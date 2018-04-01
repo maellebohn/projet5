@@ -11,7 +11,7 @@
         <field name="content" type="text" />
         <field name="title" length="200" />
         <field name="date_creation" column="date_creation" type="datetime" />
-        <field name="date_modification" column="date_creation" type="datetime" />
+        <field name="date_modification" column="date_modification" type="datetime" />
         <field name="image" type="integer" />
         <many-to-one field="author_FK" target-entity="Users">
             <join-column name="author_FK" referenced-column-name="id" />
