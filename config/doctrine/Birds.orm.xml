@@ -4,10 +4,11 @@
     xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="App\Entity\Birds">
-        <id name="id" type="integer">
-            <generator strategy="AUTO" />
-        </id>
+    <entity name="App\Entity\Birds" repositoryClass="App\Repository\BirdsRepository">
+      <id name="id" column="id" type="uuid">
+          <generator strategy="CUSTOM" />
+          <custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator" />
+      </id>
         <field name="name" length="50" />
         <field name="birthdate" column="birthdate" type="datetime" />
         <field name="description" type="text" />

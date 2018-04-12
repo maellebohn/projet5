@@ -4,15 +4,16 @@
     xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="App\Entity\News">
-        <id name="id" type="integer">
-            <generator strategy="AUTO" />
-        </id>
+    <entity name="App\Entity\News" repositoryClass="App\Repository\NewsRepository">
+      <id name="id" column="id" type="uuid">
+          <generator strategy="CUSTOM" />
+          <custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator" />
+      </id>
         <field name="content" type="text" />
         <field name="title" length="200" />
-        <field name="date_creation" column="date_creation" type="datetime" />
-        <field name="image" type="integer" />
-        <many-to-one field="author_FK" target-entity="Users">
+        <field name="dateCreation" column="date_creation" type="datetime" />
+        <field name="image" type="integer" nullable="true" />
+        <many-to-one field="author" target-entity="Users">
             <join-column name="author_FK" referenced-column-name="id" />
         </many-to-one>
     </entity>

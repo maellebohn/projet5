@@ -1,0 +1,188 @@
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+
+// set if you're also including font-awesome
+$fa-font-path: "~font-awesome/fonts";
+
+@import '~bootstrap-sass/assets/stylesheets/bootstrap';
+
+.nav-side-menu {
+  overflow: auto;
+  font-size: 20px;
+  font-family:'Unica One', cursive;
+  background-color: #698B69;
+  position: fixed;
+  top: 0;
+  width: 320px;
+  height: 100%;
+  color: #e1ffff;
+  text-align:center;
+}
+
+.nav-side-menu .brand {
+  background-color: #698B69;
+  text-align: center;
+  height:30%;
+  border-bottom:1px solid #9BCD9B;
+}
+
+.nav-side-menu ul,
+.nav-side-menu li {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  line-height: 60px;
+  cursor: pointer;
+}
+
+.nav-side-menu ul .sub-menu li,
+.nav-side-menu li .sub-menu li {
+  background-color: #9BCD9B;
+  border: none;
+  line-height: 30px;
+  margin-left: 0px;
+  text-align:center;
+  font-size:15px;
+}
+
+.nav-side-menu a:hover, .nav-side-menu ul .sub-menu a:hover,
+.nav-side-menu li .sub-menu a:hover {
+  color: #006400;
+}
+
+.nav-side-menu li {
+  border-bottom: 1px solid #9BCD9B;
+}
+
+.nav-side-menu li a {
+  text-decoration: none;
+  color: #e1ffff;
+}
+
+.nav-side-menu li:hover {
+  border-right: 5px solid #006400;
+}
+
+.active {
+  color: #006400 !important;
+}
+
+@media (max-width: 1023px) {
+  .nav-side-menu {
+    position: relative;
+    width: 100%;
+  }
+
+  #hamburger {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-color: #698B69;
+    color: #006400;
+    box-shadow:none;
+    border:none;
+  }
+
+  #logo {
+    padding:5px;
+    height:60px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .nav-side-menu .menu-list .menu-content {
+    display: block;
+  }
+
+  #wrapper {
+    padding-left:320px;
+  }
+
+  #hamburger {
+    display:none;
+  }
+
+  .brand {
+    padding-top:30px;
+  }
+
+  footer {
+    padding-left:320px;
+  }
+}
+
+body, .container-fluid, html {
+  margin: 0px;
+  padding: 0px;
+}
+
+body, html {
+  height:100%;
+}
+
+.container-fluid {
+  background-color:#8FBC8F;
+}
+
+footer {
+  bottom:0;
+  height:80px;
+  background-color:#9BCD9B;
+}
+
+a.btn.btn-social-icon {
+  font-size:25px;
+  margin-top:10px;
+  color:#e1ffff;
+}
+
+a.btn.btn-social-icon:hover {
+  color:#006400;
+}
+
+.row {
+  padding:0;
+  margin:0;
+}
+
+#wrapper {
+  color:#e1ffff;
+  font-family:'Unica One', cursive;
+}
+
+#image1 {
+  background-image: url("./../images/accueil1.jpg");
+  background-size:cover;
+  height:auto;
+  min-height:300px;
+  background-position:center center;
+  background-repeat:no-repeat;
+}
+
+#welcome {
+  height:150px;
+  background-color:#9BCD9B;
+}
+
+#welcome_title {
+  text-align:center;
+  line-height:2.5em;
+}
+
+#image2 {
+  background-image: url("./../images/accueil2.jpg");
+  background-size:cover;
+  min-height:300px;
+  height:auto;
+  background-position:center center;
+  background-repeat:no-repeat;
+}
+
+hr
+{
+	height:1px;
+	width:40%;
+	background-color:#006400;
+	border:none;
+  margin-left:5%;
+}

@@ -2,11 +2,93 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Découvrez notre élevage d'oiseaux."/>
+        <title>{% block title %}Elevage de Coco{% endblock %}</title>
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('build/css/app.css') }}"/>
+        <link href="https://fonts.googleapis.com/css?family=Unica+One" rel="stylesheet"/>
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/>
+        {% endblock %}
     </head>
+
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+
+        <div class="container-fluid">
+
+            <header>{% block header %}
+
+                <div class="nav-side-menu">
+                    <div class="brand">
+                        <img id="logo" src="{{ asset('images/logo.png') }}" alt="logo de l'elevage" />
+                    </div>
+
+                        <button type="button" id="hamburger" data-toggle="collapse" data-target="#menu-content">
+                          <span class = "fas fa-align-justify"></span>
+                        </button>
+
+                        <div class="menu-list" id="menu">
+
+                            <ul id="menu-content" class="menu-content collapse out">
+                                <li>
+                                    <a class="active" href="#"><span class=""></span>NOTRE ELEVAGE</a>
+                                </li>
+
+                                <li  data-toggle="collapse" data-target="#conseils" class="collapsed">
+                                    <a href="#"></span>NOS CONSEILS</a>
+                                </li>
+                                <ul class="sub-menu collapse" id="conseils">
+                                    <li><a href="#">ALIMENTATION</a></li>
+                                    <li><a href="#">EDUCATION</a></li>
+                                    <li><a href="#">INSTALLATION</a></li>
+                                    <li><a href="#">PATHOLOGIE</a></li>
+                                </ul>
+
+                                <li data-toggle="collapse" data-target="#news" class="collapsed">
+                                    <a href="#"></span>DERNIERES NOUVELLES</a>
+                                </li>
+                                <ul class="sub-menu collapse" id="news">
+                                    <li><a href="#">News 1</a></li>
+                                    <li><a href="#">News 2</a></li>
+                                    <li><a href="#">News 3</a></li>
+                                </ul>
+
+                                <li>
+                                    <a href="#"></span>OISEAUX DISPONIBLES</a>
+                                </li>
+
+                                <li>
+                                    <a href="#"></span>NOUS CONTACTER</a>
+                                </li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+              {% endblock %}
+            </header>
+
+            <div id="wrapper">{% block wrapper %}
+            {% endblock %}
+            </div>
+        </div>
+
+        <footer>{% block footer %}
+            <div id="reseaux" class="text-center">
+                <a class="btn btn-social-icon btn-facebook" href="https://www.facebook.com/">
+                <span class="fab fa-facebook"></span>
+                </a>
+                <a class="btn btn-social-icon btn-twitter" href="https://twitter.com/">
+                <span class="fab fa-twitter"></span>
+                </a>
+            </div>
+        {% endblock %}
+        </footer>
+
+        {% block javascripts %}
+        <script src="{{ asset('build/js/app.js') }}"></script>
+        {% endblock %}
+
     </body>
+
 </html>

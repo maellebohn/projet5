@@ -4,17 +4,18 @@
     xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="App\Entity\Users">
-        <id name="id" type="integer">
-            <generator strategy="AUTO" />
-        </id>
+    <entity name="App\Entity\Users" repositoryClass="App\Repository\UsersRepository">
+      <id name="id" column="id" type="uuid">
+          <generator strategy="CUSTOM" />
+          <custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator" />
+      </id>
         <field name="firstname" length="50" />
         <field name="lastname" length="50" />
         <field name="username" length="50" />
         <field name="email" length="50" />
         <field name="password" length="50" />
         <field name="role" length="50" />
-        <field name="date_creation" column="date_creation" type="datetime" />
+        <field name="dateCreation" column="date_creation" type="datetime" />
         <field name="active" column="active" type="boolean" />
     </entity>
 </doctrine-mapping>
