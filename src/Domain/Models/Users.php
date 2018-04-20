@@ -1,8 +1,12 @@
 <?php
 
-namespace App\Entity;
+namespace App\Domain\Models;
 
-class Users
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
+use App\Domain\Models\Interfaces\UsersInterface;
+
+class Users implements UsersInterface
 {
   /**
     * @var \Ramsey\Uuid\UuidInterface
@@ -60,5 +64,24 @@ class Users
     public function getActive()
     {
         return $this->active;
+    }
+
+    public function __construct(
+        $firstname,
+        $lastname,
+        $username,
+        $email,
+        $password,
+        $role
+    ) {
+        $this->id = Uuid::uuid4();
+        $this->firstname = $firstname;
+        $this->lastname = $lastname;
+        $this->username = $username;
+        $this->email = $email;
+        $this->password = $password;
+        $this->dateCreation = new DateTime('now');
+        $this->role = $role;
+        $active->active = true;
     }
 }

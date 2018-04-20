@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block wrapper %}
+    <div class="row" id="contact">
+        <h1 id="contact_title">CONTACT</h1>
+    </div>
+
+    {% form_theme form 'theme/contact_type.html.twig' %}
+    {{ form(form) }}
+{% endblock %}

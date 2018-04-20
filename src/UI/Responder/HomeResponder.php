@@ -4,7 +4,6 @@ namespace App\UI\Responder;
 
 use App\UI\Responder\Interfaces\HomeResponderInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
 use Twig\Environment;
 
 class HomeResponder implements HomeResponderInterface

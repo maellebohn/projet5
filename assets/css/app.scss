@@ -12,7 +12,7 @@ $fa-font-path: "~font-awesome/fonts";
   background-color: #698B69;
   position: fixed;
   top: 0;
-  width: 320px;
+  width: 300px;
   height: 100%;
   color: #e1ffff;
   text-align:center;
@@ -95,7 +95,7 @@ $fa-font-path: "~font-awesome/fonts";
   }
 
   #wrapper {
-    padding-left:320px;
+    padding-left:300px;
   }
 
   #hamburger {
@@ -107,7 +107,7 @@ $fa-font-path: "~font-awesome/fonts";
   }
 
   footer {
-    padding-left:320px;
+    padding-left:300px;
   }
 }
 
@@ -150,13 +150,14 @@ a.btn.btn-social-icon:hover {
   font-family:'Unica One', cursive;
 }
 
-#image1 {
-  background-image: url("./../images/accueil1.jpg");
-  background-size:cover;
-  height:auto;
-  min-height:300px;
-  background-position:center center;
-  background-repeat:no-repeat;
+@media (max-width: 767px) {
+  #image2, #image1 {
+    display:none;
+  }
+
+  .container-fluid {
+    min-height:100%;
+  }
 }
 
 #welcome {
@@ -164,25 +165,37 @@ a.btn.btn-social-icon:hover {
   background-color:#9BCD9B;
 }
 
-#welcome_title {
-  text-align:center;
-  line-height:2.5em;
+@media (min-width: 468px) {
+  #welcome_title {
+    text-align:center;
+    line-height:3em;
+  }
 }
 
-#image2 {
-  background-image: url("./../images/accueil2.jpg");
-  background-size:cover;
-  min-height:300px;
+@media (max-width: 467px) {
+  #welcome_title {
+    line-height:1.8em;
+    text-align:center;
+  }
+}
+
+#oiseau1, #oiseau2 {
+  width:100%;
   height:auto;
-  background-position:center center;
-  background-repeat:no-repeat;
 }
 
-hr
-{
+.col-md-6 {
+  padding:0;
+}
+
+hr {
 	height:1px;
 	width:40%;
 	background-color:#006400;
 	border:none;
   margin-left:5%;
+}
+
+div.form-group.row {
+  margin-bottom:15px;
 }

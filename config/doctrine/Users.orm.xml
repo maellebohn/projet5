@@ -4,11 +4,8 @@
     xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="App\Entity\Users" repositoryClass="App\Repository\UsersRepository">
-      <id name="id" column="id" type="uuid">
-          <generator strategy="CUSTOM" />
-          <custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator" />
-      </id>
+    <entity name="App\Domain\Models\Users" repositoryClass="App\Repository\UsersRepository">
+        <id name="id" column="id" type="uuid"></id>
         <field name="firstname" length="50" />
         <field name="lastname" length="50" />
         <field name="username" length="50" />

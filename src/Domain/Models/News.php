@@ -1,8 +1,12 @@
 <?php
 
-namespace App\Entity;
+namespace App\Domain\Models;
 
-class News
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
+use App\Domain\Models\Interfaces\NewssInterface;
+
+class News implements NewsInterface
 {
   /**
     * @var \Ramsey\Uuid\UuidInterface
@@ -42,5 +46,19 @@ class News
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    public function __construct(
+        $content,
+        $title,
+        $image,
+        $author
+    ) {
+        $this->id = Uuid::uuid4();
+        $this->content = $content;
+        $this->title = $title;
+        $this->dateCreation = new DateTime('now');
+        $this->image = $image;
+        $this->author = $author;
     }
 }
