@@ -122,6 +122,19 @@ body, html {
 
 .container-fluid {
   background-color:#8FBC8F;
+  min-height:100%;
+}
+
+h1 {
+  margin-left:15px;
+}
+
+#contact_title {
+  margin-bottom: 100px;
+}
+
+.form-control {
+  width:80%;
 }
 
 footer {

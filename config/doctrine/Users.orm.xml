@@ -4,14 +4,14 @@
     xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="App\Domain\Models\Users" repositoryClass="App\Repository\UsersRepository">
-        <id name="id" column="id" type="uuid"></id>
+    <entity name="App\Domain\Models\Users" repository-class="App\Repository\UsersRepository">
+        <id name="id" column="id" type="uuid" />
         <field name="firstname" length="50" />
         <field name="lastname" length="50" />
         <field name="username" length="50" />
         <field name="email" length="50" />
         <field name="password" length="50" />
-        <field name="role" length="50" />
+        <field name="roles" type="array" />
         <field name="dateCreation" column="date_creation" type="datetime" />
         <field name="active" column="active" type="boolean" />
     </entity>

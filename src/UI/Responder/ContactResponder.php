@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\UI\Responder;
 
 use App\UI\Responder\Interfaces\ContactResponderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Twig\Environment;
-use Symfony\Component\Form\FormInterface;
 
 class ContactResponder implements ContactResponderInterface
 {

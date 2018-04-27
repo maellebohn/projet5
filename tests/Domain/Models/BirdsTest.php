@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Domain\Models;
 
 use App\Domain\Models\Birds;
@@ -9,26 +11,26 @@ class BirdsTest extends TestCase
 {
     public function testConstructor()
     {
-        $bird = new Birds('inoue','2018-02-05','femelle','200');
+        $bird = new Birds('inoue','2018-02-05','femelle',200);
 
         static::assertSame(
             'inoue',
-            $bird->getBird()
+            $bird->getName()
         );
 
         static::assertSame(
             '2018-02-05',
-            $bird->getBird()
+            $bird->getBirthdate()
         );
 
         static::assertSame(
             'femelle',
-            $bird->getBird()
+            $bird->getDescription()
         );
 
         static::assertSame(
-            '200',
-            $bird->getBird()
+            200,
+            $bird->getPrice()
         );
     }
 }

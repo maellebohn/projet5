@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\UI\Form\Handler\Interfaces;
 
 use Symfony\Component\Form\FormInterface;

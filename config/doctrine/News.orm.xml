@@ -4,8 +4,8 @@
     xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="App\Domain\Models\News" repositoryClass="App\Repository\NewsRepository">
-        <id name="id" column="id" type="uuid"></id>
+    <entity name="App\Domain\Models\News" repository-class="App\Repository\NewsRepository">
+        <id name="id" column="id" type="uuid" />
         <field name="content" type="text" />
         <field name="title" length="200" />
         <field name="dateCreation" column="date_creation" type="datetime" />

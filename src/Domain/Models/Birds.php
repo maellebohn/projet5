@@ -1,21 +1,43 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Models;
 
+use App\Domain\Models\Interfaces\BirdsInterface;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
-use App\Domain\Models\Interfaces\BirdsInterface;
 
 class Birds implements BirdsInterface
 {
-/**
-  * @var UuidInterface
-*/
+    /**
+     * @var UuidInterface
+     */
     private $id;
+
+    /**
+     * @var string
+     */
     private $name;
+
+    /**
+     * @var string
+     */
     private $birthdate;
+
+    /**
+     * @var string
+     */
     private $description;
+
+    /**
+     * @var int
+     */
     private $price;
+
+    /**
+     * @var bool
+     */
     private $reservation;
 
     public function getId()
@@ -48,11 +70,14 @@ class Birds implements BirdsInterface
         return $this->reservation;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function __construct(
-        $name,
-        $birthdate,
-        $description,
-        $price
+        string $name,
+        string $birthdate,
+        string $description,
+        int $price
     ) {
         $this->id = Uuid::uuid4();
         $this->name = $name;
@@ -60,13 +85,5 @@ class Birds implements BirdsInterface
         $this->description = $description;
         $this->price = $price;
         $this->reservation = false;
-    }
-
-    public function getBird()
-    {
-      return $this->name;
-      return $this->birthdate;
-      return $this->description;
-      return $this->price;
     }
 }

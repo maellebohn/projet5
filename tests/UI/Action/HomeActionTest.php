@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\UI\Action;
 
 use App\UI\Action\HomeAction;
@@ -11,13 +13,13 @@ use Twig\Environment;
 
 class HomeActionTest extends KernelTestCase
 {
-    public function testHomeAffichage()
+    public function testHomeView()
     {
+        $homeAction = new HomeAction();
+
         $responder = new HomeResponder(
             $this->createMock(Environment::class)
         );
-
-        $homeAction = new HomeAction();
 
         static::assertInstanceOf(
             Response::class,

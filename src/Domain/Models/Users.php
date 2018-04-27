@@ -1,24 +1,59 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Models;
 
+use App\Domain\Models\Interfaces\UsersInterface;
+use DateTime;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
-use App\Domain\Models\Interfaces\UsersInterface;
 
 class Users implements UsersInterface
 {
-  /**
-    * @var \Ramsey\Uuid\UuidInterface
-  */
+    /**
+     * @var UuidInterface
+     */
     private $id;
+
+    /**
+     * @var string
+     */
     private $firstname;
+
+    /**
+     * @var string
+     */
     private $lastname;
+
+    /**
+     * @var string
+     */
     private $username;
+
+    /**
+     * @var string
+     */
     private $email;
+
+    /**
+     * @var string
+     */
     private $password;
-    private $role;
+
+    /**
+     * @var array
+     */
+    private $roles;
+
+    /**
+     * @var int
+     */
     private $dateCreation;
+
+    /**
+     * @var bool
+     */
     private $active;
 
     public function getId()
@@ -53,7 +88,7 @@ class Users implements UsersInterface
 
     public function getRole()
     {
-        return $this->role;
+        return $this->roles;
     }
 
     public function getDateCreation()
@@ -66,13 +101,15 @@ class Users implements UsersInterface
         return $this->active;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function __construct(
-        $firstname,
-        $lastname,
-        $username,
-        $email,
-        $password,
-        $role
+        string $firstname,
+        string $lastname,
+        string $username,
+        string $email,
+        string $password
     ) {
         $this->id = Uuid::uuid4();
         $this->firstname = $firstname;
@@ -80,8 +117,8 @@ class Users implements UsersInterface
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
-        $this->dateCreation = new DateTime('now');
-        $this->role = $role;
-        $active->active = true;
+        $this->dateCreation = time();
+        $this->roles = ['ROLE_ADMIN'];
+        $this->active = true;
     }
 }
