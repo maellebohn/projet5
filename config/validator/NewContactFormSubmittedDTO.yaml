@@ -1,0 +1,34 @@
+App\Domain\DTO\NewContactFormSubmittedDTO:
+    properties:
+        name:
+            - NotBlank:
+                message: "This entry must be filled !"
+                groups: ['contact']
+            - Length:
+                min: 3
+                minMessage: "This value is too short"
+                max: 50
+                maxMessage: "This value is too long"
+                groups: ['contact']
+        email:
+            - NotBlank:
+                message: "This entry must be filled !"
+                groups: ['contact']
+            - Length:
+                min: 10
+                minMessage: "This value is too short"
+                max: 50
+                maxMessage: "This value is too long"
+                groups: ['contact']
+            - Email:
+                message: "The value '{{ value }} must be a valid email"
+        message:
+            - NotBlank:
+                message: "This entry must be filled !"
+                groups: ['contact']
+            - Length:
+                min: 10
+                minMessage: "This value is too short"
+                max: 1000
+                maxMessage: "This value is too long"
+                groups: ['contact']

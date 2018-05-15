@@ -11,31 +11,22 @@ class UsersTest extends TestCase
 {
     public function testConstructor()
     {
-        $user = new Users('maelle','bohn','coco','coco@gmail.com','coco');
-
-        static::assertSame(
+        $user = new Users(
             'maelle',
-            $user->getFirstname()
-        );
-
-        static::assertSame(
             'bohn',
-            $user->getLastname()
-        );
-
-        static::assertSame(
             'coco',
-            $user->getUsername()
-        );
-
-        static::assertSame(
             'coco@gmail.com',
-            $user->getEmail()
+            'coco'
         );
 
-        static::assertSame(
-            'coco',
-            $user->getPassword()
-        );
+        static::assertSame('maelle', $user->getFirstname());
+
+        static::assertSame('bohn', $user->getLastname());
+
+        static::assertSame('coco', $user->getUsername());
+
+        static::assertSame('coco@gmail.com', $user->getEmail());
+
+        static::assertSame('coco', $user->getPassword());
     }
 }

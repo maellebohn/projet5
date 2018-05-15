@@ -8,15 +8,19 @@ use App\UI\Action\ContactAction;
 use App\UI\Action\Interfaces\ContactActionInterface;
 use App\UI\Form\Handler\Interfaces\ContactTypeHandlerInterface;
 use App\UI\Responder\ContactResponder;
+use Blackfire\Bridge\PhpUnit\TestCaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
 class ContactActionTest extends KernelTestCase
 {
+    use TestCaseTrait;
+
     /**
      * @var ContactTypeHandlerInterface
      */
@@ -28,6 +32,11 @@ class ContactActionTest extends KernelTestCase
     private $formFactory;
 
     /**
+     * @var UrlGeneratorInterface
+     */
+    private $router;
+
+    /**
      *{@inheritdoc}
      */
     public function setUp ()
@@ -36,6 +45,9 @@ class ContactActionTest extends KernelTestCase
 
         $this->formFactory = static::$kernel->getContainer()->get('form.factory');
         $this->contactTypeHandler = $this->createMock(ContactTypeHandlerInterface::class);
+        $this->router = $this->createMock(UrlGeneratorInterface::class);
+        $this->router->method('generate')->willReturn('/contact');
+
     }
 
     public function testConstruct()
@@ -51,23 +63,33 @@ class ContactActionTest extends KernelTestCase
         );
     }
 
+    /**
+     * @group Blackfire
+     */
     public function testWrongFormHandling()
     {
+        $contactAction = new ContactAction(
+            $this->formFactory,
+            $this->contactTypeHandler
+        );
+
+        $this->contactTypeHandler->method('handle')->willReturn(false);
+        $responder = new ContactResponder(
+            $this->createMock(Environment::class),
+            $this->router
+        );
+
         $request = Request::create(
             '/contact',
             'POST'
         );
 
-        $this->contactTypeHandler->method('handle')->willReturn(false);
-        $responder = new ContactResponder(
-            $this->createMock(Environment::class)
-        );
+        $probe = static::$blackfire->createProbe();
 
+        $contactAction($request, $responder);
 
-        $contactAction = new ContactAction(
-            $this->formFactory,
-            $this->contactTypeHandler
-        );
+        static::$blackfire->endProbe($probe);
+
 
         static::assertInstanceOf(
             Response::class,
@@ -84,8 +106,9 @@ class ContactActionTest extends KernelTestCase
 
         $this->contactTypeHandler->method('handle')->willReturn(true);
         $responder = new ContactResponder(
-            $this->createMock(Environment::class)
-        );
+            $this->createMock(Environment::class),
+            $this->router
+    );
 
         $request = Request::create(
             '/contact',

@@ -32,6 +32,12 @@ class ContactAction implements ContactActionInterface
      */
     private $contactTypeHandler;
 
+    /**
+     * ContactAction constructor.
+     *
+     * @param FormFactoryInterface $formFactory
+     * @param ContactTypeHandlerInterface $contactTypeHandler
+     */
     public function __construct(
         FormFactoryInterface $formFactory,
         ContactTypeHandlerInterface $contactTypeHandler
@@ -51,7 +57,6 @@ class ContactAction implements ContactActionInterface
                                          ->handleRequest($request);
 
         if($this->contactTypeHandler->handle($contactType)) {
-            //$this->eventDispatcher->dispatch(ContactForm::Name,
             return $responder(true);
         }
 

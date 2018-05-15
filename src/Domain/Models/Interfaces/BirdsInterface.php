@@ -6,5 +6,15 @@ namespace App\Domain\Models\Interfaces;
 
 interface BirdsInterface
 {
+    public function getId();
 
+    public function getName();
+
+    public function getBirthdate();
+
+    public function getDescription();
+
+    public function getPrice();
+
+    public function getReservation();
 }

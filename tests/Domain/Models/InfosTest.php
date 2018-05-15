@@ -11,26 +11,19 @@ class InfosTest extends TestCase
 {
     public function testConstructor()
     {
-        $info = new Infos('graines, fruits et légumes','alimentation',3,'admin');
-
-        static::assertSame(
+        $info = new Infos(
             'graines, fruits et légumes',
-            $info->getContent()
-        );
-
-        static::assertSame(
             'alimentation',
-            $info->getTitle()
-        );
-
-        static::assertSame(
             3,
-            $info->getImage()
+            'admin'
         );
 
-        static::assertSame(
-            'admin',
-            $info->getAuthor()
-        );
+        static::assertSame('graines, fruits et légumes', $info->getContent());
+
+        static::assertSame('alimentation', $info->getTitle());
+
+        static::assertSame(3, $info->getImage());
+
+        static::assertSame('admin', $info->getAuthor());
     }
 }

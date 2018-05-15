@@ -1,0 +1,14 @@
+{% block form %}
+    {{ form_start(form) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.author) }}
+        {{ form_row(form.image) }}
+        {{ form_row(form.content) }}
+        <div class="form-group row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-success">Créer</button>
+            </div>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}

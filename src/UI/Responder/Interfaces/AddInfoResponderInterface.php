@@ -8,10 +8,10 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-interface ContactResponderInterface
+interface AddInfoResponderInterface
 {
     /**
-     * ContactResponderInterface constructor.
+     * AddInfoResponderInterface constructor.
      *
      * @param Environment           $twig
      * @param UrlGeneratorInterface $router
@@ -23,11 +23,11 @@ interface ContactResponderInterface
 
     /**
      * @param bool               $redirect
-     * @param FormInterface|null $contactType
+     * @param FormInterface|null $addInfoType
      * @return mixed
      */
     public function __invoke(
         $redirect = false,
-        FormInterface $contactType = null
+        FormInterface $addInfoType = null
     );
 }

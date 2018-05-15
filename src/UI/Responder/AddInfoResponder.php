@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\UI\Responder;
 
-use App\UI\Responder\Interfaces\ContactResponderInterface;
+use App\UI\Responder\Interfaces\AddInfoResponderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class ContactResponder implements ContactResponderInterface
+class AddInfoResponder implements AddInfoResponderInterface
 {
     /**
     * @var Environment
@@ -39,19 +39,19 @@ class ContactResponder implements ContactResponderInterface
 
     /**
      * @param bool               $redirect
-     * @param FormInterface|null $contactType
+     * @param FormInterface|null $addInfoType
      * @return RedirectResponse|Response
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke($redirect = false, FormInterface $contactType = null)
+    public function __invoke($redirect = false, FormInterface $addInfoType = null)
     {
         $redirect
-        ? $response = new RedirectResponse($this->router->generate('contact'))
+        ? $response = new RedirectResponse($this->router->generate('add_info'))
         : $response = new Response(
-            $this->twig->render('contact.html.twig', [
-                'form' => $contactType->createView()
+            $this->twig->render('addinfo.html.twig', [
+                'form' => $addInfoType->createView()
             ])
         );
 

@@ -11,26 +11,19 @@ class BirdsTest extends TestCase
 {
     public function testConstructor()
     {
-        $bird = new Birds('inoue','2018-02-05','femelle',200);
-
-        static::assertSame(
+        $bird = new Birds(
             'inoue',
-            $bird->getName()
-        );
-
-        static::assertSame(
             '2018-02-05',
-            $bird->getBirthdate()
-        );
-
-        static::assertSame(
             'femelle',
-            $bird->getDescription()
+            200
         );
 
-        static::assertSame(
-            200,
-            $bird->getPrice()
-        );
+        static::assertSame('inoue', $bird->getName());
+
+        static::assertSame('2018-02-05', $bird->getBirthdate());
+
+        static::assertSame('femelle', $bird->getDescription());
+
+        static::assertSame(200, $bird->getPrice());
     }
 }
