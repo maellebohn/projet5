@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Models;
 
+use App\Domain\DTO\NewInfoDTO;
 use App\Domain\Models\Interfaces\InfosInterface;
-use DateTime;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
@@ -37,7 +37,7 @@ class Infos implements InfosInterface
     private $dateModification;
 
     /**
-     * @var int
+     * @var string
      */
     private $image;
 
@@ -87,7 +87,7 @@ class Infos implements InfosInterface
     public function __construct(
         string $content,
         string $title,
-        int $image,
+        string $image,
         string $author
     ) {
         $this->id = Uuid::uuid4();
@@ -97,5 +97,20 @@ class Infos implements InfosInterface
         $this->dateModification = null;
         $this->image = $image;
         $this->author = $author;
+    }
+
+    public function create(NewInfoDTO $newinfoDTO): self
+    {
+        $this->content = $newinfoDTO->content;
+        $this->title = $newinfoDTO->title;
+        $this->image = $newinfoDTO->image;
+        $this->author = $newinfoDTO->author;
+
+        return $this;
+    }
+
+    public function getInfos(): Infos
+    {
+        return $this->infos;
     }
 }

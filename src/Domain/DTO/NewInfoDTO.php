@@ -1,34 +1,42 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\DTO;
+
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class NewInfoDTO
 {
     /**
      * @var string
      */
-    public $name;
+    public $title;
 
     /**
      * @var string
      */
-    public $email;
+    public $author;
+
+    /**
+     * @var UploadedFile
+     */
+    public $image;
 
     /**
      * @var string
      */
-    public $message;
+    public $content;
 
-    /**
-     * NewContactFormSubmittedDTO constructor.
-     * @param string $name
-     * @param string $email
-     * @param string $message
-     */
-    public function __construct (string $name, string $email, string $message)
-    {
-        $this->name = $name;
-        $this-> email = $email;
-        $this->message =  $message;
+    public function __construct(
+        string $title,
+        string $author,
+        UploadedFile $image,
+        string $content
+    ) {
+        $this->title = $title;
+        $this-> author = $author;
+        $this->image =  $image;
+        $this->content = $content;
     }
 }

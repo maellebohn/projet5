@@ -14,7 +14,7 @@ class InfosTest extends TestCase
         $info = new Infos(
             'graines, fruits et légumes',
             'alimentation',
-            3,
+            'oiseau',
             'admin'
         );
 
@@ -22,7 +22,7 @@ class InfosTest extends TestCase
 
         static::assertSame('alimentation', $info->getTitle());
 
-        static::assertSame(3, $info->getImage());
+        static::assertSame('oiseau', $info->getImage());
 
         static::assertSame('admin', $info->getAuthor());
     }

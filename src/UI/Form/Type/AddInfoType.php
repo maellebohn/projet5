@@ -18,10 +18,10 @@ class AddInfoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class, ['label' => 'Titre'])
-            ->add('author', TextType::class, ['label' => 'Auteur'])
-            ->add('image', FileType::class, ['label' => 'Image'])
-            ->add('content', TextareaType::class, ['label' => 'Texte']);
+            ->add('title', TextType::class)
+            ->add('author', TextType::class)
+            ->add('image', FileType::class)
+            ->add('content', TextareaType::class);
     }
 
     public function configureOptions (OptionsResolver $resolver)
@@ -36,7 +36,7 @@ class AddInfoType extends AbstractType
                     $form->get('content')->getData()
                 );
             },
-            "validation_groups" => ['contact']
+            "validation_groups" => ['addinfo']
         ]);
     }
 }

@@ -14,7 +14,7 @@ class NewsTest extends TestCase
         $new = new News(
             'les oeufs ont éclos',
             'nouveaux-nés',
-            3,
+            'oiseau',
             'admin'
         );
 
@@ -22,7 +22,7 @@ class NewsTest extends TestCase
 
         static::assertSame('nouveaux-nés', $new->getTitle());
 
-        static::assertSame(3, $new->getImage());
+        static::assertSame('oiseau', $new->getImage());
 
         static::assertSame('admin', $new->getAuthor());
     }

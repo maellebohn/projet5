@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block wrapper %}
+
+    <div class="row" id="admin_row">
+        <div id="admin" class="col-xs-12 col-md-offset-3 col-md-6">
+            <h1>ADMINISTRATION</h1>
+        </div>
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Contenu</th>
+            <th>Date</th>
+            <th>Publication</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for infos in listinfos %}
+        <tr>
+            <td>{{ infos.title }}</td>
+            <td>{{ infos.content }}</td>
+            <td>{{ infos.dateCreation|date("d/m/Y") }}</td>
+            <td><a href="#"><span class="fas fa-edit"></span></a><a href="#"><span class="fas fa-times"></span></a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

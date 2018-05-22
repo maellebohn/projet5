@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
-use App\Entity\Birds;
+use App\Domain\Models\Birds;
+use App\Domain\Models\Interfaces\BirdsInterface;
+use App\Repository\Interfaces\BirdsRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * @method Birds|null find($id, $lockMode = null, $lockVersion = null)
@@ -12,39 +16,19 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Birds[]    findAll()
  * @method Birds[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class BirdsRepository extends ServiceEntityRepository
+class BirdsRepository extends ServiceEntityRepository implements BirdsRepositoryInterface
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Birds::class);
     }
 
-//    /**
-//     * @return Birds[] Returns an array of Birds objects
-//     */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param BirdsInterface $bird
+     */
+    public function save(BirdsInterface $bird)
     {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('b.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $this->_em->persist($bird);
+        $this->_em->flush();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Birds
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

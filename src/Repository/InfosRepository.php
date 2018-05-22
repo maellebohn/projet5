@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
-use App\Entity\Infos;
+use App\Domain\Models\Interfaces\InfosInterface;
+use App\Domain\Models\Infos;
+use App\Repository\Interfaces\InfosRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * @method Infos|null find($id, $lockMode = null, $lockVersion = null)
@@ -12,39 +16,25 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Infos[]    findAll()
  * @method Infos[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class InfosRepository extends ServiceEntityRepository
+class InfosRepository extends ServiceEntityRepository implements InfosRepositoryInterface
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Infos::class);
     }
 
-//    /**
-//     * @return Infos[] Returns an array of Infos objects
-//     */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param InfosInterface $info
+     */
+    public function save(InfosInterface $info)
     {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('i.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $this->_em->persist($info);
+        $this->_em->flush();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Infos
+    public function remove(InfosInterface $info)
     {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $this->_em->remove($info);
+        $this->_em->flush();
     }
-    */
 }

@@ -19,7 +19,6 @@ use Symfony\Component\Routing\Annotation\Route;
  *     name="add_info"
  * )
  */
-
 class AddInfoAction implements AddInfoActionInterface
 {
     /**

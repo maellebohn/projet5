@@ -10,7 +10,6 @@ use Twig\Environment;
 
 class HomeResponder implements HomeResponderInterface
 {
-
     /**
     * @var Environment
     */

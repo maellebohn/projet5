@@ -1,10 +1,27 @@
 {% extends 'base.html.twig' %}
 
 {% block wrapper %}
-    <div class="row" id="contact">
-        <h1 id="contact_title">CONTACT</h1>
+    <div class="row" id="contact_row">
+        <div id="contact" class="col-xs-12 col-md-offset-3 col-md-6">
+            <h1>CONTACT</h1>
+            <p>Vous avez des questions sur nos perroquets ? Nous serons ravis d'y répondre !</p>
+        </div>
     </div>
 
     {% form_theme form 'theme/contact_type.html.twig' %}
     {{ form(form) }}
+
+    <div class="row" id="contact_infos">
+        <div class="col-xs-12 col-md-offset-2 col-md-3" id="email">
+            <span class="far fa-envelope"></span>
+            <h3>EMAIL</h3>
+            <p>blabla@gmail.com</p>
+        </div>
+        <div class="col-xs-12 col-md-offset-2 col-md-3" id="localisation">
+            <span class="fas fa-map-pin"></span>
+            <h3>LOCALISATION</h3>
+            <p>Visite sur rendez-vous</p>
+        </div>
+    </div>
+
 {% endblock %}

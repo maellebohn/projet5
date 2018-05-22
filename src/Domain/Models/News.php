@@ -32,7 +32,7 @@ class News implements NewsInterface
     private $dateCreation;
 
     /**
-     * @var int
+     * @var string
      */
     private $image;
 
@@ -58,7 +58,7 @@ class News implements NewsInterface
 
     public function getDateCreation()
     {
-        return $this->dateCreation;
+        return New \DateTime('u', $this->dateCreation);
     }
 
     public function getImage()
@@ -74,7 +74,7 @@ class News implements NewsInterface
     public function __construct(
         string $content,
         string $title,
-        int $image,
+        string $image,
         string $author
     ) {
         $this->id = Uuid::uuid4();

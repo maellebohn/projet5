@@ -36,7 +36,7 @@ class ContactActionFunctionalTest extends WebTestCase
         $crawler = $client->submit($form);
 
         static::assertSame(
-            Response::HTTP_FOUND,
+            Response::HTTP_OK,
             $client->getResponse()->getStatusCode()
         );
     }

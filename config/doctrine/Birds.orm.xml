@@ -10,6 +10,6 @@
         <field name="birthdate" column="birthdate" type="datetime" />
         <field name="description" type="text" />
         <field name="price" type="decimal" scale="2" />
-        <field name="reservation" column="active" type="boolean" />
+        <field name="reservation" column="reservation" type="boolean" />
     </entity>
 </doctrine-mapping>
