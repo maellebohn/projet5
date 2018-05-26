@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * )
  */
 
-class ShowCategoryInfosAction implements ShowCategoryInfosActionInterface
+final class ShowCategoryInfosAction implements ShowCategoryInfosActionInterface
 {
     /**
      * @param ShowCategoryInfosResponderInterface $responder

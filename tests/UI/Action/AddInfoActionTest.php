@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Tests\UI\Action;
 
-use App\UI\Action\ContactAction;
-use App\UI\Action\Interfaces\ContactActionInterface;
-use App\UI\Form\Handler\Interfaces\ContactTypeHandlerInterface;
-use App\UI\Responder\ContactResponder;
+use App\UI\Action\AddInfoAction;
+use App\UI\Action\Interfaces\AddInfoActionInterface;
+use App\UI\Form\Handler\Interfaces\AddInfoTypeHandlerInterface;
+use App\UI\Responder\AddInfoResponder;
 use Blackfire\Bridge\PhpUnit\TestCaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -17,14 +17,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class ContactActionTest extends KernelTestCase
+class AddInfoActionTest extends KernelTestCase
 {
     use TestCaseTrait;
 
     /**
-     * @var ContactTypeHandlerInterface
+     * @var AddInfoTypeHandlerInterface
      */
-    private $contactTypeHandler;
+    private $addInfoTypeHandler;
 
     /**
      * @var FormFactoryInterface
@@ -44,7 +44,7 @@ class ContactActionTest extends KernelTestCase
         static::bootKernel();
 
         $this->formFactory = static::$kernel->getContainer()->get('form.factory');
-        $this->contactTypeHandler = $this->createMock(ContactTypeHandlerInterface::class);
+        $this->addInfoTypeHandler = $this->createMock(AddInfoTypeHandlerInterface::class);
         $this->router = $this->createMock(UrlGeneratorInterface::class);
         $this->router->method('generate')->willReturn('/contact');
 
@@ -52,14 +52,14 @@ class ContactActionTest extends KernelTestCase
 
     public function testConstruct()
     {
-        $contactAction = new ContactAction(
+        $addInfoAction = new AddInfoAction(
             $this->formFactory,
-            $this->contactTypeHandler
+            $this->addInfoTypeHandler
         );
 
         static::assertInstanceOf(
-            ContactActionInterface::class,
-            $contactAction
+            AddInfoActionInterface::class,
+            $addInfoAction
         );
     }
 
@@ -68,56 +68,56 @@ class ContactActionTest extends KernelTestCase
      */
     public function testWrongFormHandling()
     {
-        $contactAction = new ContactAction(
+        $addInfoAction = new AddInfoAction(
             $this->formFactory,
-            $this->contactTypeHandler
+            $this->addInfoTypeHandler
         );
 
-        $this->contactTypeHandler->method('handle')->willReturn(false);
-        $responder = new ContactResponder(
+        $this->addInfoTypeHandler->method('handle')->willReturn(false);
+        $responder = new AddInfoResponder(
             $this->createMock(Environment::class),
             $this->router
         );
 
         $request = Request::create(
-            '/contact',
+            '/addinfo',
             'POST'
         );
 
         $probe = static::$blackfire->createProbe();
 
-        $contactAction($request, $responder);
+        $addInfoAction($request, $responder);
 
         static::$blackfire->endProbe($probe);
 
 
         static::assertInstanceOf(
             Response::class,
-            $contactAction($request, $responder)
+            $addInfoAction($request, $responder)
         );
     }
 
     public function testGoodFormHandling()
     {
-        $contactAction = new ContactAction(
+        $addInfoAction = new AddInfoAction(
             $this->formFactory,
-            $this->contactTypeHandler
+            $this->addInfoTypeHandler
         );
 
-        $this->contactTypeHandler->method('handle')->willReturn(true);
-        $responder = new ContactResponder(
+        $this->addInfoTypeHandler->method('handle')->willReturn(true);
+        $responder = new AddInfoResponder(
             $this->createMock(Environment::class),
             $this->router
         );
 
         $request = Request::create(
-            '/contact',
+            '/addinfo',
             'POST'
         );
 
         static::assertInstanceOf(
             RedirectResponse::class,
-            $contactAction($request, $responder)
+            $addInfoAction($request, $responder)
         );
     }
 }

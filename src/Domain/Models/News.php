@@ -58,7 +58,7 @@ class News implements NewsInterface
 
     public function getDateCreation()
     {
-        return New \DateTime('u', $this->dateCreation);
+        return \DateTime::createFromFormat('U', $this->dateCreation);
     }
 
     public function getImage()

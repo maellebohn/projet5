@@ -26,17 +26,24 @@ class NewInfoDTO
     /**
      * @var string
      */
+    public $category;
+
+    /**
+     * @var string
+     */
     public $content;
 
     public function __construct(
         string $title,
         string $author,
         UploadedFile $image,
+        string $category,
         string $content
     ) {
         $this->title = $title;
         $this-> author = $author;
         $this->image =  $image;
+        $this->category = $category;
         $this->content = $content;
     }
 }

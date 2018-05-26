@@ -15,7 +15,8 @@ class InfosTest extends TestCase
             'graines, fruits et légumes',
             'alimentation',
             'oiseau',
-            'admin'
+            'admin',
+            'education'
         );
 
         static::assertSame('graines, fruits et légumes', $info->getContent());
@@ -25,5 +26,7 @@ class InfosTest extends TestCase
         static::assertSame('oiseau', $info->getImage());
 
         static::assertSame('admin', $info->getAuthor());
+
+        static::assertSame('education', $info->getCategory());
     }
 }

@@ -85,7 +85,7 @@ a:hover {
 }
 
 .table>tbody>tr>td {
-  vertical-align:center;
+  vertical-align:middle;
 }
 
 //footer
@@ -259,10 +259,25 @@ a.connexion:hover {
 }
 
 //admin page
+.tab-content {
+  margin-bottom:20px;
+}
+
+#tab2, #tab3 {
+  display:none;
+}
+
+#add_button {
+  margin-left:5%;
+}
 
 //conseils page
 #category_row1 {
   margin-bottom:40px;
 }
 
+//reservation page
+#reservation_button {
+  text-align: center;
+}
 

@@ -8,6 +8,7 @@
         <id name="id" column="id" type="uuid"/>
         <field name="content" type="text" />
         <field name="title" length="200" />
+        <field name="category" length="50" />
         <field name="dateCreation" column="date_creation" type="datetime" />
         <field name="dateModification" column="date_modification" type="datetime" nullable="true" />
         <field name="image" length="50" nullable="true" />

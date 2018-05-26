@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *     name="add_info"
  * )
  */
-class AddInfoAction implements AddInfoActionInterface
+final class AddInfoAction implements AddInfoActionInterface
 {
     /**
      * @var FormFactoryInterface
@@ -32,7 +32,7 @@ class AddInfoAction implements AddInfoActionInterface
     private $addInfoTypeHandler;
 
     /**
-     * ContactAction constructor.
+     * AddInfoAction constructor.
      *
      * @param FormFactoryInterface $formFactory
      * @param AddInfoTypeHandlerInterface $addInfoTypeHandler

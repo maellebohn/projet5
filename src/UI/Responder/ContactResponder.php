@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class ContactResponder implements ContactResponderInterface
+final class ContactResponder implements ContactResponderInterface
 {
     /**
     * @var Environment

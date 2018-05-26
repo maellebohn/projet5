@@ -8,7 +8,7 @@ use App\UI\Responder\Interfaces\HomeResponderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class HomeResponder implements HomeResponderInterface
+final class HomeResponder implements HomeResponderInterface
 {
     /**
     * @var Environment

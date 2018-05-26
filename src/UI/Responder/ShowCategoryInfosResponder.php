@@ -8,7 +8,7 @@ use App\UI\Responder\Interfaces\ShowCategoryInfosResponderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class ShowCategoryInfosResponder implements ShowCategoryInfosResponderInterface
+final class ShowCategoryInfosResponder implements ShowCategoryInfosResponderInterface
 {
     /**
     * @var Environment

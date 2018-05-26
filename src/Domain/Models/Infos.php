@@ -27,12 +27,12 @@ class Infos implements InfosInterface
     private $title;
 
     /**
-     * @var int
+     * @var string
      */
     private $dateCreation;
 
     /**
-     * @var int
+     * @var string
      */
     private $dateModification;
 
@@ -45,6 +45,11 @@ class Infos implements InfosInterface
      * @var string
      */
     private $author;
+
+    /**
+     * @var string
+     */
+    private $category;
 
     public function getId()
     {
@@ -63,7 +68,7 @@ class Infos implements InfosInterface
 
     public function getDateCreation()
     {
-        return $this->dateCreation;
+        return \DateTime::createFromFormat('U', (string) $this->dateCreation);
     }
 
     public function getDateModification()
@@ -81,6 +86,11 @@ class Infos implements InfosInterface
         return $this->author;
     }
 
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -88,7 +98,8 @@ class Infos implements InfosInterface
         string $content,
         string $title,
         string $image,
-        string $author
+        string $author,
+        string $category
     ) {
         $this->id = Uuid::uuid4();
         $this->content = $content;
@@ -97,6 +108,7 @@ class Infos implements InfosInterface
         $this->dateModification = null;
         $this->image = $image;
         $this->author = $author;
+        $this->category = $category;
     }
 
     public function create(NewInfoDTO $newinfoDTO): self
@@ -105,12 +117,6 @@ class Infos implements InfosInterface
         $this->title = $newinfoDTO->title;
         $this->image = $newinfoDTO->image;
         $this->author = $newinfoDTO->author;
-
-        return $this;
-    }
-
-    public function getInfos(): Infos
-    {
-        return $this->infos;
+        $this->category = $newinfoDTO->category;
     }
 }

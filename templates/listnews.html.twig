@@ -13,9 +13,9 @@
     <div class="row">
         {% for news in listnews %}
         <div class="col-xs-12 col-md-4">
-            <h3>{{ infos.title }}</h3>
-            <p>Publié le {{ infos.dateCreation|date("d/m/Y") }}</p>
-            <p>{{ infos.content }} <a href="#">Lire la suite</a></p>
+            <h3>{{ news.title }}</h3>
+            <p>Publié le {{ news.dateCreation|date("d/m/Y") }}</p>
+            <p>{{ news.content }} <a href="#">Lire la suite</a></p>
         </div>
         {% endfor %}
     </div>

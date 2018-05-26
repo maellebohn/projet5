@@ -19,4 +19,6 @@ interface InfosInterface
     public function getImage();
 
     public function getAuthor();
+
+    public function getCategory();
 }

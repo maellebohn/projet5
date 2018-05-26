@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *     name="reservation"
  * )
  */
-class GetBirdsAction implements GetBirdsActionInterface
+final class GetBirdsAction implements GetBirdsActionInterface
 {
     /**
      * @var BirdsRepositoryInterface

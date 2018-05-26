@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repository\Interfaces;
 
-interface NewsRepositoryInterface
+interface UsersRepositoryInterface
 {
-    public function findAll();
+
 }

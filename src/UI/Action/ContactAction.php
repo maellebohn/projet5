@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * )
  */
 
-class ContactAction implements ContactActionInterface
+final class ContactAction implements ContactActionInterface
 {
     /**
      * @var FormFactoryInterface

@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class AddInfoResponder implements AddInfoResponderInterface
+final class AddInfoResponder implements AddInfoResponderInterface
 {
     /**
     * @var Environment

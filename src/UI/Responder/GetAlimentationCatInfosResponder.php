@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\UI\Responder;
 
-use App\UI\Responder\Interfaces\GetListInfosResponderInterface;
+use App\UI\Responder\Interfaces\GetAlimentationCatInfosResponderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-final class GetListInfosResponder implements GetListInfosResponderInterface
+final class GetAlimentationCatInfosResponder implements GetAlimentationCatInfosResponderInterface
 {
     /**
      * @var Environment
@@ -16,7 +16,7 @@ final class GetListInfosResponder implements GetListInfosResponderInterface
     private $twig;
 
     /**
-     *GetListInfosResponder constructor.
+     *GetAlimentationCatInfosResponder constructor.
      *
      * @param Environment $twig
      */
@@ -37,8 +37,8 @@ final class GetListInfosResponder implements GetListInfosResponderInterface
     public function __invoke($data)
     {
         return new Response(
-            $this->twig->render('listinfos.html.twig', [
-                'listinfos' => $data
+            $this->twig->render('alimentationcatinfos.html.twig', [
+                'alimentationcatinfos' =>$data
             ])
         );
     }

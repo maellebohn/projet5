@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *     name="news"
  * )
  */
-class GetListNewsAction implements GetListNewsActionInterface
+final class GetListNewsAction implements GetListNewsActionInterface
 {
     /**
      * @var NewsRepositoryInterface

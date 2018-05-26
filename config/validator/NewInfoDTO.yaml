@@ -13,7 +13,7 @@ App\Domain\DTO\NewInfoDTO:
         author:
             - NotBlank:
                 message: "This entry must be filled !"
-                groups: ['contact']
+                groups: ['addinfo']
             - Length:
                 min: 3
                 minMessage: "This value is too short"
@@ -25,6 +25,16 @@ App\Domain\DTO\NewInfoDTO:
                 mimeTypes: ['image/jpeg', 'image/png']
                 mimeTypesMessage: "This file is not a valid image"
                 maxSize: "2M"
+                groups: ['addinfo']
+        category:
+            - NotBlank:
+                message: "This entry must be filled !"
+                groups: ['addinfo']
+            - Length:
+                min: 3
+                minMessage: "This value is too short"
+                max: 50
+                maxMessage: "This value is too long"
                 groups: ['addinfo']
         content:
             - NotBlank:

@@ -8,7 +8,7 @@ use App\UI\Responder\Interfaces\GetBirdsResponderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class GetBirdsResponder implements GetBirdsResponderInterface
+final class GetBirdsResponder implements GetBirdsResponderInterface
 {
     /**
      * @var Environment

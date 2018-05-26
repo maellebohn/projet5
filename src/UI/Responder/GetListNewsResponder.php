@@ -8,7 +8,7 @@ use App\UI\Responder\Interfaces\GetListNewsResponderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class GetListNewsResponder implements GetListNewsResponderInterface
+final class GetListNewsResponder implements GetListNewsResponderInterface
 {
     /**
      * @var Environment

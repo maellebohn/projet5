@@ -20,7 +20,8 @@ class AddInfoType extends AbstractType
         $builder
             ->add('title', TextType::class)
             ->add('author', TextType::class)
-            ->add('image', FileType::class)
+            ->add('image', FileType::class, ['required' => false])
+            ->add('category', TextType::class)
             ->add('content', TextareaType::class);
     }
 
@@ -33,6 +34,7 @@ class AddInfoType extends AbstractType
                     $form->get('title')->getData(),
                     $form->get('author')->getData(),
                     $form->get('image')->getData(),
+                    $form->get('category')->getData(),
                     $form->get('content')->getData()
                 );
             },

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Action;
 
+use App\Repository\Interfaces\BirdsRepositoryInterface;
 use App\Repository\Interfaces\InfosRepositoryInterface;
 use App\UI\Action\Interfaces\GetListInfosActionInterface;
 use App\UI\Responder\Interfaces\GetListInfosResponderInterface;
@@ -15,12 +16,17 @@ use Symfony\Component\Routing\Annotation\Route;
  *     name="admin"
  * )
  */
-class GetListInfosAction implements GetListInfosActionInterface
+final class GetListInfosAction implements GetListInfosActionInterface
 {
     /**
      * @var InfosRepositoryInterface
      */
     private $infosRepository;
+
+    /**
+     * @var BirdsRepositoryInterface
+     */
+    private $birdsRepository;
 
     /**
      * @var GetListInfosResponderInterface
@@ -29,10 +35,12 @@ class GetListInfosAction implements GetListInfosActionInterface
 
     public function __construct (
         InfosRepositoryInterface $infosRepository,
-        GetListInfosResponderInterface $responder
+        GetListInfosResponderInterface $responder,
+        BirdsRepositoryInterface $birdsRepository
     ) {
         $this->infosRepository = $infosRepository;
         $this->responder = $responder;
+        $this->birdsRepository = $birdsRepository;
     }
 
     public function __invoke()
