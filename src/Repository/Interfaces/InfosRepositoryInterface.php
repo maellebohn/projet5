@@ -20,4 +20,9 @@ interface InfosRepositoryInterface
         $limit = null,
         $offset = null
     );
+
+    public function findOneBy(
+        array $criteria,
+        array $orderBy = null
+    );
 }

@@ -27,6 +27,12 @@ final class GetListNewsAction implements GetListNewsActionInterface
      */
     private $responder;
 
+    /**
+     * GetListNewsAction constructor.
+     *
+     * @param NewsRepositoryInterface       $newsRepository
+     * @param GetListNewsResponderInterface $responder
+     */
     public function __construct (
         NewsRepositoryInterface $newsRepository,
         GetListNewsResponderInterface $responder
@@ -35,6 +41,13 @@ final class GetListNewsAction implements GetListNewsActionInterface
         $this->responder = $responder;
     }
 
+    /**
+     * @return mixed|\Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function __invoke()
     {
         $responder = $this->responder;

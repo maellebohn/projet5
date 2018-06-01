@@ -20,6 +20,5 @@ interface ContactTypeHandlerInterface
     *@param FormInterface $form
     *@return bool
     */
-
     public function handle(FormInterface $form): bool;
 }

@@ -35,7 +35,7 @@ final class ContactAction implements ContactActionInterface
     /**
      * ContactAction constructor.
      *
-     * @param FormFactoryInterface $formFactory
+     * @param FormFactoryInterface        $formFactory
      * @param ContactTypeHandlerInterface $contactTypeHandler
      */
     public function __construct(
@@ -46,10 +46,16 @@ final class ContactAction implements ContactActionInterface
         $this->contactTypeHandler = $contactTypeHandler;
     }
 
+
     /**
-     * @param Request $request
+     * @param Request                   $request
      * @param ContactResponderInterface $responder
-     * @return mixed
+     *
+     * @return mixed|\Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
     public function __invoke(Request $request, ContactResponderInterface $responder)
     {

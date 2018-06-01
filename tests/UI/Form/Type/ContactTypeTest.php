@@ -2,6 +2,7 @@
 
 namespace App\Tests\UI\Form\Type;
 
+use App\Domain\DTO\NewContactFormSubmittedDTO;
 use App\UI\Form\Type\ContactType;
 use Symfony\Component\Form\Test\TypeTestCase;
 
@@ -11,21 +12,15 @@ class ContactTypeTest extends TypeTestCase
     {
         $form = $this->factory->create(ContactType::class);
 
-        $form->submit([
-            'name' => 'toto',
-            'email' => 'toto@gmail.com',
-            'message' => 'Hello !'
-        ]);
+        $dto = new NewContactFormSubmittedDTO('toto', 'toto@gmail.com', 'Hello !');
+
+        $form->submit($dto);
 
         static::assertTrue(
             $form->isSubmitted()
         );
 
-        static::assertSame([
-            'name' => 'toto',
-            'email' => 'toto@gmail.com',
-            'message' => 'Hello !'
-            ],
+        static::assertSame($dto,
             $form->getData()
         );
 

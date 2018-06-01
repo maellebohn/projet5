@@ -9,15 +9,15 @@
     </div>
 
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#listinfos" data-toggle="tab">Conseils</a></li>
-        <li><a href="#listnews" data-toggle="tab">News</a></li>
-        <li><a href="#listbirds" data-toggle="tab">Oiseaux</a></li>
+        <li class="active"><a href="#tab1" data-toggle="tab" id="infos">Conseils</a></li>
+        <li><a href="#tab2" data-toggle="tab" id="news">News</a></li>
+        <li><a href="#tab3" data-toggle="tab" id="birds">Oiseaux</a></li>
     </ul>
 
     <div class="tab-content">
 
         <div class="tap-pane active" id="tab1">
-            <table class="table table-striped table-bordered table-condensed" id="listinfos">
+            <table class="table table-bordered">
                 <thead>
                 <tr>
                     <th>Titre</th>
@@ -32,8 +32,8 @@
                 <tr>
                     <td>{{ infos.title }}</td>
                     <td>{{ infos.content }}</td>
-                    {#<td>{{ infos.dateCreation|date("d/m/Y") }}</td>#}
-                    <td><a href="#"><span class="fas fa-edit"></span></a><a href="#"><span class="fas fa-times"></span></a></td>
+                    <td>{{ infos.dateCreation|date("d/m/Y") }}</td>
+                    <td><a href="#"><span class="fas fa-edit"></span></a><a href="{{ path('delete_info', {'id':infos.id}) }}"><span class="fas fa-times"></span></a></td>
                 </tr>
                 {% endfor %}
                 </tbody>
@@ -41,7 +41,7 @@
         </div>
 
         <div class="tap-pane" id="tab2">
-            <table class="table table-striped table-bordered table-condensed" id="listnews">
+            <table class="table table-bordered">
                 <thead>
                 <tr>
                     <th>Titre</th>
@@ -52,7 +52,7 @@
                 </thead>
 
                 <tbody>
-                {% for news in listinfos %}
+                {% for news in listnews %}
                     <tr>
                         <td>{{ news.title }}</td>
                         <td>{{ news.content }}</td>
@@ -65,7 +65,7 @@
         </div>
 
         <div class="tap-pane" id="tab3">
-            <table class="table table-striped table-bordered table-condensed" id="listbirds">
+            <table class="table table-bordered">
                 <thead>
                 <tr>
                     <th>Nom</th>
@@ -77,22 +77,30 @@
                 </thead>
 
                 <tbody>
-{#                {% for birds in listinfos %}
+                {% for birds in listbirds %}
                     <tr>
                         <td>{{ birds.name }}</td>
-                        <td>{{ birds.birthdate }}</td>
+                        {#<td>{{ birds.birthdate }}</td>#}
                         <td>{{ birds.description }}</td>
                         <td>{{ birds.price }}</td>
-                        <td><a href="#"><span class="fas fa-edit"></span></a><a href="#"><span class="fas fa-times"></span></a></td>
+                        <td><a href="#"><span class="fas fa-times"></span></a></td>
                     </tr>
-                {% endfor %}#}
+                {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
 
-    <div id="add_button">
-        <a href="{{ path('add_info') }}"class="btn btn-success">Créer une info</a>
+    <div id="addinfo_button">
+        <a href="{{ path('add_info') }}" class="btn btn-success">Créer une info</a>
+    </div>
+
+    <div id="addnews_button">
+        <a href="#" class="btn btn-success">Créer une news</a>
+    </div>
+
+    <div id="addbird_button">
+        <a href="#" class="btn btn-success">Ajouter un oiseau</a>
     </div>
 
 {% endblock %}

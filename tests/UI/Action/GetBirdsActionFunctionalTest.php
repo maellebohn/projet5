@@ -13,7 +13,7 @@ class GetBirdsActionFunctionalTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET','/');
+        $client->request('GET','/reservation');
 
         static::assertSame(
             Response::HTTP_OK,

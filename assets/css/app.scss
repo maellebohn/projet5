@@ -28,6 +28,7 @@ body, html {
 #wrapper {
   color:#e1ffff;
   font-family:'Unica One', cursive;
+  margin-bottom:50px;
 }
 
 h1 {
@@ -58,7 +59,7 @@ div.form-group.row {
   margin-bottom:15px;
 }
 
-.table {
+.table, .table-responsive {
   width:90%;
   margin:auto;
 }
@@ -86,6 +87,20 @@ a:hover {
 
 .table>tbody>tr>td {
   vertical-align:middle;
+}
+
+#contact_row, #reservation_row, #conseils_row, #welcome_row, #listnews_row, #addinfo_row, #admin_row, #alimentation_row {
+  margin-bottom: 100px;
+  margin-top: 30px;
+}
+
+#contact, #reservation, #conseils, #welcome, #listnews, #addinfo, #admin, #alimentation {
+  background-color: #698B69;
+  text-align:center;
+}
+
+th, td {
+  color: #e1ffff;
 }
 
 //footer
@@ -222,18 +237,8 @@ a.connexion:hover {
 }
 
 //page contact
-#contact_row, #reservation_row, #conseils_row, #welcome_row, #listnews_row, #addinfo_row, #admin_row {
-  margin-bottom: 100px;
-  margin-top: 30px;
-}
-
 .form-control, #mceu_11 {
   width:80% !important;
-}
-
-#contact, #reservation, #conseils, #welcome, #listnews, #addinfo, #admin {
-  background-color: #698B69;
-  text-align:center;
 }
 
 #contact_infos {
@@ -263,11 +268,11 @@ a.connexion:hover {
   margin-bottom:20px;
 }
 
-#tab2, #tab3 {
+#tab2, #tab3, #addnews_button, #addbird_button {
   display:none;
 }
 
-#add_button {
+#addinfo_button, #addnews_button, #addbird_button {
   margin-left:5%;
 }
 
@@ -276,8 +281,23 @@ a.connexion:hover {
   margin-bottom:40px;
 }
 
+@media (max-width: 767px) {
+    #conseils_row {
+      margin-bottom: 50px;
+    }
+}
+
 //reservation page
 #reservation_button {
   text-align: center;
 }
 
+.modal-content {
+  background-color: #698B69;
+}
+
+//add_info page
+input#add_info_image.custom-file-input {
+  display: inline;
+  margin-left: 2%;
+}

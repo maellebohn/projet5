@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block wrapper %}
+
+    <div class="row" id="alimentation_row">
+        {% for infos in infosbycategory %}
+        {% if infos.category=='alimentation' %}
+        <div id="alimentation" class="col-xs-12 col-md-offset-3 col-md-6">
+            <h1>ALIMENTATION</h1>
+            <p>Retrouvez ici tous nos conseils concernant l'alimentation de votre perroquet !</p>
+        </div>
+
+        {% elseif infos.category=='education' %}
+        <div id="alimentation" class="col-xs-12 col-md-offset-3 col-md-6">
+            <h1>EDUCATION</h1>
+            <p>Retrouvez ici tous nos conseils concernant l'éducation de votre perroquet !</p>
+        </div>
+
+        {% elseif infos.category=='installation' %}
+        <div id="alimentation" class="col-xs-12 col-md-offset-3 col-md-6">
+            <h1>INSTALLATION</h1>
+            <p>Retrouvez ici tous nos conseils concernant l'installation de votre perroquet chez vous !</p>
+        </div>
+
+        {% elseif infos.category=='pathologie' %}
+            <div id="alimentation" class="col-xs-12 col-md-offset-3 col-md-6">
+                <h1>PATHOLOGIE</h1>
+                <p>Retrouvez ici tous nos conseils concernant les pathologies de votre perroquet !</p>
+            </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="row">
+        {% for infos in infosbycategory %}
+        <div class="col-xs-12 col-md-4">
+            <h3>{{ infos.title }}</h3>
+            {#<p>Publié le {{ infos.dateCreation|date("d/m/Y") }}</p>#}
+            <p>{{ infos.content[:50] }} <br> <a href="#">Lire la suite</a></p>
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

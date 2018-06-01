@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\UI\Responder;
 
 use App\UI\Responder\Interfaces\GetBirdsResponderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
@@ -26,7 +27,8 @@ final class GetBirdsResponder implements GetBirdsResponderInterface
     }
 
     /**
-     * @param $data
+     * @param               $data
+     * @param FormInterface $reservationType
      *
      * @return Response
      *
@@ -34,11 +36,12 @@ final class GetBirdsResponder implements GetBirdsResponderInterface
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke($data)
+    public function __invoke($data, FormInterface $reservationType)
     {
         return new Response(
             $this->twig->render('listbirds.html.twig', [
-                'listbirds' =>$data
+                'listbirds' =>$data,
+                'form' => $reservationType->createView()
             ])
         );
     }

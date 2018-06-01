@@ -4,7 +4,7 @@ namespace App\Tests\UI\Form\Type;
 
 use App\UI\Form\Type\AddInfoType;
 use Symfony\Component\Form\Test\TypeTestCase;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
 
 class AddInfoTypeTest extends TypeTestCase
 {
@@ -15,7 +15,7 @@ class AddInfoTypeTest extends TypeTestCase
         $form->submit([
             'title' => 'alimentation',
             'author' => 'toto',
-            'image' => new UploadedFile('/public/images/accueil1.jpg', 'photo.jpg', 'image/jpeg', 123),
+            'image' => new File(),
             'category' => 'education',
             'content' => 'bien nourrir ses perroquets'
         ]);
@@ -27,7 +27,7 @@ class AddInfoTypeTest extends TypeTestCase
         static::assertSame([
             'title' => 'alimentation',
             'author' => 'toto',
-            'image' => new UploadedFile('/public/images/accueil1.jpg', 'photo.jpg', 'image/jpeg', 123),
+            'image' => new File(),
             'category' => 'education',
             'content' => 'bien nourrir ses perroquets'
             ],

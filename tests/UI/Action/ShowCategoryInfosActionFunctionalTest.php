@@ -13,7 +13,7 @@ class ShowCategoryInfosActionFunctionalTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET','/');
+        $client->request('GET','/conseils');
 
         static::assertSame(
             Response::HTTP_OK,

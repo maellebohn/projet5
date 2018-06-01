@@ -68,7 +68,8 @@ class Infos implements InfosInterface
 
     public function getDateCreation()
     {
-        return \DateTime::createFromFormat('U', (string) $this->dateCreation);
+//        return \DateTime::createFromFormat('U', (string) $this->dateCreation);
+        return $this->dateCreation;
     }
 
     public function getDateModification()
@@ -104,7 +105,7 @@ class Infos implements InfosInterface
         $this->id = Uuid::uuid4();
         $this->content = $content;
         $this->title = $title;
-        $this->dateCreation = time();
+        $this->dateCreation = new \DateTime();
         $this->dateModification = null;
         $this->image = $image;
         $this->author = $author;

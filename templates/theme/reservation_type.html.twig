@@ -2,7 +2,8 @@
     {{ form_start(form) }}
         {{ form_row(form.name, { 'label': 'Votre nom' }) }}
         {{ form_row(form.email, { 'label': 'Votre adresse e-mail' }) }}
-        <div class="form-group row">
+        {{ form_row(form.message, { 'label': 'Votre message' }) }}
+    <div class="form-group row">
             <div class="col-sm-2"></div>
             <div class="col-sm-10">
                 <button type="submit" class="btn btn-success">Envoyer</button>

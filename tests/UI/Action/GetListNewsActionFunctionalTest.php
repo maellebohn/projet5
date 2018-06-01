@@ -13,7 +13,7 @@ class GetListNewsActionFunctionalTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET','/');
+        $client->request('GET','/news');
 
         static::assertSame(
             Response::HTTP_OK,

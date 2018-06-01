@@ -9,10 +9,19 @@ use App\UI\Responder\Interfaces\GetListNewsResponderInterface;
 
 interface GetListNewsActionInterface
 {
+    /**
+     * GetListNewsAction constructor.
+     *
+     * @param NewsRepositoryInterface       $newsRepository
+     * @param GetListNewsResponderInterface $responder
+     */
     public function __construct (
-        NewsRepositoryInterface $infosRepository,
+        NewsRepositoryInterface $newsRepository,
         GetListNewsResponderInterface $responder
     );
 
+    /**
+     * @return mixed
+     */
     public function __invoke();
 }

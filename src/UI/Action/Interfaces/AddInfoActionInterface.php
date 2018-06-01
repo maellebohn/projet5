@@ -25,6 +25,7 @@ interface AddInfoActionInterface
     /**
      * @param Request                   $request
      * @param AddInfoResponderInterface $responder
+     *
      * @return mixed
      */
     public function __invoke(

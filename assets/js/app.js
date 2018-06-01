@@ -11,35 +11,37 @@ require('bootstrap-sass');
 
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
-});
 
-$(document).ready( function(){
     $("#menu ul li a").click(function(){
         $("#menu ul li a").removeClass("active");
         $(this).addClass("active")
     });
-});
 
-$(document).ready( function(){
-    $("#listnews").click(function(){
+    $("#news").click(function(){
         $("#tab2").show();
+        $("#addnews_button").show();
         $("#tab1").hide();
         $("#tab3").hide();
+        $("#addbird_button").hide();
+        $("#addinfo_button").hide();
     });
-});
 
-$(document).ready( function(){
-    $("#listinfos").click(function(){
+    $("#infos").click(function(){
         $("#tab1").show();
+        $("#addinfo_button").show();
         $("#tab2").hide();
         $("#tab3").hide();
+        $("#addnews_button").hide();
+        $("#addbird_button").hide();
     });
-});
 
-$(document).ready( function(){
-    $("#listbirds").click(function(){
+    $("#birds").click(function(){
         $("#tab3").show();
+        $("#addbird_button").show();
         $("#tab2").hide();
         $("#tab1").hide();
+        $("#addinfo_button").hide();
+        $("#addnews_button").hide();
     });
+
 });

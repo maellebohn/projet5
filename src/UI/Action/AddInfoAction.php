@@ -34,7 +34,7 @@ final class AddInfoAction implements AddInfoActionInterface
     /**
      * AddInfoAction constructor.
      *
-     * @param FormFactoryInterface $formFactory
+     * @param FormFactoryInterface        $formFactory
      * @param AddInfoTypeHandlerInterface $addInfoTypeHandler
      */
     public function __construct(
@@ -45,10 +45,16 @@ final class AddInfoAction implements AddInfoActionInterface
         $this->addInfoTypeHandler = $addInfoTypeHandler;
     }
 
+
     /**
-     * @param Request $request
+     * @param Request                   $request
      * @param AddInfoResponderInterface $responder
-     * @return mixed
+     *
+     * @return mixed|\Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
     public function __invoke(Request $request, AddInfoResponderInterface $responder)
     {

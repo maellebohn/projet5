@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\UI\Form\Handler;
 
-use App\Domain\DTO\NewInfoDTO;
 use App\Domain\Models\Infos;
 use App\Helper\FileUploaderHelper;
 use App\Repository\Interfaces\InfosRepositoryInterface;
@@ -23,6 +22,12 @@ class AddInfoTypeHandler implements AddInfoTypeHandlerInterface
      */
     private $fileUploaderHelper;
 
+    /**
+     * AddInfoTypeHandler constructor.
+     *
+     * @param InfosRepositoryInterface $infosRepository
+     * @param FileUploaderHelper $fileUploaderHelper
+     */
     public function __construct (
         InfosRepositoryInterface $infosRepository,
         FileUploaderHelper $fileUploaderHelper
@@ -42,7 +47,13 @@ class AddInfoTypeHandler implements AddInfoTypeHandlerInterface
             $image = $form->getData()->image;
             $imageName = $this->fileUploaderHelper->upload($image);
 
-            $info = new Infos($form->getData()->title, $form->getData()->author, $imageName, $form->getData()->category, $form->getData()->content);
+            $info = new Infos(
+                $form->getData()->title,
+                $form->getData()->author,
+                $imageName,
+                $form->getData()->category,
+                $form->getData()->content
+            );
 
             $this->infosRepository->save($info);
 

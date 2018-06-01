@@ -33,7 +33,6 @@ class GetListNewsActionTest extends KernelTestCase
         $this->newsRepository = $this->createMock(NewsRepositoryInterface::class);
         $this->newsRepository->method('findAll')->willReturn([]);
         $this->responder = new GetListNewsResponder($this->createMock(Environment::class));
-        ;
     }
 
     public function testConstruct()
