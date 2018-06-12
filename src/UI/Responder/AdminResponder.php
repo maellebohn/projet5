@@ -16,7 +16,7 @@ final class AdminResponder implements AdminResponderInterface
     private $twig;
 
     /**
-     *GetListInfosResponder constructor.
+     *AdminResponder constructor.
      *
      * @param Environment $twig
      */

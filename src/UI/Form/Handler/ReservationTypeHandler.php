@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\UI\Form\Handler;
 
-use App\Event\ContactFormSubmittedEvent;
-use App\Event\Interfaces\ContactFormSubmittedEventInterface;
+use App\Event\ReservationFormSubmittedEvent;
+use App\Event\Interfaces\ReservationFormSubmittedEventInterface;
 use App\UI\Form\Handler\Interfaces\ReservationTypeHandlerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormInterface;
@@ -18,7 +18,7 @@ class ReservationTypeHandler implements ReservationTypeHandlerInterface
     private $eventDispatcher;
 
     /**
-     * ContactTypeHandler constructor.
+     * ReservationTypeHandler constructor.
      *
      * @param EventDispatcherInterface $eventDispatcher
      */
@@ -34,7 +34,7 @@ class ReservationTypeHandler implements ReservationTypeHandlerInterface
     public function handle(FormInterface $form): bool
     {
         if($form->isSubmitted() && $form->isValid()) {
-            $this->eventDispatcher->dispatch(ContactFormSubmittedEventInterface::NAME, new ContactFormSubmittedEvent($form->getData()));
+            $this->eventDispatcher->dispatch(ReservationFormSubmittedEventInterface::NAME, new ReservationFormSubmittedEvent($form->getData()));
             return true;
         }
         return false;

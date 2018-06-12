@@ -27,4 +27,13 @@ class ContactFormSubmittedEventTest extends KernelTestCase
             $contactFormSubmittedEvent
         );
     }
+
+    public function testGetter()
+    {
+        $contactFormSubmittedEvent = new ContactFormSubmittedEvent(
+            $this->newContactFormSubmittedDTO
+        );
+
+        static::assertSame($this->newContactFormSubmittedDTO, $contactFormSubmittedEvent->getnewContactFormSubmittedDTO());
+    }
 }

@@ -20,4 +20,24 @@ class GetBirdsActionFunctionalTest extends WebTestCase
             $client->getResponse()->getStatusCode()
         );
     }
+
+    public function testReservationPageFormSubmission()
+    {
+        $client = static::createClient();
+
+        $crawler = $client->request('GET','/reservation');
+
+        $form = $crawler->selectButton('Envoyer')->form();
+
+        $form['reservation[name]'] = 'Toto';
+        $form['reservation[email]'] = 'toto@gmail.com';
+        $form['reservation[message]'] = 'Hello !' ;
+
+        $crawler = $client->submit($form);
+
+        static::assertSame(
+            Response::HTTP_OK,
+            $client->getResponse()->getStatusCode()
+        );
+    }
 }

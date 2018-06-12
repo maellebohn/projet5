@@ -31,4 +31,10 @@ class BirdsRepository extends ServiceEntityRepository implements BirdsRepository
         $this->_em->persist($bird);
         $this->_em->flush();
     }
+
+    public function remove(BirdsInterface $bird)
+    {
+        $this->_em->remove($bird);
+        $this->_em->flush();
+    }
 }

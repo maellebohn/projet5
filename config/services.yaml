@@ -32,3 +32,8 @@ services:
         class: App\Listener\ContactFormSubmittedListener
         tags:
             - { name: kernel.event_listener, event: 'contactform.submitted', method: onContactFormSubmitted }
+
+    app.reservationform_listener:
+        class: App\Listener\ReservationFormSubmittedListener
+        tags:
+            - { name: kernel.event_listener, event: 'reservationform.submitted', method: onReservationFormSubmitted }

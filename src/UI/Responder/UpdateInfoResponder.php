@@ -51,7 +51,7 @@ final class UpdateInfoResponder implements UpdateInfoResponderInterface
         $redirect
         ? $response = new RedirectResponse($this->router->generate('contact'))
         : $response = new Response(
-            $this->twig->render('contact.html.twig', [
+            $this->twig->render('updateinfo.html.twig', [
                 'info' => $info,
                 'form' => $updateInfoType->createView()
             ])

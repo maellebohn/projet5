@@ -63,8 +63,13 @@ class UpdateInfoAction implements UpdateInfoActionInterface
         Request $request,
         UpdateInfoResponderInterface $responder
     ) {
-        $info = $this->infosRepository->findOneBy(['id' => $request->attributes->get('id')]);
+        $infos = $this->infosRepository->findOneBy(['id' => $request->attributes->get('id')]);
         $dto = new UpdateInfoDTO(
+            $infos->getTitle(),
+            $infos->getAuthor(),
+            $infos->getImage(),
+            $infos->getCategory(),
+            $infos->getContent()
         );
 
         $updateInfoType = $this->formFactory->create(UpdateInfoType::class, $dto)
@@ -74,6 +79,6 @@ class UpdateInfoAction implements UpdateInfoActionInterface
             return $responder(true);
         }
 
-        return $responder(false, $info, $updateInfoType);
+        return $responder(false, $infos, $updateInfoType);
     }
 }

@@ -26,7 +26,7 @@ class AddInfoTypeHandler implements AddInfoTypeHandlerInterface
      * AddInfoTypeHandler constructor.
      *
      * @param InfosRepositoryInterface $infosRepository
-     * @param FileUploaderHelper $fileUploaderHelper
+     * @param FileUploaderHelper       $fileUploaderHelper
      */
     public function __construct (
         InfosRepositoryInterface $infosRepository,

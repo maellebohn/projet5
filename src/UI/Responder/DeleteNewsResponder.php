@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\UI\Responder;
 
-use App\UI\Responder\Interfaces\DeleteInfoResponderInterface;
+use App\UI\Responder\Interfaces\DeleteNewsResponderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-final class DeleteInfoResponder implements DeleteInfoResponderInterface
+final class DeleteNewsResponder implements DeleteNewsResponderInterface
 {
     /**
     * @var Environment
@@ -22,7 +22,7 @@ final class DeleteInfoResponder implements DeleteInfoResponderInterface
     private $router;
 
     /**
-    *DeleteInfoResponder constructor.
+    *DeleteNewsResponder constructor.
     *
     * @param Environment $twig
     * @param UrlGeneratorInterface $router

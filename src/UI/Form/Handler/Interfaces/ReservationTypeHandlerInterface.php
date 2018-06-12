@@ -10,7 +10,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 interface ReservationTypeHandlerInterface
 {
     /**
-     * ContactTypeHandler constructor.
+     * ReservationTypeHandler constructor.
      *
      * @param EventDispatcherInterface $eventDispatcher
      */

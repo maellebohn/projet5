@@ -43,5 +43,11 @@ $(document).ready(function() {
         $("#addinfo_button").hide();
         $("#addnews_button").hide();
     });
+   //
+   // $("form").submit(function(event){
+   //      var content = tinyMCE.activeEditor.getContent();
+    // or     var content = tinyMCE.get("add_info_content").getContent();
+    //     $("#add_info_content2").html(content);
+   // });
 
 });

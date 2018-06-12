@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Models;
 
 use App\Domain\DTO\NewInfoDTO;
+use App\Domain\DTO\UpdateInfoDTO;
 use App\Domain\Models\Interfaces\InfosInterface;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -112,12 +113,21 @@ class Infos implements InfosInterface
         $this->category = $category;
     }
 
-    public function create(NewInfoDTO $newinfoDTO): self
+    public function create(NewInfoDTO $newInfoDTO): self
     {
-        $this->content = $newinfoDTO->content;
-        $this->title = $newinfoDTO->title;
-        $this->image = $newinfoDTO->image;
-        $this->author = $newinfoDTO->author;
-        $this->category = $newinfoDTO->category;
+        $this->content = $newInfoDTO->content;
+        $this->title = $newInfoDTO->title;
+        $this->image = $newInfoDTO->image;
+        $this->author = $newInfoDTO->author;
+        $this->category = $newInfoDTO->category;
+    }
+
+    public function update(UpdateInfoDTO $updateInfoDTO)
+    {
+        $this->content = $updateInfoDTO->content;
+        $this->title = $updateInfoDTO->title;
+        $this->image = $updateInfoDTO->image;
+        $this->author = $updateInfoDTO->author;
+        $this->category = $updateInfoDTO->category;
     }
 }

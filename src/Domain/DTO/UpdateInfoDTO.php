@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Domain\DTO;
 
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-
 class UpdateInfoDTO
 {
     /**
@@ -19,7 +17,7 @@ class UpdateInfoDTO
     public $author;
 
     /**
-     * @var UploadedFile
+     * @var string
      */
     public $image;
 
@@ -34,18 +32,18 @@ class UpdateInfoDTO
     public $content;
 
     /**
-     * NewInfoDTO constructor.
+     * UpdateInfoDTO constructor.
      *
-     * @param string       $title
-     * @param string       $author
-     * @param UploadedFile $image
-     * @param string       $category
-     * @param string       $content
+     * @param string $title
+     * @param string $author
+     * @param string $image
+     * @param string $category
+     * @param string $content
      */
     public function __construct(
         string $title,
         string $author,
-        UploadedFile $image,
+        string $image,
         string $category,
         string $content
     ) {

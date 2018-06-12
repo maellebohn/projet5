@@ -24,7 +24,7 @@ final class AddInfoResponder implements AddInfoResponderInterface
     private $router;
 
     /**
-     *ContactResponder constructor.
+     *AddInfoResponder constructor.
      *
      * @param Environment           $twig
      * @param UrlGeneratorInterface $router

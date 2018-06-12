@@ -23,15 +23,15 @@ class NewsRepository extends ServiceEntityRepository implements NewsRepositoryIn
         parent::__construct($registry, News::class);
     }
 
-    public function save(NewsInterface $new)
+    public function save(NewsInterface $news)
     {
-        $this->_em->persist($new);
+        $this->_em->persist($news);
         $this->_em->flush();
     }
 
-    public function remove(NewsInterface $new)
+    public function remove(NewsInterface $news)
     {
-        $this->_em->remove($new);
+        $this->_em->remove($news);
         $this->_em->flush();
     }
 }

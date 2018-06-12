@@ -25,4 +25,6 @@ interface InfosRepositoryInterface
         array $criteria,
         array $orderBy = null
     );
+
+    public function update();
 }

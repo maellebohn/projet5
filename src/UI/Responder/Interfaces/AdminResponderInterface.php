@@ -10,7 +10,7 @@ use Twig\Environment;
 interface AdminResponderInterface
 {
     /**
-     *GetListInfosResponder constructor.
+     *AdminResponder constructor.
      *
      * @param Environment $twig
      */

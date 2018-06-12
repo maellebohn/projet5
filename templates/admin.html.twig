@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base2.html.twig' %}
 
 {% block wrapper %}
 
@@ -33,7 +33,7 @@
                     <td>{{ infos.title }}</td>
                     <td>{{ infos.content }}</td>
                     <td>{{ infos.dateCreation|date("d/m/Y") }}</td>
-                    <td><a href="#"><span class="fas fa-edit"></span></a><a href="{{ path('delete_info', {'id':infos.id}) }}"><span class="fas fa-times"></span></a></td>
+                    <td><a href="{{ path('update_info', {'id':infos.id}) }}"><span class="fas fa-edit"></span></a><a href="{{ path('delete_info', {'id':infos.id}) }}"><span class="fas fa-times"></span></a></td>
                 </tr>
                 {% endfor %}
                 </tbody>
@@ -80,10 +80,10 @@
                 {% for birds in listbirds %}
                     <tr>
                         <td>{{ birds.name }}</td>
-                        {#<td>{{ birds.birthdate }}</td>#}
+                        <td>{{ birds.birthdate|date("d/m/Y") }}</td>
                         <td>{{ birds.description }}</td>
                         <td>{{ birds.price }}</td>
-                        <td><a href="#"><span class="fas fa-times"></span></a></td>
+                        <td><a href="#"><span class="fas fa-edit"></span></a><a href="#"><span class="fas fa-times"></span></a></td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -92,7 +92,7 @@
     </div>
 
     <div id="addinfo_button">
-        <a href="{{ path('add_info') }}" class="btn btn-success">Créer une info</a>
+        <a href="{{ path('add_info') }}" class="btn btn-success">Créer un conseil</a>
     </div>
 
     <div id="addnews_button">

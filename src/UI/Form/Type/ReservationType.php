@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Form\Type;
 
-use App\Domain\DTO\NewInfoDTO;
+use App\Domain\DTO\NewReservationFormSubmittedDTO;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -24,19 +24,18 @@ class ReservationType extends AbstractType
 
     }
 
-/*    public function configureOptions (OptionsResolver $resolver)
+    public function configureOptions (OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => NewInfoDTO::class,
+            'data_class' => NewReservationFormSubmittedDTO::class,
             'empty_data' => function (FormInterface $form) {
-                return new NewInfoDTO(
-                    $form->get('title')->getData(),
-                    $form->get('author')->getData(),
-                    $form->get('image')->getData(),
-                    $form->get('content')->getData()
+                return new NewReservationFormSubmittedDTO(
+                    $form->get('name')->getData(),
+                    $form->get('email')->getData(),
+                    $form->get('message')->getData()
                 );
             },
-            "validation_groups" => ['addinfo']
+            "validation_groups" => ['contact']
         ]);
-    }*/
+    }
 }

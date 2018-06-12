@@ -37,4 +37,9 @@ class InfosRepository extends ServiceEntityRepository implements InfosRepository
         $this->_em->remove($info);
         $this->_em->flush();
     }
+
+    public function update()
+    {
+        $this->_em->flush();
+    }
 }

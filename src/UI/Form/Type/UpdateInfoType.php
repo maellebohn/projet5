@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\UI\Form\Type;
 
-use App\Domain\DTO\NewInfoDTO;
+use App\Domain\DTO\UpdateInfoDTO;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,9 +29,9 @@ class UpdateInfoType extends AbstractType
     public function configureOptions (OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => NewInfoDTO::class,
+            'data_class' => UpdateInfoDTO::class,
             'empty_data' => function (FormInterface $form) {
-                return new NewInfoDTO(
+                return new UpdateInfoDTO(
                     $form->get('title')->getData(),
                     $form->get('author')->getData(),
                     $form->get('image')->getData(),

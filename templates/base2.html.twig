@@ -32,34 +32,33 @@
 
                             <ul id="menu-content" class="menu-content collapse out">
                                 <li>
-                                    <a class="active" href="{{ path('home') }}">NOTRE ELEVAGE</a>
+                                    <a class="active" href="{{ path('admin') }}">TABLEAU DE BORD</a>
                                 </li>
 
-                                <li  data-toggle="collapse" data-target="#conseils" class="collapsed">
-                                    <a href="{{ path('conseils') }}">NOS CONSEILS</a>
+                                <li  data-toggle="collapse" data-target="#create" class="collapsed">
+                                    <a href="#">CREER</a>
                                 </li>
-                                <ul class="sub-menu collapse" id="conseils">
-                                    <li><a href="#">ALIMENTATION</a></li>
-                                    <li><a href="#">EDUCATION</a></li>
-                                    <li><a href="#">INSTALLATION</a></li>
-                                    <li><a href="#">PATHOLOGIE</a></li>
+                                <ul class="sub-menu collapse" id="create">
+                                    <li><a href="#">AJOUTER UN CONSEIL</a></li>
+                                    <li><a href="#">AJOUTER UNE NEWS</a></li>
+                                    <li><a href="#">AJOUTER UN OISEAU</a></li>
                                 </ul>
 
-                                <li data-toggle="collapse" data-target="#news" class="collapsed">
-                                    <a href="{{ path('news') }}">DERNIERES NOUVELLES</a>
+                                <li data-toggle="collapse" data-target="#update" class="collapsed">
+                                    <a href="#">MODIFIER</a>
                                 </li>
-                                <ul class="sub-menu collapse" id="news">
-                                    <li><a href="#">News 1</a></li>
-                                    <li><a href="#">News 2</a></li>
-                                    <li><a href="#">News 3</a></li>
+                                <ul class="sub-menu collapse" id="update">
+                                    <li><a href="#">MODIFIER UN CONSEIL</a></li>
+                                    <li><a href="#">MODIFIER UNE NEWS</a></li>
+                                    <li><a href="#">MODIFIER UN OISEAU</a></li>
                                 </ul>
 
                                 <li>
-                                    <a href="{{ path('reservation') }}">OISEAUX DISPONIBLES</a>
+                                    <a href="#">GESTION UTILISATEUR</a>
                                 </li>
 
                                 <li>
-                                    <a href="{{ path('contact') }}">NOUS CONTACTER</a>
+                                    <a href="{{ path('home') }}">RETOUR ACCUEIL</a>
                                 </li>
                             </ul>
                         </div>

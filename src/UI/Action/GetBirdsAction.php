@@ -6,6 +6,7 @@ namespace App\UI\Action;
 
 use App\Repository\Interfaces\BirdsRepositoryInterface;
 use App\UI\Action\Interfaces\GetBirdsActionInterface;
+use App\UI\Form\Handler\Interfaces\ReservationTypeHandlerInterface;
 use App\UI\Form\Type\ReservationType;
 use App\UI\Responder\Interfaces\GetBirdsResponderInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,22 +37,29 @@ final class GetBirdsAction implements GetBirdsActionInterface
     private $formFactory;
 
     /**
+     * @var ReservationTypeHandlerInterface
+     */
+    private $reservationTypeHandler;
+
+    /**
      * GetBirdsAction constructor.
      *
-     * @param BirdsRepositoryInterface   $birdsRepository
-     * @param GetBirdsResponderInterface $responder
-     * @param FormFactoryInterface       $formFactory
+     * @param BirdsRepositoryInterface        $birdsRepository
+     * @param GetBirdsResponderInterface      $responder
+     * @param FormFactoryInterface            $formFactory
+     * @param ReservationTypeHandlerInterface $reservationTypeHandler
      */
     public function __construct (
         BirdsRepositoryInterface $birdsRepository,
         GetBirdsResponderInterface $responder,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        ReservationTypeHandlerInterface $reservationTypeHandler
     ) {
         $this->birdsRepository = $birdsRepository;
         $this->responder = $responder;
         $this->formFactory = $formFactory;
+        $this->reservationTypeHandler = $reservationTypeHandler;
     }
-
 
     /**
      * @param Request $request
@@ -69,6 +77,10 @@ final class GetBirdsAction implements GetBirdsActionInterface
 
         $responder = $this->responder;
 
-        return $responder($this->birdsRepository->findAll(), $reservationType);
+        if($this->reservationTypeHandler->handle($reservationType)) {
+            return $responder(true, $this->birdsRepository->findAll());
+        }
+
+        return $responder(false, $this->birdsRepository->findAll(), $reservationType);
     }
 }

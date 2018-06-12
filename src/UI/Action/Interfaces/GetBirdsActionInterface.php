@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\UI\Action\Interfaces;
 
 use App\Repository\Interfaces\BirdsRepositoryInterface;
+use App\UI\Form\Handler\Interfaces\ReservationTypeHandlerInterface;
 use App\UI\Responder\Interfaces\GetBirdsResponderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,14 +15,16 @@ interface GetBirdsActionInterface
     /**
      * GetBirdsAction constructor.
      *
-     * @param BirdsRepositoryInterface   $birdsRepository
-     * @param GetBirdsResponderInterface $responder
-     * @param FormFactoryInterface       $formFactory
+     * @param BirdsRepositoryInterface        $birdsRepository
+     * @param GetBirdsResponderInterface      $responder
+     * @param FormFactoryInterface            $formFactory
+     * @param ReservationTypeHandlerInterface $reservationTypeHandler
      */
     public function __construct (
         BirdsRepositoryInterface $birdsRepository,
         GetBirdsResponderInterface $responder,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        ReservationTypeHandlerInterface $reservationTypeHandler
     );
 
     /**
