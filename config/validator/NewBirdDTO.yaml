@@ -2,41 +2,41 @@ App\Domain\DTO\NewBirdDTO:
     properties:
         name:
             - NotBlank:
-                message: "This entry must be filled !"
+                message: "Ce champs est requis, veuillez saisir une valeur."
                 groups: ['addbird']
             - Length:
                 min: 3
-                minMessage: "This value is too short"
+                minMessage: "Cette valeur est trop courte !"
                 max: 50
-                maxMessage: "This value is too long"
+                maxMessage: "Cette valeur est trop longue !"
                 groups: ['addbird']
         birthdate:
             - NotBlank:
-                message: "This entry must be filled !"
+                message: "Ce champs est requis, veuillez saisir une valeur."
                 groups: ['addbird']
             - Length:
                 min: 3
-                minMessage: "This value is too short"
+                minMessage: "Cette valeur est trop courte !"
                 max: 50
-                maxMessage: "This value is too long"
+                maxMessage: "Cette valeur est trop longue !"
                 groups: ['addbird']
         price:
             - NotBlank:
-                message: "This entry must be filled !"
+                message: "Ce champs est requis, veuillez saisir une valeur."
                 groups: ['addbird']
             - Length:
                 min: 3
-                minMessage: "This value is too short"
+                minMessage: "Cette valeur est trop courte !"
                 max: 50
-                maxMessage: "This value is too long"
+                maxMessage: "Cette valeur est trop longue !"
                 groups: ['addbird']
         description:
             - NotBlank:
-                message: "This entry must be filled !"
+                message: "Ce champs est requis, veuillez saisir une valeur."
                 groups: ['addbird']
             - Length:
                 min: 10
-                minMessage: "This value is too short"
+                minMessage: "Cette valeur est trop courte !"
                 max: 1000
-                maxMessage: "This value is too long"
+                maxMessage: "Cette valeur est trop longue !"
                 groups: ['addbird']

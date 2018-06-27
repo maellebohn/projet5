@@ -1,48 +1,42 @@
-App\Domain\DTO\NewInfoDTO:
+App\Domain\DTO\UpdateBirdDTO:
     properties:
-        title:
+        name:
             - NotBlank:
                 message: "Ce champs est requis, veuillez saisir une valeur."
-                groups: ['addinfo']
-            - Length:
-                min: 3
-                minMessage: "Cette valeur est trop courte !"
-                max: 100
-                maxMessage: "This value is too long"
-                groups: ['addinfo']
-        author:
-            - NotBlank:
-                message: "Ce champs est requis, veuillez saisir une valeur."
-                groups: ['addinfo']
+                groups: ['updatebird']
             - Length:
                 min: 3
                 minMessage: "Cette valeur est trop courte !"
                 max: 50
                 maxMessage: "Cette valeur est trop longue !"
-                groups: ['addinfo']
-        image:
-            - Image:
-                mimeTypes: ['image/jpeg', 'image/png']
-                mimeTypesMessage: "This file is not a valid image"
-                maxSize: "2M"
-                groups: ['addinfo']
-        category:
+                groups: ['updatebird']
+        birthdate:
             - NotBlank:
                 message: "Ce champs est requis, veuillez saisir une valeur."
-                groups: ['addinfo']
+                groups: ['updatebird']
             - Length:
                 min: 3
                 minMessage: "Cette valeur est trop courte !"
                 max: 50
                 maxMessage: "Cette valeur est trop longue !"
-                groups: ['addinfo']
-        content:
+                groups: ['updatebird']
+        price:
             - NotBlank:
                 message: "Ce champs est requis, veuillez saisir une valeur."
-                groups: ['addinfo']
+                groups: ['updatebird']
+            - Length:
+                min: 3
+                minMessage: "Cette valeur est trop courte !"
+                max: 50
+                maxMessage: "Cette valeur est trop longue !"
+                groups: ['updatebird']
+        description:
+            - NotBlank:
+                message: "Ce champs est requis, veuillez saisir une valeur."
+                groups: ['updatebird']
             - Length:
                 min: 10
                 minMessage: "Cette valeur est trop courte !"
                 max: 1000
                 maxMessage: "Cette valeur est trop longue !"
-                groups: ['addinfo']
+                groups: ['updatebird']

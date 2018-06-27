@@ -35,7 +35,7 @@ class UpdateBirdType extends AbstractType
                     $form->get('description')->getData()
                 );
             },
-            "validation_groups" => ['addbird']
+            "validation_groups" => ['updatebird']
         ]);
     }
 }

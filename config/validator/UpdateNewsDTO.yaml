@@ -1,48 +1,38 @@
-App\Domain\DTO\NewInfoDTO:
+App\Domain\DTO\UpdateNewsDTO:
     properties:
         title:
             - NotBlank:
                 message: "Ce champs est requis, veuillez saisir une valeur."
-                groups: ['addinfo']
+                groups: ['updatenews']
             - Length:
                 min: 3
                 minMessage: "Cette valeur est trop courte !"
                 max: 100
-                maxMessage: "This value is too long"
-                groups: ['addinfo']
+                maxMessage: "Cette valeur est trop longue !"
+                groups: ['updatenews']
         author:
             - NotBlank:
                 message: "Ce champs est requis, veuillez saisir une valeur."
-                groups: ['addinfo']
+                groups: ['updatenews']
             - Length:
                 min: 3
                 minMessage: "Cette valeur est trop courte !"
                 max: 50
                 maxMessage: "Cette valeur est trop longue !"
-                groups: ['addinfo']
+                groups: ['updatenews']
         image:
             - Image:
                 mimeTypes: ['image/jpeg', 'image/png']
                 mimeTypesMessage: "This file is not a valid image"
                 maxSize: "2M"
-                groups: ['addinfo']
-        category:
-            - NotBlank:
-                message: "Ce champs est requis, veuillez saisir une valeur."
-                groups: ['addinfo']
-            - Length:
-                min: 3
-                minMessage: "Cette valeur est trop courte !"
-                max: 50
-                maxMessage: "Cette valeur est trop longue !"
-                groups: ['addinfo']
+                groups: ['updatenews']
         content:
             - NotBlank:
                 message: "Ce champs est requis, veuillez saisir une valeur."
-                groups: ['addinfo']
+                groups: ['updatenews']
             - Length:
                 min: 10
                 minMessage: "Cette valeur est trop courte !"
                 max: 1000
                 maxMessage: "Cette valeur est trop longue !"
-                groups: ['addinfo']
+                groups: ['updatenews']

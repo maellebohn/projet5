@@ -35,7 +35,7 @@ class ReservationType extends AbstractType
                     $form->get('message')->getData()
                 );
             },
-            "validation_groups" => ['contact']
+            "validation_groups" => ['reservation']
         ]);
     }
 }

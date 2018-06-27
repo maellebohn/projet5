@@ -39,7 +39,7 @@ class UpdateInfoType extends AbstractType
                     $form->get('content')->getData()
                 );
             },
-            "validation_groups" => ['addinfo']
+            "validation_groups" => ['updateinfo']
         ]);
     }
 }

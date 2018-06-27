@@ -36,7 +36,7 @@ class UpdateNewsType extends AbstractType
                     $form->get('content')->getData()
                 );
             },
-            "validation_groups" => ['addinfo']
+            "validation_groups" => ['updatenews']
         ]);
     }
 }

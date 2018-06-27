@@ -1,34 +1,34 @@
-App\Domain\DTO\NewContactFormSubmittedDTO:
+App\Domain\DTO\NewReservationFormSubmittedDTO:
     properties:
         name:
             - NotBlank:
                 message: "Ce champs est requis, veuillez saisir une valeur."
-                groups: ['contact']
+                groups: ['reservation']
             - Length:
                 min: 3
                 minMessage: "Cette valeur est trop courte !"
                 max: 50
                 maxMessage: "Cette valeur est trop longue !"
-                groups: ['contact']
+                groups: ['reservation']
         email:
             - NotBlank:
                 message: "Ce champs est requis, veuillez saisir une valeur."
-                groups: ['contact']
+                groups: ['reservation']
             - Length:
                 min: 10
                 minMessage: "Cette valeur est trop courte !"
                 max: 50
                 maxMessage: "Cette valeur est trop longue !"
-                groups: ['contact']
+                groups: ['reservation']
             - Email:
                 message: "Cette adresse '{{ value }}' doit être une adresse e-mail valide."
         message:
             - NotBlank:
                 message: "Ce champs est requis, veuillez saisir une valeur."
-                groups: ['contact']
+                groups: ['reservation']
             - Length:
                 min: 10
                 minMessage: "Cette valeur est trop courte !"
                 max: 1000
                 maxMessage: "Cette valeur est trop longue !"
-                groups: ['contact']
+                groups: ['reservation']
