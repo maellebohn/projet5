@@ -9,6 +9,12 @@
         </div>
     </div>
 
+    {% for message in app.flashes('success') %}
+        <div class="flash-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>

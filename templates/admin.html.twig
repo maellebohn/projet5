@@ -28,14 +28,33 @@
                 </thead>
 
                 <tbody>
+
                 {% for infos in listinfos %}
                 <tr>
                     <td>{{ infos.title }}</td>
                     <td>{{ infos.content }}</td>
                     <td>{{ infos.dateCreation|date("d/m/Y") }}</td>
-                    <td><a href="{{ path('update_info', {'id':infos.id}) }}"><span class="fas fa-edit"></span></a><a href="{{ path('delete_info', {'id':infos.id}) }}"><span class="fas fa-times"></span></a></td>
+                    <td><a href="{{ path('update_info', {'id':infos.id}) }}"><span class="fas fa-edit"></span></a><a href="#" data-toggle="modal" data-target="#delete_info"><span class="fas fa-times"></span></a></td>
                 </tr>
+
+                <div class="modal fade" id="delete_info" tabindex="-1" role="dialog" aria-labelledby="delete-info" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="delete_info_title">Confirmation de suppression</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Confirmez-vous la suppression de cette info ?</p>
+                                <a href="{{ path('delete_info', {'id':infos.id}) }}" class="btn btn-success">Supprimer</a>
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div>
                 {% endfor %}
+
                 </tbody>
             </table>
         </div>
@@ -57,9 +76,27 @@
                         <td>{{ news.title }}</td>
                         <td>{{ news.content }}</td>
                         {#<td>{{ news.dateCreation|date("d/m/Y") }}</td>#}
-                        <td><a href="#"><span class="fas fa-edit"></span></a><a href="#"><span class="fas fa-times"></span></a></td>
+                        <td><a href="{{ path('update_news', {'id':news.id}) }}"><span class="fas fa-edit"></span></a><a href="#" data-toggle="modal" data-target="#delete_news"><span class="fas fa-times"></span></a></td>
                     </tr>
+
+                    <div class="modal fade" id="delete_news" tabindex="-1" role="dialog" aria-labelledby="delete-news" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="delete_news_title">Confirmation de suppression</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Confirmez-vous la suppression de cette news ?</p>
+                                    <a href="{{ path('delete_news', {'id':news.id}) }}" class="btn btn-success">Supprimer</a>
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div>
                 {% endfor %}
+
                 </tbody>
             </table>
         </div>
@@ -73,6 +110,7 @@
                     <th>Description</th>
                     <th>Prix</th>
                     <th>Réservation</th>
+                    <th>Publication</th>
                 </tr>
                 </thead>
 
@@ -83,9 +121,28 @@
                         <td>{{ birds.birthdate|date("d/m/Y") }}</td>
                         <td>{{ birds.description }}</td>
                         <td>{{ birds.price }}</td>
-                        <td><a href="#"><span class="fas fa-edit"></span></a><a href="#"><span class="fas fa-times"></span></a></td>
+                        <td><a href="#">Oiseau non réservé</a></td>
+                        <td><a href="{{ path('update_bird', {'id':birds.id}) }}"><span class="fas fa-edit"></span></a><a href="#" data-toggle="modal" data-target="#delete_bird"><span class="fas fa-times"></span></a></td>
                     </tr>
+
+                <div class="modal fade" id="delete_bird" tabindex="-1" role="dialog" aria-labelledby="delete-bird" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="delete_bird_title">Confirmation de suppression</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Confirmez-vous la suppression de cet oiseau ?</p>
+                                <a href="{{ path('delete_bird', {'id':birds.id}) }}" class="btn btn-success">Supprimer</a>
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div>
                 {% endfor %}
+
                 </tbody>
             </table>
         </div>
@@ -96,11 +153,11 @@
     </div>
 
     <div id="addnews_button">
-        <a href="#" class="btn btn-success">Créer une news</a>
+        <a href="{{ path('add_news') }}" class="btn btn-success">Créer une news</a>
     </div>
 
     <div id="addbird_button">
-        <a href="#" class="btn btn-success">Ajouter un oiseau</a>
+        <a href="{{ path('add_bird') }}" class="btn btn-success">Ajouter un oiseau</a>
     </div>
 
 {% endblock %}

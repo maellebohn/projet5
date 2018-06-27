@@ -54,8 +54,9 @@ class GetBirdsActionTest extends KernelTestCase
         $this->formFactory = static::$kernel->getContainer()->get('form.factory');
         $this->birdsRepository = $this->createMock(BirdsRepositoryInterface::class);
         $this->birdsRepository->method('findAll')->willReturn([]);
-        $this->responder = new GetBirdsResponder($this->createMock(Environment::class), $this->createMock(UrlGeneratorInterface::class));
+        $this->router = $this->createMock(UrlGeneratorInterface::class);
         $this->router->method('generate')->willReturn('/reservation');
+        $this->responder = new GetBirdsResponder($this->createMock(Environment::class), $this->router);
         $this->reservationTypeHandler = $this->createMock(ReservationTypeHandlerInterface::class);
     }
 

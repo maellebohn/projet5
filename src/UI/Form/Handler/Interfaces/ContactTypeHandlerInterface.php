@@ -6,6 +6,7 @@ namespace App\UI\Form\Handler\Interfaces;
 
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 interface ContactTypeHandlerInterface
 {
@@ -13,8 +14,12 @@ interface ContactTypeHandlerInterface
      * ContactTypeHandler constructor.
      *
      * @param EventDispatcherInterface $eventDispatcher
+     * @param SessionInterface         $session
      */
-    public function __construct (EventDispatcherInterface $eventDispatcher);
+    public function __construct (
+        EventDispatcherInterface $eventDispatcher,
+        SessionInterface $session
+    );
 
     /**
     *@param FormInterface $form

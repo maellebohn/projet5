@@ -1,0 +1,12 @@
+{% extends 'base2.html.twig' %}
+
+{% block wrapper %}
+    <div class="row" id="addinfo_row">
+        <div id="addinfo" class="col-xs-12 col-md-offset-3 col-md-6">
+            <h1>AJOUTER UN OISEAU</h1>
+        </div>
+    </div>
+
+    {% form_theme form 'theme/addbird_type.html.twig' %}
+    {{ form(form) }}
+{% endblock %}

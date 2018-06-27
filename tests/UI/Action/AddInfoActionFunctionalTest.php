@@ -32,11 +32,12 @@ class AddInfoActionFunctionalTest extends WebTestCase
 
         $form['add_info[title]'] = 'alimentation';
         $form['add_info[author]'] = 'toto';
-        $form['add_info[image]'] = new UploadedFile('public/images/accueil1.jpg', 'photo.jpg', 'image/jpeg', 123) ;
+        $form['add_info[image]'] = new UploadedFile('public/images/accueil1.jpg', 'photo.jpg', 'image/jpeg') ;
         $form['add_info[category]'] = 'education' ;
         $form['add_info[content]'] = 'bien nourrir ses perroquets' ;
 
         $crawler = $client->submit($form);
+        //dump($client->getResponse()->getContent()); author doit prendre valeur App\Domain\Models\Users, comment faire?
 
         static::assertSame(
             Response::HTTP_OK,

@@ -50,7 +50,7 @@ final class AddInfoResponder implements AddInfoResponderInterface
     public function __invoke($redirect = false, FormInterface $addInfoType = null)
     {
         $redirect
-        ? $response = new RedirectResponse($this->router->generate('add_info'))
+        ? $response = new RedirectResponse($this->router->generate('admin'))
         : $response = new Response(
             $this->twig->render('addinfo.html.twig', [
                 'form' => $addInfoType->createView()

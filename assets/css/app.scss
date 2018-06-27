@@ -254,6 +254,12 @@ a.connexion:hover {
   padding: 15px;
 }
 
+div.flash-success {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 //home page
 @media (max-width: 767px) {
   #image2, #image1 {
@@ -297,10 +303,17 @@ a.connexion:hover {
 
 .modal-content {
   background-color: #698B69;
+  color: #e1ffff;
 }
 
 //add_info page
 input#add_info_image.custom-file-input {
+  display: inline;
+  margin-left: 2%;
+}
+
+//add_news page
+input#add_news_image.custom-file-input {
   display: inline;
   margin-left: 2%;
 }

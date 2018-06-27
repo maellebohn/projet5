@@ -19,4 +19,5 @@ interface BirdsRepositoryInterface
         array $orderBy = null
     );
 
+    public function update();
 }

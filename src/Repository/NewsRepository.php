@@ -34,4 +34,9 @@ class NewsRepository extends ServiceEntityRepository implements NewsRepositoryIn
         $this->_em->remove($news);
         $this->_em->flush();
     }
+
+    public function update()
+    {
+        $this->_em->flush();
+    }
 }

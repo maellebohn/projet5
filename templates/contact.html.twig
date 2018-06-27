@@ -8,6 +8,12 @@
         </div>
     </div>
 
+    {% for message in app.flashes('success') %}
+        <div class="flash-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     {% form_theme form 'theme/contact_type.html.twig' %}
     {{ form(form) }}
 

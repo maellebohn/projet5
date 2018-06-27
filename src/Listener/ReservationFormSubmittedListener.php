@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Listener;
 
-use App\Event\ReservationFormSubmittedEvent;
+use App\Event\Interfaces\ReservationFormSubmittedEventInterface;
 use Twig\Environment;
 
 class ReservationFormSubmittedListener
@@ -22,7 +22,7 @@ class ReservationFormSubmittedListener
      * ReservationFormSubmittedListener constructor.
      *
      * @param \Swift_Mailer $mailer
-     * @param Environment $twig
+     * @param Environment   $twig
      */
     public function __construct(
         \Swift_Mailer $mailer,
@@ -33,13 +33,13 @@ class ReservationFormSubmittedListener
     }
 
     /**
-     * @param ReservationFormSubmittedEvent $event
+     * @param ReservationFormSubmittedEventInterface $event
      *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function onReservationFormSubmitted(ReservationFormSubmittedEvent $event)
+    public function onReservationFormSubmitted(ReservationFormSubmittedEventInterface $event)
     {
         $message = (new \Swift_Message('Reservation Email'))
             ->setFrom($event->getNewReservationFormSubmittedDTO()->email)

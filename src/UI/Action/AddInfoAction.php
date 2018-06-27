@@ -45,7 +45,6 @@ final class AddInfoAction implements AddInfoActionInterface
         $this->addInfoTypeHandler = $addInfoTypeHandler;
     }
 
-
     /**
      * @param Request                   $request
      * @param AddInfoResponderInterface $responder

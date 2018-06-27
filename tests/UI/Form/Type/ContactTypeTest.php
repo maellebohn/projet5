@@ -12,15 +12,17 @@ class ContactTypeTest extends TypeTestCase
     {
         $form = $this->factory->create(ContactType::class);
 
-        $dto = new NewContactFormSubmittedDTO('toto', 'toto@gmail.com', 'Hello !');
-
-        $form->submit($dto);
+        $form->submit([
+            'name'=>'toto',
+            'email'=>'toto@gmail.com',
+            'message'=>'hello'
+        ]);
 
         static::assertTrue(
             $form->isSubmitted()
         );
 
-        static::assertSame($dto,
+        static::assertInstanceOf(NewContactFormSubmittedDTO::class,
             $form->getData()
         );
 

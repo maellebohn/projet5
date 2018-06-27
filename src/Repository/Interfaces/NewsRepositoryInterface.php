@@ -18,4 +18,6 @@ interface NewsRepositoryInterface
         array $criteria,
         array $orderBy = null
     );
+
+    public function update();
 }

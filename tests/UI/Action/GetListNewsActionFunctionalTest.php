@@ -15,6 +15,8 @@ class GetListNewsActionFunctionalTest extends WebTestCase
 
         $client->request('GET','/news');
 
+        //dump($client->getResponse()->getContent()); no database selected, n'arrive pas a faire le query
+
         static::assertSame(
             Response::HTTP_OK,
             $client->getResponse()->getStatusCode()

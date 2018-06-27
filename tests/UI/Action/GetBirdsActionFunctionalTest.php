@@ -36,7 +36,7 @@ class GetBirdsActionFunctionalTest extends WebTestCase
         $crawler = $client->submit($form);
 
         static::assertSame(
-            Response::HTTP_OK,
+            Response::HTTP_FOUND,
             $client->getResponse()->getStatusCode()
         );
     }

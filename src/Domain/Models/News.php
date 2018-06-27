@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Models;
 
+use App\Domain\DTO\NewNewsDTO;
+use App\Domain\DTO\UpdateNewsDTO;
 use App\Domain\Models\Interfaces\NewsInterface;
 use DateTime;
 use Ramsey\Uuid\Uuid;
@@ -83,5 +85,21 @@ class News implements NewsInterface
         $this->dateCreation = time();
         $this->image = $image;
         $this->author = $author;
+    }
+
+    public function create(NewNewsDTO $newNewsDTO): self
+    {
+        $this->content = $newNewsDTO->content;
+        $this->title = $newNewsDTO->title;
+        $this->image = $newNewsDTO->image;
+        $this->author = $newNewsDTO->author;
+    }
+
+    public function update(UpdateNewsDTO $updateNewsDTO)
+    {
+        $this->content = $updateNewsDTO->content;
+        $this->title = $updateNewsDTO->title;
+        $this->image = $updateNewsDTO->image;
+        $this->author = $updateNewsDTO->author;
     }
 }

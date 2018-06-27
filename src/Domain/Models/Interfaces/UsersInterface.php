@@ -18,7 +18,7 @@ interface UsersInterface
 
     public function getPassword();
 
-    public function getRole();
+    public function getRoles();
 
     public function getDateCreation();
 

@@ -8,8 +8,9 @@ use App\Domain\Models\Interfaces\UsersInterface;
 use DateTime;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-class Users implements UsersInterface
+class Users implements UsersInterface, UserInterface
 {
     /**
      * @var UuidInterface
@@ -86,7 +87,7 @@ class Users implements UsersInterface
         return $this->password;
     }
 
-    public function getRole()
+    public function getRoles()
     {
         return $this->roles;
     }
@@ -99,6 +100,15 @@ class Users implements UsersInterface
     public function getActive()
     {
         return $this->active;
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function eraseCredentials()
+    {
     }
 
     /**

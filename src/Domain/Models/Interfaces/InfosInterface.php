@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Domain\Models\Interfaces;
 
+use App\Domain\DTO\UpdateInfoDTO;
+use App\Domain\DTO\NewInfoDTO;
+
 interface InfosInterface
 {
     public function getId();
@@ -21,4 +24,6 @@ interface InfosInterface
     public function getAuthor();
 
     public function getCategory();
+
+    public function update(UpdateInfoDTO $updateInfoDTO);
 }

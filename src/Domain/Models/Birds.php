@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Models;
 
+use App\Domain\DTO\NewBirdDTO;
 use App\Domain\Models\Interfaces\BirdsInterface;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -86,4 +87,20 @@ class Birds implements BirdsInterface
         $this->price = $price;
         $this->reservation = false;
     }
+
+    public function create(NewBirdDTO $newBirdDTO): self
+    {
+        $this->name = $newBirdDTO->name;
+        $this->birthdate = $newBirdDTO->birthdate;
+        $this->price = $newBirdDTO->price;
+        $this->description = $newBirdDTO->description;
+    }
+
+/*    public function update(UpdateBirdDTO $updateBirdDTO)
+    {
+        $this->name = $updateBirdDTO->name;
+        $this->birthdate = $updateBirdDTO->birthdate;
+        $this->description = $updateBirdDTO->description;
+        $this->price = $updateBirdDTO->price;
+    }*/
 }

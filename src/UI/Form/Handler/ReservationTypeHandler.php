@@ -9,6 +9,7 @@ use App\Event\Interfaces\ReservationFormSubmittedEventInterface;
 use App\UI\Form\Handler\Interfaces\ReservationTypeHandlerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class ReservationTypeHandler implements ReservationTypeHandlerInterface
 {
@@ -18,13 +19,22 @@ class ReservationTypeHandler implements ReservationTypeHandlerInterface
     private $eventDispatcher;
 
     /**
+     * @var SessionInterface
+     */
+    private $session;
+
+    /**
      * ReservationTypeHandler constructor.
      *
      * @param EventDispatcherInterface $eventDispatcher
+     * @param SessionInterface         $session
      */
-    public function __construct (EventDispatcherInterface $eventDispatcher)
-    {
+    public function __construct (
+        EventDispatcherInterface $eventDispatcher,
+        SessionInterface $session
+    ) {
         $this->eventDispatcher = $eventDispatcher;
+        $this->session = $session;
     }
 
     /**
@@ -35,6 +45,9 @@ class ReservationTypeHandler implements ReservationTypeHandlerInterface
     {
         if($form->isSubmitted() && $form->isValid()) {
             $this->eventDispatcher->dispatch(ReservationFormSubmittedEventInterface::NAME, new ReservationFormSubmittedEvent($form->getData()));
+
+            $this->session->getFlashBag()->add('success', 'Votre email a bien été envoyé !');
+
             return true;
         }
         return false;

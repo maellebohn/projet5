@@ -46,7 +46,7 @@ class AddInfoActionTest extends KernelTestCase
         $this->formFactory = static::$kernel->getContainer()->get('form.factory');
         $this->addInfoTypeHandler = $this->createMock(AddInfoTypeHandlerInterface::class);
         $this->router = $this->createMock(UrlGeneratorInterface::class);
-        $this->router->method('generate')->willReturn('/contact');
+        $this->router->method('generate')->willReturn('/addinfo');
     }
 
     public function testConstruct()

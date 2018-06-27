@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Listener;
 
-use App\Event\ContactFormSubmittedEvent;
+use App\Event\Interfaces\ContactFormSubmittedEventInterface;
 use Twig\Environment;
 
 class ContactFormSubmittedListener
@@ -22,7 +22,7 @@ class ContactFormSubmittedListener
      * ContactFormSubmittedListener constructor.
      *
      * @param \Swift_Mailer $mailer
-     * @param Environment $twig
+     * @param Environment   $twig
      */
     public function __construct(
         \Swift_Mailer $mailer,
@@ -33,12 +33,13 @@ class ContactFormSubmittedListener
     }
 
     /**
-     * @param ContactFormSubmittedEvent $event
+     * @param ContactFormSubmittedEventInterface $event
+     *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function onContactFormSubmitted(ContactFormSubmittedEvent $event)
+    public function onContactFormSubmitted(ContactFormSubmittedEventInterface $event)
     {
         $message = (new \Swift_Message('Contact Email'))
             ->setFrom($event->getNewContactFormSubmittedDTO()->email)
