@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Helper;
 
+use App\Helper\Interfaces\FileUploaderHelperInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class FileUploaderHelper
+class FileUploaderHelper implements FileUploaderHelperInterface
 {
     /**
      * @var string

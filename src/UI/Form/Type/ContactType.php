@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Form\Type;
 
+use App\Domain\DTO\Interfaces\NewContactFormSubmittedDTOInterface;
 use App\Domain\DTO\NewContactFormSubmittedDTO;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -26,7 +27,7 @@ class ContactType extends AbstractType
     public function configureOptions (OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => NewContactFormSubmittedDTO::class,
+            'data_class' => NewContactFormSubmittedDTOInterface::class,
             'empty_data' => function (FormInterface $form) {
                 return new NewContactFormSubmittedDTO(
                     $form->get('name')->getData(),

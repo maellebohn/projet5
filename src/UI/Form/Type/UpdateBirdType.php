@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Form\Type;
 
+use App\Domain\DTO\Interfaces\UpdateBirdDTOInterface;
 use App\Domain\DTO\UpdateBirdDTO;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -26,7 +27,7 @@ class UpdateBirdType extends AbstractType
     public function configureOptions (OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => UpdateBirdDTO::class,
+            'data_class' => UpdateBirdDTOInterface::class,
             'empty_data' => function (FormInterface $form) {
                 return new UpdateBirdDTO(
                     $form->get('name')->getData(),

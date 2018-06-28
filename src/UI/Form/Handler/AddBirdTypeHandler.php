@@ -8,6 +8,7 @@ use App\Domain\Models\Birds;
 use App\Repository\Interfaces\BirdsRepositoryInterface;
 use App\UI\Form\Handler\Interfaces\AddBirdTypeHandlerInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AddBirdTypeHandler implements AddBirdTypeHandlerInterface
 {
@@ -40,6 +41,9 @@ class AddBirdTypeHandler implements AddBirdTypeHandlerInterface
                 $form->getData()->description,
                 $form->getData()->price
             );
+            //$this->validator->validate($bird, [], [
+            //    'addbird'
+            //]);
 
             $this->birdsRepository->save($bird);
 

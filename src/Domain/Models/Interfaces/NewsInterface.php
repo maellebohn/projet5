@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Domain\Models\Interfaces;
 
+use App\Domain\DTO\NewNewsDTO;
+use App\Domain\DTO\UpdateNewsDTO;
+
 interface NewsInterface
 {
     public function getId();
@@ -17,4 +20,8 @@ interface NewsInterface
     public function getImage();
 
     public function getAuthor();
+
+    //public function create(NewNewsDTO $newBirdDTO): self;
+
+    public function update(UpdateNewsDTO $updateNewsDTO);
 }

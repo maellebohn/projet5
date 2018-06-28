@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Form\Type;
 
+use App\Domain\DTO\Interfaces\UpdateNewsDTOInterface;
 use App\Domain\DTO\UpdateNewsDTO;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -27,7 +28,7 @@ class UpdateNewsType extends AbstractType
     public function configureOptions (OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => UpdateNewsDTO::class,
+            'data_class' => UpdateNewsDTOInterface::class,
             'empty_data' => function (FormInterface $form) {
                 return new UpdateNewsDTO(
                     $form->get('title')->getData(),

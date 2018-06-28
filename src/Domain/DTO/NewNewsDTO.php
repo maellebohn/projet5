@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domain\DTO;
 
+use App\Domain\DTO\Interfaces\NewNewsDTOInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class NewNewsDTO
+class NewNewsDTO implements NewNewsDTOInterface
 {
     /**
      * @var string

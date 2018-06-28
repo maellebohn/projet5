@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Domain\DTO;
 
+use App\Domain\DTO\Interfaces\NewReservationFormSubmittedDTOInterface;
 
-class NewReservationFormSubmittedDTO
+class NewReservationFormSubmittedDTO implements NewReservationFormSubmittedDTOInterface
 {
     /**
      * @var string

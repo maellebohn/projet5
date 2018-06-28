@@ -4,27 +4,29 @@ declare(strict_types=1);
 
 namespace App\Domain\DTO;
 
-class UpdateBirdDTO
+use App\Domain\DTO\Interfaces\UpdateBirdDTOInterface;
+
+class UpdateBirdDTO implements UpdateBirdDTOInterface
 {
     /**
      * @var string
      */
-    private $name;
+    public $name;
 
     /**
      * @var string
      */
-    private $birthdate;
+    public $birthdate;
 
     /**
      * @var string
      */
-    private $description;
+    public $description;
 
     /**
      * @var int
      */
-    private $price;
+    public $price;
 
     /**
      * UpdateBirdDTO constructor.

@@ -53,7 +53,7 @@ class UpdateNewsTypeHandler implements UpdateNewsTypeHandlerInterface
             );
 
             $this->validator->validate($updateNews, [], [
-                'addinfo'
+                'updateinfo'
             ]);
 
             $this->newsRepository->update();

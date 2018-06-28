@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Form\Type;
 
+use App\Domain\DTO\Interfaces\NewBirdDTOInterface;
 use App\Domain\DTO\NewBirdDTO;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -27,7 +28,7 @@ class AddBirdType extends AbstractType
     public function configureOptions (OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => NewBirdDTO::class,
+            'data_class' => NewBirdDTOInterface::class,
             'empty_data' => function (FormInterface $form) {
                 return new NewBirdDTO(
                     $form->get('name')->getData(),

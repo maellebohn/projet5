@@ -54,7 +54,7 @@ class UpdateBirdTypeHandler implements UpdateBirdTypeHandlerInterface
             );
 
             $this->validator->validate($updateBird, [], [
-                'addinfo'
+                'updatebird'
             ]);
 
             $this->birdsRepository->update();

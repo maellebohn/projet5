@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\UI\Form\Handler;
 
 use App\Domain\Models\News;
-use App\Helper\FileUploaderHelper;
+use App\Helper\Interfaces\FileUploaderHelperInterface;
 use App\Repository\Interfaces\NewsRepositoryInterface;
 use App\UI\Form\Handler\Interfaces\AddNewsTypeHandlerInterface;
 use Symfony\Component\Form\FormInterface;
@@ -18,19 +18,19 @@ class AddNewsTypeHandler implements AddNewsTypeHandlerInterface
     private $newsRepository;
 
     /**
-     * @var fileUploaderHelper
+     * @var FileUploaderHelperInterface
      */
     private $fileUploaderHelper;
 
     /**
      * AddNewsTypeHandler constructor.
      *
-     * @param NewsRepositoryInterface $newsRepository
-     * @param FileUploaderHelper      $fileUploaderHelper
+     * @param NewsRepositoryInterface     $newsRepository
+     * @param FileUploaderHelperInterface $fileUploaderHelper
      */
     public function __construct (
         NewsRepositoryInterface $newsRepository,
-        FileUploaderHelper $fileUploaderHelper
+        FileUploaderHelperInterface $fileUploaderHelper
     ) {
         $this->newsRepository = $newsRepository;
         $this->fileUploaderHelper = $fileUploaderHelper;

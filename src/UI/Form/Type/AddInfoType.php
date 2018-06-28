@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Form\Type;
 
+use App\Domain\DTO\Interfaces\NewInfoDTOInterface;
 use App\Domain\DTO\NewInfoDTO;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -29,7 +30,7 @@ class AddInfoType extends AbstractType
     public function configureOptions (OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => NewInfoDTO::class,
+            'data_class' => NewInfoDTOInterface::class,
             'empty_data' => function (FormInterface $form) {
                 return new NewInfoDTO(
                     $form->get('title')->getData(),

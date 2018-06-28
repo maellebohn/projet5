@@ -4,27 +4,29 @@ declare(strict_types=1);
 
 namespace App\Domain\DTO;
 
-class NewBirdDTO
+use App\Domain\DTO\Interfaces\NewBirdDTOInterface;
+
+class NewBirdDTO implements NewBirdDTOInterface
 {
     /**
      * @var string
      */
-    private $name;
+    public $name;
 
     /**
      * @var string
      */
-    private $birthdate;
+    public $birthdate;
 
     /**
      * @var int
      */
-    private $price;
+    public $price;
 
     /**
      * @var string
      */
-    private $description;
+    public $description;
 
     /**
      * NewBirdDTO constructor.

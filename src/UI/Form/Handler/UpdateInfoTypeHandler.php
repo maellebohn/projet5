@@ -54,7 +54,7 @@ class UpdateInfoTypeHandler implements UpdateInfoTypeHandlerInterface
             );
 
             $this->validator->validate($updateInfo, [], [
-                'addinfo'
+                'updateinfo'
             ]);
 
             $this->infosRepository->update();

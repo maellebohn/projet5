@@ -23,4 +23,8 @@ interface UsersInterface
     public function getDateCreation();
 
     public function getActive();
+
+    public function getSalt();
+
+    public function eraseCredentials();
 }

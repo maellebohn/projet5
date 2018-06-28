@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domain\DTO;
 
-class UpdateInfoDTO
+use App\Domain\DTO\Interfaces\UpdateInfoDTOInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
+class UpdateInfoDTO implements UpdateInfoDTOInterface
 {
     /**
      * @var string
@@ -36,14 +39,14 @@ class UpdateInfoDTO
      *
      * @param string $title
      * @param string $author
-     * @param string $image
+     * @param UploadedFile $image
      * @param string $category
      * @param string $content
      */
     public function __construct(
         string $title,
         string $author,
-        string $image,
+        UploadedFile $image,
         string $category,
         string $content
     ) {

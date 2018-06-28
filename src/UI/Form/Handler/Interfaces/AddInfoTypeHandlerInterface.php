@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Form\Handler\Interfaces;
 
-use App\Helper\FileUploaderHelper;
+use App\Helper\Interfaces\FileUploaderHelperInterface;
 use App\Repository\Interfaces\InfosRepositoryInterface;
 use Symfony\Component\Form\FormInterface;
 
@@ -13,12 +13,12 @@ interface AddInfoTypeHandlerInterface
     /**
      * AddInfoTypeHandler constructor.
      *
-     * @param InfosRepositoryInterface $infosRepository
-     * @param FileUploaderHelper       $fileUploaderHelper
+     * @param InfosRepositoryInterface    $infosRepository
+     * @param FileUploaderHelperInterface $fileUploaderHelper
      */
     public function __construct (
         InfosRepositoryInterface $infosRepository,
-        FileUploaderHelper $fileUploaderHelper
+        FileUploaderHelperInterface $fileUploaderHelper
     );
 
     /**

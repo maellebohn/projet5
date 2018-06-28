@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Models\Interfaces;
 
 use App\Domain\DTO\NewBirdDTO;
+use App\Domain\DTO\UpdateBirdDTO;
 
 interface BirdsInterface
 {
@@ -22,5 +23,5 @@ interface BirdsInterface
 
     //public function create(NewBirdDTO $newBirdDTO): self;
 
-    //public function update(UpdateBirdDTO $updateBirdDTO);
+    public function update(UpdateBirdDTO $updateBirdDTO);
 }

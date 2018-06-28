@@ -23,7 +23,7 @@ App\Domain\DTO\NewNewsDTO:
         image:
             - Image:
                 mimeTypes: ['image/jpeg', 'image/png']
-                mimeTypesMessage: "This file is not a valid image"
+                mimeTypesMessage: "Ce format d'image est interdit, veuillez recommencer votre saisie."
                 maxSize: "2M"
                 groups: ['addnews']
         content:
