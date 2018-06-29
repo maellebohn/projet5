@@ -9,6 +9,7 @@ use App\Helper\Interfaces\FileUploaderHelperInterface;
 use App\Repository\Interfaces\InfosRepositoryInterface;
 use App\UI\Form\Handler\Interfaces\AddInfoTypeHandlerInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AddInfoTypeHandler implements AddInfoTypeHandlerInterface
 {
@@ -23,17 +24,25 @@ class AddInfoTypeHandler implements AddInfoTypeHandlerInterface
     private $fileUploaderHelper;
 
     /**
+     * @var ValidatorInterface
+     */
+    private $validator;
+
+    /**
      * AddInfoTypeHandler constructor.
      *
      * @param InfosRepositoryInterface    $infosRepository
      * @param FileUploaderHelperInterface $fileUploaderHelper
+     * @param ValidatorInterface          $validator
      */
     public function __construct (
         InfosRepositoryInterface $infosRepository,
-        FileUploaderHelperInterface $fileUploaderHelper
+        FileUploaderHelperInterface $fileUploaderHelper,
+        ValidatorInterface $validator
     ) {
         $this->infosRepository = $infosRepository;
         $this->fileUploaderHelper = $fileUploaderHelper;
+        $this->validator = $validator;
     }
 
     /**
@@ -54,6 +63,10 @@ class AddInfoTypeHandler implements AddInfoTypeHandlerInterface
                 $form->getData()->category,
                 $form->getData()->content
             );
+
+            $this->validator->validate($info, [], [
+                'addinfo'
+            ]);
 
             $this->infosRepository->save($info);
 

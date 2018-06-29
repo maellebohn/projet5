@@ -69,7 +69,7 @@ class AddInfoTypeHandlerTest extends TestCase
         $formInterfaceMock = $this->createMock(FormInterface::class);
         $image = $this->createMock(UploadedFile::class);
         $image->method('getClientOriginalName')->willReturn('/tmp/hdhzdzdndjdzndnzd');
-
+//mock user interface
         $newInfoDTOMock = new NewInfoDTO(
             'alimentation',
             'toto',

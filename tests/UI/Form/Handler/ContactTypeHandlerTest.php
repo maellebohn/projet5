@@ -33,6 +33,7 @@ class ContactTypeHandlerTest extends KernelTestCase
 
         $this->eventDispatcher = static::$kernel->getContainer()->get('event_dispatcher');
         $this->session = $this->createMock(SessionInterface::class);
+        //new session storage
     }
 
     public function testConstruct ()

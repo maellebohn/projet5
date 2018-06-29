@@ -1,0 +1,54 @@
+App\Domain\DTO\UserRegistrationDTO:
+    properties:
+        firstname:
+            - NotBlank:
+                message: "Ce champs est requis, veuillez saisir une valeur."
+                groups: ['registration']
+            - Length:
+                min: 3
+                minMessage: "Cette valeur est trop courte !"
+                max: 50
+                maxMessage: "Cette valeur est trop longue !"
+                groups: ['registration']
+        lastname:
+            - NotBlank:
+                message: "Ce champs est requis, veuillez saisir une valeur."
+                groups: ['registration']
+            - Length:
+                min: 3
+                minMessage: "Cette valeur est trop courte !"
+                max: 50
+                maxMessage: "Cette valeur est trop longue !"
+                groups: ['registration']
+        username:
+            - NotBlank:
+                message: "Ce champs est requis, veuillez saisir une valeur."
+                groups: ['registration']
+            - Length:
+                min: 3
+                minMessage: "Cette valeur est trop courte !"
+                max: 50
+                maxMessage: "Cette valeur est trop longue !"
+                groups: ['registration']
+        email:
+            - NotBlank:
+                message: "Ce champs est requis, veuillez saisir une valeur."
+                groups: ['contact']
+            - Length:
+                min: 10
+                minMessage: "Cette valeur est trop courte !"
+                max: 50
+                maxMessage: "Cette valeur est trop longue !"
+                groups: ['registration']
+            - Email:
+                message: "Cette adresse '{{ value }}' doit être une adresse e-mail valide."
+        password:
+            - NotBlank:
+                message: "Ce champs est requis, veuillez saisir une valeur."
+                groups: ['registration']
+            - Length:
+                min: 5
+                minMessage: "Cette valeur est trop courte !"
+                max: 25
+                maxMessage: "Cette valeur est trop longue !"
+                groups: ['registration']

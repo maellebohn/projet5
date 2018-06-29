@@ -20,8 +20,8 @@ class AddBirdType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('birthdate', TextType::class)
-            ->add('price', IntegerType::class)
+            ->add('birthdate', TextType::class)//birthdaytype gettimestamp
+            ->add('price', IntegerType::class)//moneytype
             ->add('description', TextareaType::class);
     }
 

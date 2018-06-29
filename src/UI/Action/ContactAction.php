@@ -57,8 +57,10 @@ final class ContactAction implements ContactActionInterface
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke(Request $request, ContactResponderInterface $responder)
-    {
+    public function __invoke(
+        Request $request,
+        ContactResponderInterface $responder
+    ) {
         $contactType = $this->formFactory->create(ContactType::class)
                                          ->handleRequest($request);
 

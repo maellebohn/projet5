@@ -23,7 +23,7 @@ class AddInfoType extends AbstractType
             ->add('title', TextType::class)
             ->add('author', TextType::class)
             ->add('image', FileType::class, ['required' => false])
-            ->add('category', TextType::class)
+            ->add('category', TextType::class)//choicetype
             ->add('content', TextareaType::class);
     }
 

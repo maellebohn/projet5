@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class AddInfoTypeHandlerTest extends TestCase
+class AddNewsTypeHandlerTest extends TestCase
 {
     /**
      * @var NewsRepositoryInterface

@@ -36,5 +36,7 @@ class ContactFormSubmittedListenerTest extends TestCase
         $twigMock = $this->createMock(Environment::class);
 
         $contactFormSubmittedListener = new ContactFormSubmittedListener($mailerMock, $twigMock);
+
+        //test fonctionnel de l'envoi du mail
     }
 }

@@ -9,6 +9,7 @@ use App\Helper\Interfaces\FileUploaderHelperInterface;
 use App\Repository\Interfaces\NewsRepositoryInterface;
 use App\UI\Form\Handler\Interfaces\AddNewsTypeHandlerInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AddNewsTypeHandler implements AddNewsTypeHandlerInterface
 {
@@ -23,17 +24,25 @@ class AddNewsTypeHandler implements AddNewsTypeHandlerInterface
     private $fileUploaderHelper;
 
     /**
+     * @var ValidatorInterface
+     */
+    private $validator;
+
+    /**
      * AddNewsTypeHandler constructor.
      *
-     * @param NewsRepositoryInterface     $newsRepository
+     * @param NewsRepositoryInterface    $newsRepository
      * @param FileUploaderHelperInterface $fileUploaderHelper
+     * @param ValidatorInterface          $validator
      */
     public function __construct (
         NewsRepositoryInterface $newsRepository,
-        FileUploaderHelperInterface $fileUploaderHelper
+        FileUploaderHelperInterface $fileUploaderHelper,
+        ValidatorInterface $validator
     ) {
         $this->newsRepository = $newsRepository;
         $this->fileUploaderHelper = $fileUploaderHelper;
+        $this->validator = $validator;
     }
 
     /**
@@ -53,6 +62,10 @@ class AddNewsTypeHandler implements AddNewsTypeHandlerInterface
                 $imageName,
                 $form->getData()->content
             );
+
+            $this->validator->validate($news, [], [
+                'addnews'
+            ]);
 
             $this->newsRepository->save($news);
 

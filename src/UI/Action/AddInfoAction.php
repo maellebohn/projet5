@@ -55,8 +55,10 @@ final class AddInfoAction implements AddInfoActionInterface
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke(Request $request, AddInfoResponderInterface $responder)
-    {
+    public function __invoke(
+        Request $request,
+        AddInfoResponderInterface $responder
+    ) {
         $addInfoType = $this->formFactory->create(AddInfoType::class)
                                          ->handleRequest($request);
 

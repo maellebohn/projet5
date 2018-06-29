@@ -55,8 +55,10 @@ final class AddBirdAction implements AddBirdActionInterface
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke(Request $request, AddBirdResponderInterface $responder)
-    {
+    public function __invoke(
+        Request $request,
+        AddBirdResponderInterface $responder
+    ) {
         $addBirdType = $this->formFactory->create(AddBirdType::class)
                                          ->handleRequest($request);
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Models;
 
+use App\Domain\DTO\UserRegistrationDTO;
 use App\Domain\Models\Interfaces\UsersInterface;
 use DateTime;
 use Ramsey\Uuid\Uuid;
@@ -94,7 +95,7 @@ class Users implements UsersInterface, UserInterface
 
     public function getDateCreation()
     {
-        return $this->dateCreation;
+        return \DateTime::createFromFormat('U', (string) $this->dateCreation);
     }
 
     public function getActive()
@@ -119,16 +120,26 @@ class Users implements UsersInterface, UserInterface
         string $lastname,
         string $username,
         string $email,
-        string $password
+        string $password,
+        callable $passwordEncoder
     ) {
         $this->id = Uuid::uuid4();
         $this->firstname = $firstname;
         $this->lastname = $lastname;
         $this->username = $username;
         $this->email = $email;
-        $this->password = $password;
+        $this->password = $passwordEncoder($password, null);
         $this->dateCreation = time();
         $this->roles = ['ROLE_ADMIN'];
         $this->active = true;
+    }
+
+    public function create(UserRegistrationDTO $userRegistrationDTO): self
+    {
+        $this->firstname = $userRegistrationDTO->firstname;
+        $this->lastname = $userRegistrationDTO->lastname;
+        $this->username = $userRegistrationDTO->username;
+        $this->email = $userRegistrationDTO->email;
+        $this->password = $userRegistrationDTO->password;
     }
 }

@@ -5,9 +5,9 @@ namespace App\Tests\Event;
 use App\Domain\DTO\NewContactFormSubmittedDTO;
 use App\Event\ContactFormSubmittedEvent;
 use App\Event\Interfaces\ContactFormSubmittedEventInterface;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use PHPUnit\Framework\TestCase;
 
-class ContactFormSubmittedEventTest extends KernelTestCase
+class ContactFormSubmittedEventTest extends TestCase
 {
     private $newContactFormSubmittedDTO;
 

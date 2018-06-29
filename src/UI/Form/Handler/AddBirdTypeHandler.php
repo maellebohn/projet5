@@ -18,13 +18,23 @@ class AddBirdTypeHandler implements AddBirdTypeHandlerInterface
     private $birdsRepository;
 
     /**
+     * @var ValidatorInterface
+     */
+    private $validator;
+
+    /**
      * AddBirdTypeHandler constructor.
      *
      * @param BirdsRepositoryInterface $birdsRepository
+     * @param ValidatorInterface       $validator
+
      */
-    public function __construct (BirdsRepositoryInterface $birdsRepository)
-    {
+    public function __construct (
+        BirdsRepositoryInterface $birdsRepository,
+        ValidatorInterface $validator
+    ) {
         $this->birdsRepository = $birdsRepository;
+        $this->validator = $validator;
     }
 
     /**
@@ -41,9 +51,9 @@ class AddBirdTypeHandler implements AddBirdTypeHandlerInterface
                 $form->getData()->description,
                 $form->getData()->price
             );
-            //$this->validator->validate($bird, [], [
-            //    'addbird'
-            //]);
+            $this->validator->validate($bird, [], [
+                'addbird'
+            ]);
 
             $this->birdsRepository->save($bird);
 

@@ -22,7 +22,6 @@ class UpdateBirdTypeHandler implements UpdateBirdTypeHandlerInterface
      */
     private $validator;
 
-
     /**
      * UpdateBirdTypeHandler constructor.
      *

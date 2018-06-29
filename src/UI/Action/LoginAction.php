@@ -16,7 +16,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
  *     methods={"GET", "POST"}
  * )
  */
-
 final class LoginAction implements LoginActionInterface
 {
     /**

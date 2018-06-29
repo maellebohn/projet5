@@ -7,18 +7,21 @@ namespace App\UI\Form\Handler\Interfaces;
 use App\Helper\Interfaces\FileUploaderHelperInterface;
 use App\Repository\Interfaces\NewsRepositoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 interface AddNewsTypeHandlerInterface
 {
     /**
      * AddNewsTypeHandler constructor.
      *
-     * @param NewsRepositoryInterface     $newsRepository
+     * @param NewsRepositoryInterface    $newsRepository
      * @param FileUploaderHelperInterface $fileUploaderHelper
+     * @param ValidatorInterface          $validator
      */
     public function __construct (
         NewsRepositoryInterface $newsRepository,
-        FileUploaderHelperInterface $fileUploaderHelper
+        FileUploaderHelperInterface $fileUploaderHelper,
+        ValidatorInterface $validator
     );
 
     /**

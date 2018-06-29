@@ -45,7 +45,7 @@ class UpdateNewsAction implements UpdateNewsActionInterface
      * @param UpdateNewsTypeHandlerInterface $updateNewsTypeHandler
      */
     public function __construct (
-        NewsRepositoryInterface $infosRepository,
+        NewsRepositoryInterface $newsRepository,
         FormFactoryInterface $formFactory,
         UpdateNewsTypeHandlerInterface $updateNewsTypeHandler
     ) {

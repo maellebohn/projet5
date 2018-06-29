@@ -6,15 +6,21 @@ namespace App\UI\Form\Handler\Interfaces;
 
 use App\Repository\Interfaces\BirdsRepositoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 interface AddBirdTypeHandlerInterface
 {
     /**
      * AddBirdTypeHandler constructor.
      *
-     * @param BirdsRepositoryInterface $newsRepository
+     * @param BirdsRepositoryInterface $birdsRepository
+     * @param ValidatorInterface       $validator
+
      */
-    public function __construct (BirdsRepositoryInterface $birdsRepository);
+    public function __construct (
+        BirdsRepositoryInterface $birdsRepository,
+        ValidatorInterface $validator
+    );
 
     /**
     *@param FormInterface $form

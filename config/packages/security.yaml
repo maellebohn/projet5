@@ -1,6 +1,5 @@
 security:
     providers:
-#        in_memory: { memory: ~ }
         db_provider:
             entity:
                 class: App\Domain\Models\Users

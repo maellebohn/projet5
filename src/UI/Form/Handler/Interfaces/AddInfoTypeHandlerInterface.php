@@ -7,6 +7,7 @@ namespace App\UI\Form\Handler\Interfaces;
 use App\Helper\Interfaces\FileUploaderHelperInterface;
 use App\Repository\Interfaces\InfosRepositoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 interface AddInfoTypeHandlerInterface
 {
@@ -15,10 +16,13 @@ interface AddInfoTypeHandlerInterface
      *
      * @param InfosRepositoryInterface    $infosRepository
      * @param FileUploaderHelperInterface $fileUploaderHelper
+     * @param ValidatorInterface          $validator
+
      */
     public function __construct (
         InfosRepositoryInterface $infosRepository,
-        FileUploaderHelperInterface $fileUploaderHelper
+        FileUploaderHelperInterface $fileUploaderHelper,
+        ValidatorInterface $validator
     );
 
     /**

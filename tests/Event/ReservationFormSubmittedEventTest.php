@@ -5,9 +5,9 @@ namespace App\Tests\Event;
 use App\Domain\DTO\NewReservationFormSubmittedDTO;
 use App\Event\ReservationFormSubmittedEvent;
 use App\Event\Interfaces\ReservationFormSubmittedEventInterface;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use PHPUnit\Framework\TestCase;
 
-class ReservationFormSubmittedEventTest extends KernelTestCase
+class ReservationFormSubmittedEventTest extends TestCase
 {
     private $newReservationFormSubmittedDTO;
 

@@ -55,8 +55,10 @@ final class AddNewsAction implements AddNewsActionInterface
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke(Request $request, AddNewsResponderInterface $responder)
-    {
+    public function __invoke(
+        Request $request,
+        AddNewsResponderInterface $responder
+    ) {
         $addNewsType = $this->formFactory->create(AddNewsType::class)
                                          ->handleRequest($request);
 
