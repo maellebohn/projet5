@@ -57,6 +57,7 @@ class UpdateNewsTypeHandler implements UpdateNewsTypeHandlerInterface
             ]);
 
             $this->newsRepository->update();
+
             return true;
         }
         return false;

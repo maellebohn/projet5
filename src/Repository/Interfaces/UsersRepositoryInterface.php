@@ -11,4 +11,8 @@ interface UsersRepositoryInterface
     public function save(UsersInterface $user);
 
     public function update();
+
+    public function getUserByUsernameAndEmail(string $username, string $email);
+
+    public function getUserByResetPasswordToken(string $token);
 }

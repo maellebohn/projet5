@@ -31,9 +31,9 @@
             {% for birds in listbirds %}
             <tr>
                 <td>{{ birds.name }}</td>
-                <td>{{ birds.birthdate|date("d/m/Y") }}</td>
+                {#<td>{{ birds.birthdate|date("d/m/Y") }}</td>#}
                 <td>{{ birds.description }}</td>
-                <td>{{ birds.price }} euros</td>
+                <td>{{ birds.price|number_format(2, ',', ' ') }} euros</td>
                 <td id="reservation_button"><button class="btn btn-success" data-toggle="modal" data-target="#form_reservation">Réserver</button>
                 </td>
             </tr>

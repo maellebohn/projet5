@@ -6,7 +6,6 @@ namespace App\Domain\Models;
 
 use App\Domain\DTO\UserRegistrationDTO;
 use App\Domain\Models\Interfaces\UsersInterface;
-use DateTime;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -58,6 +57,11 @@ class Users implements UsersInterface, UserInterface
      */
     private $active;
 
+    /**
+     * @var string
+     */
+    private $resetPasswordToken;
+
     public function getId()
     {
         return $this->id;
@@ -103,6 +107,11 @@ class Users implements UsersInterface, UserInterface
         return $this->active;
     }
 
+    public function getResetPasswordToken()
+    {
+        return $this->resetPasswordToken;
+    }
+
     public function getSalt()
     {
         return null;
@@ -132,6 +141,7 @@ class Users implements UsersInterface, UserInterface
         $this->dateCreation = time();
         $this->roles = ['ROLE_ADMIN'];
         $this->active = true;
+        $this->resetPasswordToken = null;
     }
 
     public function create(UserRegistrationDTO $userRegistrationDTO): self
@@ -141,5 +151,10 @@ class Users implements UsersInterface, UserInterface
         $this->username = $userRegistrationDTO->username;
         $this->email = $userRegistrationDTO->email;
         $this->password = $userRegistrationDTO->password;
+    }
+
+    public function askForPasswordReset($resetPasswordToken)
+    {
+        $this->resetPasswordToken = $resetPasswordToken->getResetPasswordToken();
     }
 }

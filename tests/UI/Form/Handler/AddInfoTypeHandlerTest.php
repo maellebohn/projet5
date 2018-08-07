@@ -12,6 +12,7 @@ use App\UI\Form\Handler\Interfaces\AddInfoTypeHandlerInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AddInfoTypeHandlerTest extends TestCase
 {
@@ -26,19 +27,27 @@ class AddInfoTypeHandlerTest extends TestCase
     private $fileUploaderHelper;
 
     /**
+     * @var ValidatorInterface
+     */
+    private $validator;
+
+    /**
      *{@inheritdoc}
      */
     public function setUp ()
     {
         $this->infosRepository = $this->createMock(InfosRepositoryInterface::class);
         $this->fileUploaderHelper = $this->createMock(FileUploaderHelperInterface::class);
+        $this->validator = $this->createMock(ValidatorInterface::class);
+        $this->validator->method('validate')->willReturn([]);
     }
 
     public function testConstruct ()
     {
         $addInfoTypeHandler = new AddInfoTypeHandler(
             $this->infosRepository,
-            $this->fileUploaderHelper
+            $this->fileUploaderHelper,
+            $this->validator
         );
 
         static::assertInstanceOf(
@@ -53,7 +62,8 @@ class AddInfoTypeHandlerTest extends TestCase
 
         $addInfoTypeHandler = new AddInfoTypeHandler(
             $this->infosRepository,
-            $this->fileUploaderHelper
+            $this->fileUploaderHelper,
+            $this->validator
         );
 
         $formInterfaceMock->method('isValid')->willReturn(false);
@@ -80,7 +90,8 @@ class AddInfoTypeHandlerTest extends TestCase
 
         $addInfoTypeHandler = new AddInfoTypeHandler(
             $this->infosRepository,
-            $this->fileUploaderHelper
+            $this->fileUploaderHelper,
+            $this->validator
         );
 
         $formInterfaceMock->method('isValid')->willReturn(true);

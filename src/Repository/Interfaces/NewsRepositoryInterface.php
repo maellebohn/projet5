@@ -19,5 +19,7 @@ interface NewsRepositoryInterface
         array $orderBy = null
     );
 
+    public function deleteById(string $id);
+
     public function update();
 }

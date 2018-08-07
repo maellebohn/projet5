@@ -23,7 +23,7 @@ class Birds implements BirdsInterface
     private $name;
 
     /**
-     * @var string
+     * @var int
      */
     private $birthdate;
 
@@ -54,7 +54,7 @@ class Birds implements BirdsInterface
 
     public function getBirthdate()
     {
-        return $this->birthdate;
+        return \DateTime::createFromFormat('U', (string) $this->birthdate);
     }
 
     public function getDescription()
@@ -77,7 +77,7 @@ class Birds implements BirdsInterface
      */
     public function __construct(
         string $name,
-        string $birthdate,
+        int $birthdate,
         string $description,
         int $price
     ) {

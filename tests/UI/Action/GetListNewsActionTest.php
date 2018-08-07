@@ -9,11 +9,11 @@ use App\UI\Action\GetListNewsAction;
 use App\UI\Action\Interfaces\GetListNewsActionInterface;
 use App\UI\Responder\GetListNewsResponder;
 use App\UI\Responder\Interfaces\GetListNewsResponderInterface;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class GetListNewsActionTest extends KernelTestCase
+class GetListNewsActionTest extends WebTestCase
 {
     /**
      * @var NewsRepositoryInterface

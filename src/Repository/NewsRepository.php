@@ -39,4 +39,23 @@ class NewsRepository extends ServiceEntityRepository implements NewsRepositoryIn
     {
         $this->_em->flush();
     }
+
+    /**
+     * @param string $id
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function deleteById(string $id)
+    {
+        $news = $this->createQueryBuilder('news')
+            ->where('news.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $this->_em->remove($news);
+        $this->_em->flush();
+    }
 }

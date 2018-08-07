@@ -7,6 +7,7 @@ namespace App\UI\Form\Type;
 use App\Domain\DTO\Interfaces\NewInfoDTOInterface;
 use App\Domain\DTO\NewInfoDTO;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -23,7 +24,14 @@ class AddInfoType extends AbstractType
             ->add('title', TextType::class)
             ->add('author', TextType::class)
             ->add('image', FileType::class, ['required' => false])
-            ->add('category', TextType::class)//choicetype
+            ->add('category', ChoiceType::class, [
+                'choices' => [
+                    'alimentation' => 'alimentation',
+                    'education' => 'education',
+                    'installation' => 'installation',
+                    'pathologie' => 'pathologie'
+                ]
+            ])
             ->add('content', TextareaType::class);
     }
 

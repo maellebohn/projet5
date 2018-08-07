@@ -9,7 +9,7 @@ use App\UI\Action\Interfaces\AddInfoActionInterface;
 use App\UI\Form\Handler\Interfaces\AddInfoTypeHandlerInterface;
 use App\UI\Responder\AddInfoResponder;
 use Blackfire\Bridge\PhpUnit\TestCaseTrait;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class AddInfoActionTest extends KernelTestCase
+class AddInfoActionTest extends WebTestCase
 {
     use TestCaseTrait;
 
@@ -41,9 +41,7 @@ class AddInfoActionTest extends KernelTestCase
      */
     public function setUp ()
     {
-        static::bootKernel();
-
-        $this->formFactory = static::$kernel->getContainer()->get('form.factory');
+        $this->formFactory = $this->createMock(FormFactoryInterface::class);
         $this->addInfoTypeHandler = $this->createMock(AddInfoTypeHandlerInterface::class);
         $this->router = $this->createMock(UrlGeneratorInterface::class);
         $this->router->method('generate')->willReturn('/addinfo');

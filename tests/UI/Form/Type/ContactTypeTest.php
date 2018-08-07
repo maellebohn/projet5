@@ -13,9 +13,9 @@ class ContactTypeTest extends TypeTestCase
         $form = $this->factory->create(ContactType::class);
 
         $form->submit([
-            'name'=>'toto',
-            'email'=>'toto@gmail.com',
-            'message'=>'hello'
+            'name' => 'toto',
+            'email' => 'toto@gmail.com',
+            'message' => 'hello'
         ]);
 
         static::assertTrue(

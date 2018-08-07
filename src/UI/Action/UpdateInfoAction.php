@@ -10,6 +10,7 @@ use App\UI\Action\Interfaces\UpdateInfoActionInterface;
 use App\UI\Form\Handler\Interfaces\UpdateInfoTypeHandlerInterface;
 use App\UI\Form\Type\UpdateInfoType;
 use App\UI\Responder\Interfaces\UpdateInfoResponderInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,6 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *     name="update_info"
  * )
  */
+// @Security("is_granted('ROLE_ADMIN')")
 class UpdateInfoAction implements UpdateInfoActionInterface
 {
     /**
@@ -81,7 +83,7 @@ class UpdateInfoAction implements UpdateInfoActionInterface
         $updateInfoType = $this->formFactory->create(UpdateInfoType::class, $dto)
                                             ->handleRequest($request);
 
-        if($this->updateInfoTypeHandler->handle($updateInfoType)) {
+        if($this->updateInfoTypeHandler->handle($updateInfoType, $infos)) {
             return $responder(true);
         }
 

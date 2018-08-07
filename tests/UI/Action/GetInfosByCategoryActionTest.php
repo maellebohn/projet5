@@ -9,12 +9,12 @@ use App\UI\Action\GetInfosByCategoryAction;
 use App\UI\Action\Interfaces\GetInfosByCategoryActionInterface;
 use App\UI\Responder\GetInfosByCategoryResponder;
 use App\UI\Responder\Interfaces\GetInfosByCategoryResponderInterface;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class GetInfosByCategoryActionTest extends KernelTestCase
+class GetInfosByCategoryActionTest extends WebTestCase
 {
     /**
      * @var InfosRepositoryInterface
@@ -31,8 +31,6 @@ class GetInfosByCategoryActionTest extends KernelTestCase
      */
     public function setUp ()
     {
-        static::bootKernel();
-
         $this->infosRepository = $this->createMock(InfosRepositoryInterface::class);
         $this->infosRepository->method('findBy')->willReturn([]);
         $this->responder = new GetInfosByCategoryResponder($this->createMock(Environment::class));

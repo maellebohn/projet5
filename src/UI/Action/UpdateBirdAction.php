@@ -10,6 +10,7 @@ use App\UI\Action\Interfaces\UpdateBirdActionInterface;
 use App\UI\Form\Handler\Interfaces\UpdateBirdTypeHandlerInterface;
 use App\UI\Form\Type\UpdateBirdType;
 use App\UI\Responder\Interfaces\UpdateBirdResponderInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,6 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *     name="update_bird"
  * )
  */
+// @Security("is_granted('ROLE_ADMIN')")
 class UpdateBirdAction implements UpdateBirdActionInterface
 {
     /**
@@ -75,7 +77,7 @@ class UpdateBirdAction implements UpdateBirdActionInterface
         $updateBirdType = $this->formFactory->create(UpdateBirdType::class, $dto)
                                             ->handleRequest($request);
 
-        if($this->updateBirdTypeHandler->handle($updateBirdType)) {
+        if($this->updateBirdTypeHandler->handle($updateBirdType, $bird)) {
             return $responder(true);
         }
 

@@ -10,25 +10,13 @@ App\Domain\DTO\UpdateBirdDTO:
                 max: 50
                 maxMessage: "Cette valeur est trop longue !"
                 groups: ['updatebird']
-        birthdate:
-            - NotBlank:
-                message: "Ce champs est requis, veuillez saisir une valeur."
-                groups: ['updatebird']
-            - Length:
-                min: 3
-                minMessage: "Cette valeur est trop courte !"
-                max: 50
-                maxMessage: "Cette valeur est trop longue !"
-                groups: ['updatebird']
         price:
             - NotBlank:
                 message: "Ce champs est requis, veuillez saisir une valeur."
                 groups: ['updatebird']
-            - Length:
-                min: 3
-                minMessage: "Cette valeur est trop courte !"
-                max: 50
-                maxMessage: "Cette valeur est trop longue !"
+            - Type:
+                type: integer
+                message: "Ce champs ne doit contenir que des chiffres, veuillez saisir une valeur correcte."
                 groups: ['updatebird']
         description:
             - NotBlank:

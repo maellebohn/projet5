@@ -13,8 +13,8 @@ class GetInfosByCategoryActionFunctionalTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET','/conseils/{category}');
-        //dump($client->getResponse()->getContent()); no database selected, n'arrive pas a faire le query
+        $client->request('GET','/conseils/alimentation');
+
         static::assertSame(
             Response::HTTP_OK,
             $client->getResponse()->getStatusCode()

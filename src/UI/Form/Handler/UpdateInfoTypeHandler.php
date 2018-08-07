@@ -58,6 +58,7 @@ class UpdateInfoTypeHandler implements UpdateInfoTypeHandlerInterface
             ]);
 
             $this->infosRepository->update();
+
             return true;
         }
         return false;

@@ -34,4 +34,38 @@ class UsersRepository extends ServiceEntityRepository implements UsersRepository
     {
         $this->_em->flush();
     }
+
+    /**
+     * @param string $username
+     * @param string $email
+     *
+     * @return mixed
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getUserByUsernameAndEmail(string $username, string $email)
+    {
+        return $this->createQueryBuilder('users')
+            ->where('users.username = :username AND users.email = :email')
+            ->setParameter('username', $username)
+            ->setParameter('email', $email)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    /**
+     * @param string $token
+     *
+     * @return mixed
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getUserByResetPasswordToken(string $token)
+    {
+        return $this->createQueryBuilder('users')
+            ->where('users.resetPasswordToken = :token')
+            ->setParameter('token', $token)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

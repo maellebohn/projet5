@@ -57,6 +57,7 @@ class UpdateBirdTypeHandler implements UpdateBirdTypeHandlerInterface
             ]);
 
             $this->birdsRepository->update();
+
             return true;
         }
         return false;

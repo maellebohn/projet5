@@ -23,9 +23,6 @@ class InfosRepository extends ServiceEntityRepository implements InfosRepository
         parent::__construct($registry, Infos::class);
     }
 
-    /**
-     * @param InfosInterface $info
-     */
     public function save(InfosInterface $info)
     {
         $this->_em->persist($info);
@@ -40,6 +37,25 @@ class InfosRepository extends ServiceEntityRepository implements InfosRepository
 
     public function update()
     {
+        $this->_em->flush();
+    }
+
+    /**
+     * @param string $id
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function deleteById(string $id)
+    {
+        $info = $this->createQueryBuilder('infos')
+            ->where('infos.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $this->_em->remove($info);
         $this->_em->flush();
     }
 }

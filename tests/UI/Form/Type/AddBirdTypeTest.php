@@ -13,10 +13,10 @@ class AddBirdTypeTest extends TypeTestCase
         $form = $this->factory->create(AddBirdType::class);
 
         $form->submit([
-            'name'=>'inoue',
-            'birthdate'=>'2018-02-05',
-            'price'=>200,
-            'description'=>'femelle'
+            'name' => 'inoue',
+            'birthdate' => 1530741600,
+            'price' => 200,
+            'description' => 'femelle'
         ]);
 
         static::assertTrue(

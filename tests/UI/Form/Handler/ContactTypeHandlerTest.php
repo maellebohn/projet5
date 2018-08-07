@@ -10,7 +10,9 @@ use App\UI\Form\Handler\Interfaces\ContactTypeHandlerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
 class ContactTypeHandlerTest extends KernelTestCase
 {
@@ -32,8 +34,7 @@ class ContactTypeHandlerTest extends KernelTestCase
         static::bootKernel();
 
         $this->eventDispatcher = static::$kernel->getContainer()->get('event_dispatcher');
-        $this->session = $this->createMock(SessionInterface::class);
-        //new session storage
+        $this->session = new Session(new MockArraySessionStorage());
     }
 
     public function testConstruct ()

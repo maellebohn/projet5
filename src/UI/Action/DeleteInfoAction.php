@@ -7,9 +7,9 @@ namespace App\UI\Action;
 use App\Repository\Interfaces\InfosRepositoryInterface;
 use App\UI\Action\Interfaces\DeleteInfoActionInterface;
 use App\UI\Responder\Interfaces\DeleteInfoResponderInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-
 
 /**
  * @Route(
@@ -17,6 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *     name="delete_info"
  * )
  */
+// @Security("is_granted('ROLE_ADMIN')")
 class DeleteInfoAction implements DeleteInfoActionInterface
 {
     /**
@@ -45,9 +46,7 @@ class DeleteInfoAction implements DeleteInfoActionInterface
         Request $request,
         DeleteInfoResponderInterface $responder
     ) {
-        $info = $this->infosRepository->findOneBy(['id' => $request->attributes->get('id')]);
-
-        $this->infosRepository->remove($info);
+        $this->infosRepository->deleteById($request->attributes->get('id'));
 
         return $responder();
     }

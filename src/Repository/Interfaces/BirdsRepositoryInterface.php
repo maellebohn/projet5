@@ -14,10 +14,7 @@ interface BirdsRepositoryInterface
 
     public function remove(BirdsInterface $bird);
 
-    public function findOneBy(
-        array $criteria,
-        array $orderBy = null
-    );
+    public function deleteById(string $id);
 
     public function update();
 }

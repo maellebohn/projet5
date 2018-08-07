@@ -7,9 +7,9 @@ namespace App\UI\Action;
 use App\Repository\Interfaces\NewsRepositoryInterface;
 use App\UI\Action\Interfaces\DeleteNewsActionInterface;
 use App\UI\Responder\Interfaces\DeleteNewsResponderInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-
 
 /**
  * @Route(
@@ -17,6 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *     name="delete_news"
  * )
  */
+// @Security("is_granted('ROLE_ADMIN')")
 class DeleteNewsAction implements DeleteNewsActionInterface
 {
     /**
@@ -45,9 +46,7 @@ class DeleteNewsAction implements DeleteNewsActionInterface
         Request $request,
         DeleteNewsResponderInterface $responder
     ) {
-        $news = $this->newsRepository->findOneBy(['id' => $request->attributes->get('id')]);
-
-        $this->newsRepository->remove($news);
+        $this->newsRepository->deleteById($request->attributes->get('id'));
 
         return $responder();
     }

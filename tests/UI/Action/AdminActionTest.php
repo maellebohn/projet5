@@ -11,11 +11,11 @@ use App\UI\Action\AdminAction;
 use App\UI\Action\Interfaces\AdminActionInterface;
 use App\UI\Responder\AdminResponder;
 use App\UI\Responder\Interfaces\AdminResponderInterface;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class AdminActionTest extends KernelTestCase
+class AdminActionTest extends WebTestCase
 {
     /**
      * @var InfosRepositoryInterface

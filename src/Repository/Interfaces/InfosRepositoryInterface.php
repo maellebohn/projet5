@@ -26,5 +26,7 @@ interface InfosRepositoryInterface
         array $orderBy = null
     );
 
+    public function deleteById(string $id);
+
     public function update();
 }

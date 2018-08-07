@@ -23,9 +23,6 @@ class BirdsRepository extends ServiceEntityRepository implements BirdsRepository
         parent::__construct($registry, Birds::class);
     }
 
-    /**
-     * @param BirdsInterface $bird
-     */
     public function save(BirdsInterface $bird)
     {
         $this->_em->persist($bird);
@@ -40,6 +37,25 @@ class BirdsRepository extends ServiceEntityRepository implements BirdsRepository
 
     public function update()
     {
+        $this->_em->flush();
+    }
+
+    /**
+     * @param string $id
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function deleteById(string $id)
+    {
+        $bird = $this->createQueryBuilder('birds')
+            ->where('birds.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $this->_em->remove($bird);
         $this->_em->flush();
     }
 }

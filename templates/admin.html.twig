@@ -118,9 +118,9 @@
                 {% for birds in listbirds %}
                     <tr>
                         <td>{{ birds.name }}</td>
-                        <td>{{ birds.birthdate|date("d/m/Y") }}</td>
+                        {#<td>{{ birds.birthdate|date("d/m/Y") }}</td>#}
                         <td>{{ birds.description }}</td>
-                        <td>{{ birds.price }}</td>
+                        <td>{{ birds.price|number_format(2, ',', ' ') }}</td>
                         <td><a href="#">Oiseau non réservé</a></td>
                         <td><a href="{{ path('update_bird', {'id':birds.id}) }}"><span class="fas fa-edit"></span></a><a href="#" data-toggle="modal" data-target="#delete_bird"><span class="fas fa-times"></span></a></td>
                     </tr>

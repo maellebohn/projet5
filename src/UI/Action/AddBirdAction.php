@@ -32,7 +32,7 @@ final class AddBirdAction implements AddBirdActionInterface
     private $addBirdTypeHandler;
 
     /**
-     * AddNewsAction constructor.
+     * AddBirdAction constructor.
      *
      * @param FormFactoryInterface        $formFactory
      * @param AddBirdTypeHandlerInterface $addBirdTypeHandler

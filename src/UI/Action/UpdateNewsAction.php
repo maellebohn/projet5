@@ -10,6 +10,7 @@ use App\UI\Action\Interfaces\UpdateNewsActionInterface;
 use App\UI\Form\Handler\Interfaces\UpdateNewsTypeHandlerInterface;
 use App\UI\Form\Type\UpdateNewsType;
 use App\UI\Responder\Interfaces\UpdateNewsResponderInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,6 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *     name="update_news"
  * )
  */
+// @Security("is_granted('ROLE_ADMIN')")
 class UpdateNewsAction implements UpdateNewsActionInterface
 {
     /**
@@ -76,7 +78,7 @@ class UpdateNewsAction implements UpdateNewsActionInterface
         $updateNewsType = $this->formFactory->create(UpdateNewsType::class, $dto)
                                             ->handleRequest($request);
 
-        if($this->updateNewsTypeHandler->handle($updateNewsType)) {
+        if($this->updateNewsTypeHandler->handle($updateNewsType, $news)) {
             return $responder(true);
         }
 

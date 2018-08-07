@@ -7,7 +7,9 @@ namespace App\UI\Form\Type;
 use App\Domain\DTO\Interfaces\NewBirdDTOInterface;
 use App\Domain\DTO\NewBirdDTO;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,8 +22,18 @@ class AddBirdType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('birthdate', TextType::class)//birthdaytype gettimestamp
-            ->add('price', IntegerType::class)//moneytype
+            ->add('birthdate', BirthdayType::class, [
+                'input' => 'timestamp', 'format' => 'dd MM yyyy'
+            ])
+/*            ->add('price', IntegerType::class, [
+                'scale' => 2,
+                'attr' => [
+                    'placeholder' => 'ex : 200.00'
+                ]
+            ])*/
+            ->add('price', MoneyType::class, [
+                'divisor' => 100,
+            ])
             ->add('description', TextareaType::class);
     }
 

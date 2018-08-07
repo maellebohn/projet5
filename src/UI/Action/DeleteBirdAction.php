@@ -7,6 +7,7 @@ namespace App\UI\Action;
 use App\Repository\Interfaces\BirdsRepositoryInterface;
 use App\UI\Action\Interfaces\DeleteBirdActionInterface;
 use App\UI\Responder\Interfaces\DeleteBirdResponderInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -17,6 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *     name="delete_bird"
  * )
  */
+// @Security("is_granted('ROLE_ADMIN')")
 class DeleteBirdAction implements DeleteBirdActionInterface
 {
     /**
@@ -45,9 +47,7 @@ class DeleteBirdAction implements DeleteBirdActionInterface
         Request $request,
         DeleteBirdResponderInterface $responder
     ) {
-        $bird = $this->birdsRepository->findOneBy(['id' => $request->attributes->get('id')]);
-
-        $this->birdsRepository->remove($bird);
+        $this->birdsRepository->deleteById($request->attributes->get('id'));
 
         return $responder();
     }

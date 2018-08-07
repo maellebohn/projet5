@@ -7,7 +7,7 @@
     <entity name="App\Domain\Models\Birds" repository-class="App\Repository\BirdsRepository">
         <id name="id" column="id" type="uuid"></id>
         <field name="name" length="50" />
-        <field name="birthdate" column="birthdate" type="datetime" />
+        <field name="birthdate" column="birthdate" type="integer" />
         <field name="description" type="text" />
         <field name="price" type="decimal" scale="2" />
         <field name="reservation" column="reservation" type="boolean" />

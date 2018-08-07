@@ -7,7 +7,6 @@ namespace App\UI\Form\Handler;
 use App\Domain\Models\Users;
 use App\Repository\Interfaces\UsersRepositoryInterface;
 use App\UI\Form\Handler\Interfaces\RegisterTypeHandlerInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
@@ -30,11 +29,6 @@ class RegisterTypeHandler implements RegisterTypeHandlerInterface
     private $validator;
 
     /**
-     * @var EventDispatcherInterface
-     */
-    private $eventDispatcher;
-
-    /**
      * @var SessionInterface
      */
     private $session;
@@ -44,13 +38,11 @@ class RegisterTypeHandler implements RegisterTypeHandlerInterface
         EncoderFactoryInterface $passwordEncoderFactory,
         UsersRepositoryInterface $usersRepository,
         ValidatorInterface $validator,
-        EventDispatcherInterface $eventDispatcher,
         SessionInterface $session
     ) {
         $this->passwordEncoderFactory = $passwordEncoderFactory;
         $this->usersRepository = $usersRepository;
         $this->validator = $validator;
-        $this->eventDispatcher = $eventDispatcher;
         $this->session = $session;
     }
 

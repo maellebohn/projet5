@@ -10,25 +10,13 @@ App\Domain\DTO\NewBirdDTO:
                 max: 50
                 maxMessage: "Cette valeur est trop longue !"
                 groups: ['addbird']
-        birthdate:
-            - NotBlank:
-                message: "Ce champs est requis, veuillez saisir une valeur."
-                groups: ['addbird']
-            - Length:
-                min: 3
-                minMessage: "Cette valeur est trop courte !"
-                max: 50
-                maxMessage: "Cette valeur est trop longue !"
-                groups: ['addbird']
         price:
             - NotBlank:
                 message: "Ce champs est requis, veuillez saisir une valeur."
                 groups: ['addbird']
-            - Length:
-                min: 3
-                minMessage: "Cette valeur est trop courte !"
-                max: 50
-                maxMessage: "Cette valeur est trop longue !"
+            - Type:
+                type: integer
+                message: "Ce champs ne doit contenir que des chiffres, veuillez saisir une valeur correcte."
                 groups: ['addbird']
         description:
             - NotBlank:

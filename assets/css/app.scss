@@ -317,3 +317,16 @@ input#add_news_image.custom-file-input {
   display: inline;
   margin-left: 2%;
 }
+
+//add_bird page
+legend {
+  border-bottom: none;
+  color: #e1ffff;
+  font-family: 'Vollkorn', serif;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+select#add_bird_birthdate_day.form-control, select#add_bird_birthdate_month.form-control, select#add_bird_birthdate_year.form-control, input#add_bird_price.form-control {
+  width: 20% !important;
+}

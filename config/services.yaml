@@ -37,3 +37,8 @@ services:
         class: App\Listener\ReservationFormSubmittedListener
         tags:
             - { name: kernel.event_listener, event: 'reservationform.submitted', method: onReservationFormSubmitted }
+
+    app.resetform_listener:
+        class: App\Listener\AskResetPasswordFormSubmittedListener
+        tags:
+            - { name: kernel.event_listener, event: 'resetform.submitted', method: onAskResetPasswordFormSubmitted }

@@ -10,14 +10,14 @@ interface NewBirdDTOInterface
      * NewBirdDTO constructor.
      *
      * @param string $name
-     * @param string $birthdate
+     * @param int    $birthdate
      * @param int    $price
      * @param string $description
 
      */
     public function __construct(
         string $name,
-        string $birthdate,
+        int $birthdate,
         int $price,
         string $description
     );

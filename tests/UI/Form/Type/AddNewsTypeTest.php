@@ -14,10 +14,10 @@ class AddNewsTypeTest extends TypeTestCase
         $form = $this->factory->create(AddNewsType::class);
 
         $form->submit([
-            'title'=>'nouveaux-nés',
-            'author'=>'admin',
-            'image'=>new UploadedFile('public/images/accueil1.jpg', 'photo.jpg', 'image/jpeg', 123),
-            'content'=>'les oeufs ont éclos'
+            'title' => 'nouveaux-nés',
+            'author' => 'admin',
+            'image' => new UploadedFile('public/images/accueil1.jpg', 'photo.jpg', 'image/jpeg', 123),
+            'content' => 'les oeufs ont éclos'
         ]);
 
         static::assertTrue(

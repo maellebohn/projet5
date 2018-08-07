@@ -6,11 +6,11 @@ namespace App\Tests\UI\Action;
 
 use App\UI\Action\HomeAction;
 use App\UI\Responder\HomeResponder;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class HomeActionTest extends KernelTestCase
+class HomeActionTest extends WebTestCase
 {
     public function testHomeView()
     {

@@ -13,14 +13,14 @@ class BirdsTest extends TestCase
     {
         $bird = new Birds(
             'inoue',
-            '2018-02-05',
+            1530741600,
             'femelle',
             200
         );
 
         static::assertSame('inoue', $bird->getName());
 
-        static::assertSame('2018-02-05', $bird->getBirthdate());
+        static::assertSame('2018-07-05', $bird->getBirthdate());
 
         static::assertSame('femelle', $bird->getDescription());
 

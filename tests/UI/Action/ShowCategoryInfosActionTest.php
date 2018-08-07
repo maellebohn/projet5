@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace App\Tests\UI\Action;
 
 use App\UI\Action\ShowCategoryInfosAction;
-use App\UI\Action\Interfaces\ShowCategoryInfosActionInterface;
 use App\UI\Responder\ShowCategoryInfosResponder;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class ShowCategoryInfosActionTest extends KernelTestCase
+class ShowCategoryInfosActionTest extends WebTestCase
 {
     public function testShowCategoryInfosView()
     {

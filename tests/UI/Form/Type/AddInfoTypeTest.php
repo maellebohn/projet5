@@ -14,11 +14,11 @@ class AddInfoTypeTest extends TypeTestCase
         $form = $this->factory->create(AddInfoType::class);
 
         $form->submit([
-            'title'=>'alimentation',
-            'author'=>'toto',
-            'image'=>new UploadedFile('public/images/accueil1.jpg', 'photo.jpg', 'image/jpeg', 123),
-            'category'=>'education',
-            'content'=>'bien nourrir ses perroquets'
+            'title' => 'alimentation',
+            'author' => 'toto',
+            'image' => new UploadedFile('public/images/accueil1.jpg', 'photo.jpg', 'image/jpeg', 123),
+            'category' => 'education',
+            'content' => 'bien nourrir ses perroquets'
         ]);
 
         static::assertTrue(

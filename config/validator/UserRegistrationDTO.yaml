@@ -33,7 +33,7 @@ App\Domain\DTO\UserRegistrationDTO:
         email:
             - NotBlank:
                 message: "Ce champs est requis, veuillez saisir une valeur."
-                groups: ['contact']
+                groups: ['registration']
             - Length:
                 min: 10
                 minMessage: "Cette valeur est trop courte !"
@@ -49,6 +49,6 @@ App\Domain\DTO\UserRegistrationDTO:
             - Length:
                 min: 5
                 minMessage: "Cette valeur est trop courte !"
-                max: 25
+                max: 50
                 maxMessage: "Cette valeur est trop longue !"
                 groups: ['registration']

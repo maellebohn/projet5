@@ -12,6 +12,7 @@ use App\UI\Form\Handler\Interfaces\AddNewsTypeHandlerInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AddNewsTypeHandlerTest extends TestCase
 {
@@ -26,19 +27,27 @@ class AddNewsTypeHandlerTest extends TestCase
     private $fileUploaderHelper;
 
     /**
+     * @var ValidatorInterface
+     */
+    private $validator;
+
+    /**
      *{@inheritdoc}
      */
     public function setUp ()
     {
         $this->newsRepository = $this->createMock(NewsRepositoryInterface::class);
         $this->fileUploaderHelper = $this->createMock(FileUploaderHelperInterface::class);
+        $this->validator = $this->createMock(ValidatorInterface::class);
+        $this->validator->method('validate')->willReturn([]);
     }
 
     public function testConstruct ()
     {
         $addNewsTypeHandler = new AddNewsTypeHandler(
             $this->newsRepository,
-            $this->fileUploaderHelper
+            $this->fileUploaderHelper,
+            $this->validator
         );
 
         static::assertInstanceOf(
@@ -53,7 +62,8 @@ class AddNewsTypeHandlerTest extends TestCase
 
         $addNewsTypeHandler = new AddNewsTypeHandler(
             $this->newsRepository,
-            $this->fileUploaderHelper
+            $this->fileUploaderHelper,
+            $this->validator
         );
 
         $formInterfaceMock->method('isValid')->willReturn(false);
@@ -79,7 +89,8 @@ class AddNewsTypeHandlerTest extends TestCase
 
         $addNewsTypeHandler = new AddNewsTypeHandler(
             $this->newsRepository,
-            $this->fileUploaderHelper
+            $this->fileUploaderHelper,
+            $this->validator
         );
 
         $formInterfaceMock->method('isValid')->willReturn(true);

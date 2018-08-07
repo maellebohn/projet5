@@ -9,7 +9,7 @@ use App\UI\Action\Interfaces\AddNewsActionInterface;
 use App\UI\Form\Handler\Interfaces\AddNewsTypeHandlerInterface;
 use App\UI\Responder\AddNewsResponder;
 use Blackfire\Bridge\PhpUnit\TestCaseTrait;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class AddNewsActionTest extends KernelTestCase
+class AddNewsActionTest extends WebTestCase
 {
     use TestCaseTrait;
 
@@ -41,9 +41,7 @@ class AddNewsActionTest extends KernelTestCase
      */
     public function setUp ()
     {
-        static::bootKernel();
-
-        $this->formFactory = static::$kernel->getContainer()->get('form.factory');
+        $this->formFactory = $this->createMock(FormFactoryInterface::class);
         $this->addNewsTypeHandler = $this->createMock(AddNewsTypeHandlerInterface::class);
         $this->router = $this->createMock(UrlGeneratorInterface::class);
         $this->router->method('generate')->willReturn('/addnews');

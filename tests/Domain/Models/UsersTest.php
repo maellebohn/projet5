@@ -6,17 +6,29 @@ namespace App\Tests\Domain\Models;
 
 use App\Domain\Models\Users;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
 class UsersTest extends TestCase
 {
-    public function testConstructor()
+    /**
+     * @var PasswordEncoderInterface
+     */
+    private $passwordEncoder;
+
+    public function setUp ()
     {
+        $this->passwordEncoder = $this->createMock(PasswordEncoderInterface::class);
+    }
+
+    public function testConstructor()
+    {//$encoder = closure::from callable
         $user = new Users(
             'maelle',
             'bohn',
             'coco',
             'coco@gmail.com',
-            'coco'
+            'coco',
+            $encoder
         );
 
         static::assertSame('maelle', $user->getFirstname());
