@@ -69,7 +69,7 @@ class UpdateBirdAction implements UpdateBirdActionInterface
         $bird = $this->birdsRepository->findOneBy(['id' => $request->attributes->get('id')]);
         $dto = new UpdateBirdDTO(
             $bird->getName(),
-            $bird->getBirthdate(),
+            $bird->getBirthdate()->getTimestamp(),
             $bird->getPrice(),
             $bird->getDescription()
         );
@@ -78,7 +78,7 @@ class UpdateBirdAction implements UpdateBirdActionInterface
                                             ->handleRequest($request);
 
         if($this->updateBirdTypeHandler->handle($updateBirdType, $bird)) {
-            return $responder(true);
+            return $responder(true, $bird);
         }
 
         return $responder(false, $bird, $updateBirdType);

@@ -35,27 +35,21 @@
                                     <a class="active" href="{{ path('admin') }}">TABLEAU DE BORD</a>
                                 </li>
 
-                                <li  data-toggle="collapse" data-target="#create" class="collapsed">
+                                <li data-toggle="collapse" data-target="#create" class="collapsed">
                                     <a href="#">CREER</a>
                                 </li>
                                 <ul class="sub-menu collapse" id="create">
-                                    <li><a href="#">AJOUTER UN CONSEIL</a></li>
-                                    <li><a href="#">AJOUTER UNE NEWS</a></li>
-                                    <li><a href="#">AJOUTER UN OISEAU</a></li>
+                                    <li><a href="{{ path('add_info') }}">AJOUTER UN CONSEIL</a></li>
+                                    <li><a href="{{ path('add_news') }}">AJOUTER UNE NEWS</a></li>
+                                    <li><a href="{{ path('add_bird') }}">AJOUTER UN OISEAU</a></li>
                                 </ul>
 
-                                <li data-toggle="collapse" data-target="#update" class="collapsed">
-                                    <a href="#">MODIFIER</a>
-                                </li>
-                                <ul class="sub-menu collapse" id="update">
-                                    <li><a href="#">MODIFIER UN CONSEIL</a></li>
-                                    <li><a href="#">MODIFIER UNE NEWS</a></li>
-                                    <li><a href="#">MODIFIER UN OISEAU</a></li>
-                                </ul>
-
-                                <li>
+                                <li data-toggle="collapse" data-target="#user" class="collapsed">
                                     <a href="#">GESTION UTILISATEUR</a>
                                 </li>
+                                <ul class="sub-menu collapse" id="user">
+                                    <li><a href="{{ path('registration') }}">AJOUTER UN ADMIN</a></li>
+                                </ul>
 
                                 <li>
                                     <a href="{{ path('home') }}">RETOUR ACCUEIL</a>
@@ -79,7 +73,7 @@
                 <a class="btn btn-social-icon btn-twitter" href="https://twitter.com/">
                 <span class="fab fa-twitter"></span>
                 </a>
-                <p><a class="connexion" href="#">Se connecter</a></p>
+                <p><a class="connexion" href="{{ path('logout') }}">Se déconnecter</a></p>
             </div>
         {% endblock %}
         </footer>

@@ -13,16 +13,13 @@ interface GetInfosByCategoryActionInterface
     /**
      * GetInfosByCategoryAction constructor.
      *
-     * @param InfosRepositoryInterface             $infosRepository
-     * @param GetInfosByCategoryResponderInterface $responder
+     * @param InfosRepositoryInterface $infosRepository
      */
-    public function __construct (
-        InfosRepositoryInterface $infosRepository,
-        GetInfosByCategoryResponderInterface $responder
-    );
+    public function __construct (InfosRepositoryInterface $infosRepository);
 
     /**
-     * @param Request $request
+     * @param Request                              $request
+     * @param GetInfosByCategoryResponderInterface $responder
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
@@ -30,5 +27,8 @@ interface GetInfosByCategoryActionInterface
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke(Request $request);
+    public function __invoke(
+        Request $request,
+        GetInfosByCategoryResponderInterface $responder
+    );
 }

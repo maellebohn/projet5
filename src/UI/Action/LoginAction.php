@@ -5,35 +5,38 @@ declare(strict_types=1);
 namespace App\UI\Action;
 
 use App\UI\Action\Interfaces\LoginActionInterface;
+use App\UI\Form\Type\LoginType;
 use App\UI\Responder\Interfaces\LoginResponderInterface;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+
 
 /**
  * @Route(
  *     path="/login",
  *     name="login",
- *     methods={"GET", "POST"}
  * )
  */
 final class LoginAction implements LoginActionInterface
 {
     /**
-     * @var AuthenticationUtils
+     * @var FormFactoryInterface
      */
-    private $authenticationUtils;
+    private $formFactory;
 
     /**
      * LoginAction constructor.
      *
-     * @param AuthenticationUtils $authenticationUtils
+     * @param FormFactoryInterface $formFactory
      */
-    public function __construct(AuthenticationUtils $authenticationUtils)
+    public function __construct(FormFactoryInterface $formFactory)
     {
-        $this->authenticationUtils = $authenticationUtils;
+        $this->formFactory = $formFactory;
     }
 
     /**
+     * @param Request                 $request
      * @param LoginResponderInterface $responder
      *
      * @return mixed|\Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -42,11 +45,13 @@ final class LoginAction implements LoginActionInterface
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke(LoginResponderInterface $responder)
-    {
-        return $responder(
-            $this->authenticationUtils->getLastAuthenticationError(),
-            $this->authenticationUtils->getLastUsername()
-        );
+    public function __invoke(
+        Request $request,
+        LoginResponderInterface $responder
+    ) {
+        $loginType = $this->formFactory->create(LoginType::class)
+                                         ->handleRequest($request);
+
+        return $responder($loginType);
     }
 }

@@ -33,7 +33,14 @@ class RegisterTypeHandler implements RegisterTypeHandlerInterface
      */
     private $session;
 
-
+    /**
+     * RegisterTypeHandler constructor.
+     *
+     * @param EncoderFactoryInterface  $passwordEncoderFactory
+     * @param UsersRepositoryInterface $usersRepository
+     * @param ValidatorInterface       $validator
+     * @param SessionInterface         $session
+     */
     public function __construct (
         EncoderFactoryInterface $passwordEncoderFactory,
         UsersRepositoryInterface $usersRepository,

@@ -8,7 +8,15 @@ interface ContactFormSubmittedEventInterface
 {
     const NAME = 'contactform.submitted';
 
+    /**
+     * ContactFormSubmittedEvent constructor.
+     *
+     * @param NewContactFormSubmittedDTO $newContactFormSubmittedDTO
+     */
     public function __construct (NewContactFormSubmittedDTO $newContactFormSubmittedDTO);
 
+    /**
+     * @return NewContactFormSubmittedDTO
+     */
     public function getNewContactFormSubmittedDTO(): NewContactFormSubmittedDTO;
 }

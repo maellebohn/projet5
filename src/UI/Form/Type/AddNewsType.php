@@ -20,7 +20,6 @@ class AddNewsType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-            ->add('author', TextType::class)
             ->add('image', FileType::class, ['required' => false])
             ->add('content', TextareaType::class);
     }
@@ -32,7 +31,6 @@ class AddNewsType extends AbstractType
             'empty_data' => function (FormInterface $form) {
                 return new NewNewsDTO(
                     $form->get('title')->getData(),
-                    $form->get('author')->getData(),
                     $form->get('image')->getData(),
                     $form->get('content')->getData()
                 );

@@ -11,19 +11,19 @@ class NewsTest extends TestCase
 {
     public function testConstructor()
     {
-        $new = new News(
+        $news = new News(
             'les oeufs ont éclos',
             'nouveaux-nés',
-            'oiseau',
-            'admin'
+            'admin',
+            'oiseau'
         );
 
-        static::assertSame('les oeufs ont éclos', $new->getContent());
+        static::assertSame('les oeufs ont éclos', $news->getContent());
 
-        static::assertSame('nouveaux-nés', $new->getTitle());
+        static::assertSame('nouveaux-nés', $news->getTitle());
 
-        static::assertSame('oiseau', $new->getImage());
+        static::assertSame('admin', $news->getAuthor());
 
-        static::assertSame('admin', $new->getAuthor());
+        static::assertSame('oiseau', $news->getImage());
     }
 }

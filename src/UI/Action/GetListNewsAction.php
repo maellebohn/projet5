@@ -23,35 +23,26 @@ final class GetListNewsAction implements GetListNewsActionInterface
     private $newsRepository;
 
     /**
-     * @var GetListNewsResponderInterface
-     */
-    private $responder;
-
-    /**
      * GetListNewsAction constructor.
      *
-     * @param NewsRepositoryInterface       $newsRepository
-     * @param GetListNewsResponderInterface $responder
+     * @param NewsRepositoryInterface $newsRepository
      */
-    public function __construct (
-        NewsRepositoryInterface $newsRepository,
-        GetListNewsResponderInterface $responder
-    ) {
+    public function __construct (NewsRepositoryInterface $newsRepository)
+    {
         $this->newsRepository = $newsRepository;
-        $this->responder = $responder;
     }
 
     /**
+     * @param GetListNewsResponderInterface $responder
+     *
      * @return mixed|\Symfony\Component\HttpFoundation\Response
      *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke()
+    public function __invoke(GetListNewsResponderInterface $responder)
     {
-        $responder = $this->responder;
-
         return $responder($this->newsRepository->findAll());
     }
 

@@ -4,13 +4,24 @@ declare(strict_types=1);
 
 namespace App\Helper\Interfaces;
 
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-
 interface FileUploaderHelperInterface
 {
+    /**
+     * FileUploaderHelper constructor.
+     *
+     * @param string $imageFolder
+     */
     public function __construct(string $imageFolder);
 
+    /**
+     * @return string
+     */
     public function getImageFolder(): string;
 
-    public function upload(UploadedFile $image);
+    /**
+     * @param \SplFileInfo $image
+     *
+     * @return string
+     */
+    public function upload(\SplFileInfo $image);
 }

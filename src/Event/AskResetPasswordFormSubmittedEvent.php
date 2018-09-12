@@ -14,15 +14,19 @@ class AskResetPasswordFormSubmittedEvent extends Event implements AskResetPasswo
      * @var UsersInterface
      */
     private $user;
+
     /**
-     * {@inheritdoc}
+     * AskResetPasswordFormSubmittedEvent constructor.
+     *
+     * @param UsersInterface $user
      */
     public function __construct(UsersInterface $user)
     {
         $this->user = $user;
     }
+
     /**
-     * {@inheritdoc}
+     * @return UsersInterface
      */
     public function getUser(): UsersInterface
     {

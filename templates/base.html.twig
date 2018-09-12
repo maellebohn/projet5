@@ -80,7 +80,11 @@
                 <a class="btn btn-social-icon btn-twitter" href="https://twitter.com/">
                 <span class="fab fa-twitter"></span>
                 </a>
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <p><a class="connexion" href="{{ path('logout') }}">Se déconnecter</a></p>
+                {% else %}
                 <p><a class="connexion" href="{{ path('login') }}">Se connecter</a></p>
+                {% endif %}
             </div>
         {% endblock %}
         </footer>

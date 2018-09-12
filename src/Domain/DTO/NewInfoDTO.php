@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Domain\DTO;
 
 use App\Domain\DTO\Interfaces\NewInfoDTOInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class NewInfoDTO implements NewInfoDTOInterface
 {
@@ -15,14 +14,9 @@ class NewInfoDTO implements NewInfoDTOInterface
     public $title;
 
     /**
-     * @var string
+     * @var \SplFileInfo|null
      */
-    public $author;
-
-    /**
-     * @var UploadedFile
-     */
-    public $image;
+    public $image = null;
 
     /**
      * @var string
@@ -37,23 +31,20 @@ class NewInfoDTO implements NewInfoDTOInterface
     /**
      * NewInfoDTO constructor.
      *
-     * @param string       $title
-     * @param string       $author
-     * @param UploadedFile $image
-     * @param string       $category
-     * @param string       $content
+     * @param string            $title
+     * @param string            $category
+     * @param string            $content
+     * @param \SplFileInfo|null $image
      */
     public function __construct(
         string $title,
-        string $author,
-        UploadedFile $image,
         string $category,
-        string $content
+        string $content,
+        \SplFileInfo $image = null
     ) {
         $this->title = $title;
-        $this-> author = $author;
-        $this->image =  $image;
         $this->category = $category;
         $this->content = $content;
+        $this->image =  $image;
     }
 }

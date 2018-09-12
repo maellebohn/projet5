@@ -16,7 +16,7 @@ final class AdminResponder implements AdminResponderInterface
     private $twig;
 
     /**
-     *AdminResponder constructor.
+     * AdminResponder constructor.
      *
      * @param Environment $twig
      */
@@ -36,8 +36,11 @@ final class AdminResponder implements AdminResponderInterface
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke($data, $data2, $data3)
-    {
+    public function __invoke(
+        $data,
+        $data2,
+        $data3
+    ) {
         return new Response(
             $this->twig->render('admin.html.twig', [
                 'listinfos' => $data,

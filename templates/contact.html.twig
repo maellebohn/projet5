@@ -1,18 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block wrapper %}
-    <div class="row" id="contact_row">
-        <div id="contact" class="col-xs-12 col-md-offset-3 col-md-6">
+    <div class="row title_row">
+        <div class="col-xs-12 col-md-offset-3 col-md-6 title">
             <h1>CONTACT</h1>
             <p>Vous avez des questions sur nos perroquets ? Nous serons ravis d'y répondre !</p>
         </div>
     </div>
-
-    {% for message in app.flashes('success') %}
-        <div class="flash-success">
-            {{ message }}
-        </div>
-    {% endfor %}
 
     {% form_theme form 'theme/contact_type.html.twig' %}
     {{ form(form) }}

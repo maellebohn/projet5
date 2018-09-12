@@ -41,7 +41,7 @@ class RegisterTypeHandlerTest extends TestCase
     /**
      *{@inheritdoc}
      */
-    public function setUp ()
+    protected function setUp ()
     {
         $this->passwordEncoderFactory = $this->createMock(EncoderFactoryInterface::class);
         $this->usersRepository = $this->createMock(UsersRepositoryInterface::class);

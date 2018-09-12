@@ -12,16 +12,18 @@ interface GetListNewsActionInterface
     /**
      * GetListNewsAction constructor.
      *
-     * @param NewsRepositoryInterface       $newsRepository
-     * @param GetListNewsResponderInterface $responder
+     * @param NewsRepositoryInterface $newsRepository
      */
-    public function __construct (
-        NewsRepositoryInterface $newsRepository,
-        GetListNewsResponderInterface $responder
-    );
+    public function __construct (NewsRepositoryInterface $newsRepository);
 
     /**
-     * @return mixed
+     * @param GetListNewsResponderInterface $responder
+     *
+     * @return mixed|\Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
-    public function __invoke();
+    public function __invoke(GetListNewsResponderInterface $responder);
 }

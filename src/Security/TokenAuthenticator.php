@@ -10,9 +10,12 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 
 class TokenAuthenticator extends AbstractFormLoginAuthenticator
@@ -27,12 +30,19 @@ class TokenAuthenticator extends AbstractFormLoginAuthenticator
      */
     private $userPasswordEncoder;
 
+    /**
+     * @var CsrfTokenManagerInterface
+     */
+    private $csrfTokenManager;
+
     public function __construct (
         UrlGeneratorInterface $router,
-        UserPasswordEncoderInterface $userPasswordEncoder
+        UserPasswordEncoderInterface $userPasswordEncoder,
+        CsrfTokenManagerInterface $csrfTokenManager
     ) {
         $this->router = $router;
         $this->userPasswordEncoder = $userPasswordEncoder;
+        $this->csrfTokenManager = $csrfTokenManager;
     }
 
     public function supports (Request $request)
@@ -41,10 +51,14 @@ class TokenAuthenticator extends AbstractFormLoginAuthenticator
     }
 
     public function getCredentials (Request $request)
-    {//verifier si identifiants presents avant (regarder dans requete si clés presentes)
+    {
+        if((!$request->request->get('login')['username']) && (!$request->request->get('login')['password'])){
+            return null;
+        }
+
         return [
-            'username' => $request->request->get('_username'),
-            'password' => $request->request->get('_password')
+            'username' => $request->request->get('login')['username'],
+            'password' => $request->request->get('login')['password']
         ];
     }
 
@@ -82,6 +96,4 @@ class TokenAuthenticator extends AbstractFormLoginAuthenticator
             $this->router->generate('login')
         );
     }
-
-//csrf à implementer ? dans getcredentials
 }

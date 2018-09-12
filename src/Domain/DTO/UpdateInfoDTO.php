@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\DTO;
 
 use App\Domain\DTO\Interfaces\UpdateInfoDTOInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use App\Domain\Models\Interfaces\UsersInterface;
 
 class UpdateInfoDTO implements UpdateInfoDTOInterface
 {
@@ -15,12 +15,7 @@ class UpdateInfoDTO implements UpdateInfoDTOInterface
     public $title;
 
     /**
-     * @var string
-     */
-    public $author;
-
-    /**
-     * @var string
+     * @var string|null
      */
     public $image;
 
@@ -37,21 +32,18 @@ class UpdateInfoDTO implements UpdateInfoDTOInterface
     /**
      * UpdateInfoDTO constructor.
      *
-     * @param string $title
-     * @param string $author
-     * @param UploadedFile $image
-     * @param string $category
-     * @param string $content
+     * @param string      $title
+     * @param string|null $image
+     * @param string      $category
+     * @param string      $content
      */
     public function __construct(
         string $title,
-        string $author,
-        UploadedFile $image,
+        string $image = null,
         string $category,
         string $content
     ) {
         $this->title = $title;
-        $this-> author = $author;
         $this->image =  $image;
         $this->category = $category;
         $this->content = $content;

@@ -9,7 +9,7 @@
         <field name="name" length="50" />
         <field name="birthdate" column="birthdate" type="integer" />
         <field name="description" type="text" />
-        <field name="price" type="decimal" scale="2" />
+        <field name="price" type="integer" />
         <field name="reservation" column="reservation" type="boolean" />
     </entity>
 </doctrine-mapping>

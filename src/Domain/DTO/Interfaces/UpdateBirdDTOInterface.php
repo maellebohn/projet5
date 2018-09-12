@@ -10,14 +10,14 @@ interface UpdateBirdDTOInterface
      * UpdateBirdDTO constructor.
      *
      * @param string $name
-     * @param string $birthdate
+     * @param int $birthdate
      * @param string $description
      * @param int    $price
      */
     public function __construct(
         string $name,
-        string $birthdate,
-        string $description,
-        int $price
+        int $birthdate,
+        int $price,
+        string $description
     );
 }

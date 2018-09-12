@@ -7,6 +7,7 @@ namespace App\Domain\Models;
 use App\Domain\DTO\NewInfoDTO;
 use App\Domain\DTO\UpdateInfoDTO;
 use App\Domain\Models\Interfaces\InfosInterface;
+use App\Domain\Models\Interfaces\UsersInterface;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
@@ -28,7 +29,7 @@ class Infos implements InfosInterface
     private $title;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $dateCreation;
 
@@ -40,10 +41,10 @@ class Infos implements InfosInterface
     /**
      * @var string
      */
-    private $image;
+    private $image = null;
 
     /**
-     * @var string
+     * @var UsersInterface
      */
     private $author;
 
@@ -52,16 +53,25 @@ class Infos implements InfosInterface
      */
     private $category;
 
+    /**
+     * @return UuidInterface
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * @return string
+     */
     public function getContent()
     {
         return $this->content;
     }
 
+    /**
+     * @return string
+     */
     public function getTitle()
     {
         return $this->title;
@@ -73,61 +83,85 @@ class Infos implements InfosInterface
         return $this->dateCreation;
     }
 
+    /**
+     * @return null|string
+     */
     public function getDateModification()
     {
         return $this->dateModification;
     }
 
+    /**
+     * @return null|string
+     */
     public function getImage()
     {
         return $this->image;
     }
 
+    /**
+     * @return string
+     */
     public function getAuthor()
     {
         return $this->author;
     }
 
+    /**
+     * @return string
+     */
     public function getCategory()
     {
         return $this->category;
     }
 
     /**
-     * {@inheritdoc}
+     * Infos constructor.
+     *
+     * @param string         $content
+     * @param string         $title
+     * @param UsersInterface $author
+     * @param string         $category
+     * @param string|null    $image
      */
     public function __construct(
         string $content,
         string $title,
-        string $image,
-        string $author,
-        string $category
+        UsersInterface $author,
+        string $category,
+        string $image = null
     ) {
         $this->id = Uuid::uuid4();
         $this->content = $content;
         $this->title = $title;
         $this->dateCreation = new \DateTime();
         $this->dateModification = null;
-        $this->image = $image;
         $this->author = $author;
         $this->category = $category;
+        $this->image = $image;
     }
 
+    /**
+     * @param NewInfoDTO $newInfoDTO
+     *
+     * @return Infos
+     */
     public function create(NewInfoDTO $newInfoDTO): self
     {
         $this->content = $newInfoDTO->content;
         $this->title = $newInfoDTO->title;
         $this->image = $newInfoDTO->image;
-        $this->author = $newInfoDTO->author;
         $this->category = $newInfoDTO->category;
     }
 
+    /**
+     * @param UpdateInfoDTO $updateInfoDTO
+     */
     public function update(UpdateInfoDTO $updateInfoDTO)
     {
         $this->content = $updateInfoDTO->content;
         $this->title = $updateInfoDTO->title;
         $this->image = $updateInfoDTO->image;
-        $this->author = $updateInfoDTO->author;
         $this->category = $updateInfoDTO->category;
     }
 }

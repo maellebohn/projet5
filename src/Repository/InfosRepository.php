@@ -18,23 +18,44 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class InfosRepository extends ServiceEntityRepository implements InfosRepositoryInterface
 {
+    /**
+     * InfosRepository constructor.
+     *
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Infos::class);
     }
 
+    /**
+     * @param InfosInterface $info
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function save(InfosInterface $info)
     {
         $this->_em->persist($info);
         $this->_em->flush();
     }
 
+    /**
+     * @param InfosInterface $info
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function remove(InfosInterface $info)
     {
         $this->_em->remove($info);
         $this->_em->flush();
     }
 
+    /**
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function update()
     {
         $this->_em->flush();

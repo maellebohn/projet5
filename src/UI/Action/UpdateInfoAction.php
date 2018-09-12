@@ -56,7 +56,6 @@ class UpdateInfoAction implements UpdateInfoActionInterface
         $this->updateInfoTypeHandler = $updateInfoTypeHandler;
     }
 
-
     /**
      * @param Request                      $request
      * @param UpdateInfoResponderInterface $responder
@@ -72,9 +71,9 @@ class UpdateInfoAction implements UpdateInfoActionInterface
         UpdateInfoResponderInterface $responder
     ) {
         $infos = $this->infosRepository->findOneBy(['id' => $request->attributes->get('id')]);
+
         $dto = new UpdateInfoDTO(
             $infos->getTitle(),
-            $infos->getAuthor(),
             $infos->getImage(),
             $infos->getCategory(),
             $infos->getContent()
@@ -84,7 +83,7 @@ class UpdateInfoAction implements UpdateInfoActionInterface
                                             ->handleRequest($request);
 
         if($this->updateInfoTypeHandler->handle($updateInfoType, $infos)) {
-            return $responder(true);
+            return $responder(true, $infos);
         }
 
         return $responder(false, $infos, $updateInfoType);

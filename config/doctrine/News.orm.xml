@@ -8,7 +8,7 @@
         <id name="id" column="id" type="uuid" />
         <field name="content" type="text" />
         <field name="title" length="200" />
-        <field name="dateCreation" column="date_creation" type="datetime" />
+        <field name="dateCreation" column="date_creation" type="integer" />
         <field name="image" length="50" nullable="true" />
         <many-to-one field="author" target-entity="Users">
             <join-column name="author_FK" referenced-column-name="id" />

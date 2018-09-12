@@ -14,9 +14,15 @@ class ContactFormSubmittedListenerFunctionalTest extends WebTestCase
 
         $client->enableProfiler();
 
-        //requete en get, soumettre form et recup datacollector
+        $crawler = $client->request('GET','/contact');
 
-        $crawler = $client->request('POST', '/contact');
+        $form = $crawler->selectButton('Envoyer')->form();
+
+        $form['contact[name]'] = 'Toto';
+        $form['contact[email]'] = 'toto@gmail.com';
+        $form['contact[message]'] = 'Hello !' ;
+
+        $crawler = $client->submit($form);
 
         $mailCollector = $client->getProfile()->getCollector('swiftmailer');
 
@@ -27,11 +33,11 @@ class ContactFormSubmittedListenerFunctionalTest extends WebTestCase
 
         // Asserting email data
         static::assertInstanceOf('Swift_Message', $message);
-        static::assertSame('Hello Email', $message->getSubject());
-        static::assertSame('send@example.com', key($message->getFrom()));
-        static::assertSame('recipient@example.com', key($message->getTo()));
+        static::assertSame('Contact Email', $message->getSubject());
+        static::assertSame('toto@gmail.com', key($message->getFrom()));
+        static::assertSame('bohnmaelle@gmail.com', key($message->getTo()));
         static::assertSame(
-            'You should see me from the profiler!',
+            'Hello !',
             $message->getBody()
         );
     }

@@ -22,26 +22,17 @@ class GetInfosByCategoryActionTest extends WebTestCase
     private $infosRepository;
 
     /**
-     * @var GetInfosByCategoryResponderInterface
-     */
-    private $responder;
-
-    /**
      *{@inheritdoc}
      */
-    public function setUp ()
+    protected function setUp ()
     {
         $this->infosRepository = $this->createMock(InfosRepositoryInterface::class);
         $this->infosRepository->method('findBy')->willReturn([]);
-        $this->responder = new GetInfosByCategoryResponder($this->createMock(Environment::class));
     }
 
     public function testConstruct()
     {
-        $getInfosByCategoryAction = new GetInfosByCategoryAction(
-            $this->infosRepository,
-            $this->responder
-        );
+        $getInfosByCategoryAction = new GetInfosByCategoryAction($this->infosRepository);
 
         static::assertInstanceOf(
             GetInfosByCategoryActionInterface::class,
@@ -54,21 +45,17 @@ class GetInfosByCategoryActionTest extends WebTestCase
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function testReservationView()
+    public function testInfosByCategoryPageView()
     {
-        $getInfosByCategoryAction = new GetInfosByCategoryAction(
-            $this->infosRepository,
-            $this->responder
-        );
+        $getInfosByCategoryAction = new GetInfosByCategoryAction($this->infosRepository);
 
-        $request = Request::create(
-            '/conseils/{category}',
-            'GET'
-        );
+        $responder = new GetInfosByCategoryResponder($this->createMock(Environment::class));
+
+        $requestMock = $this->createMock(Request::class);
 
         static::assertInstanceOf(
             Response::class,
-            $getInfosByCategoryAction($request)
+            $getInfosByCategoryAction($requestMock, $responder)
         );
     }
 }

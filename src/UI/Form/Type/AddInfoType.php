@@ -22,7 +22,6 @@ class AddInfoType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-            ->add('author', TextType::class)
             ->add('image', FileType::class, ['required' => false])
             ->add('category', ChoiceType::class, [
                 'choices' => [
@@ -42,10 +41,9 @@ class AddInfoType extends AbstractType
             'empty_data' => function (FormInterface $form) {
                 return new NewInfoDTO(
                     $form->get('title')->getData(),
-                    $form->get('author')->getData(),
-                    $form->get('image')->getData(),
                     $form->get('category')->getData(),
-                    $form->get('content')->getData()
+                    $form->get('content')->getData(),
+                    $form->get('image')->getData()
                 );
             },
             "validation_groups" => ['addinfo']

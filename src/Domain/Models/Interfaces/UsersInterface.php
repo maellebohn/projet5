@@ -27,4 +27,8 @@ interface UsersInterface
     public function getSalt();
 
     public function eraseCredentials();
+
+    public function getResetPasswordToken();
+
+    public function updatePassword(string $newPassword);
 }

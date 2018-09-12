@@ -29,7 +29,7 @@ class ReservationTypeHandlerTest extends KernelTestCase
     /**
      *{@inheritdoc}
      */
-    public function setUp ()
+    protected function setUp ()
     {
         static::bootKernel();
 

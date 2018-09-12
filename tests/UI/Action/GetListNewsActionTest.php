@@ -21,26 +21,17 @@ class GetListNewsActionTest extends WebTestCase
     private $newsRepository;
 
     /**
-     * @var GetListNewsResponderInterface
-     */
-    private $responder;
-
-    /**
      *{@inheritdoc}
      */
-    public function setUp ()
+    protected function setUp ()
     {
         $this->newsRepository = $this->createMock(NewsRepositoryInterface::class);
         $this->newsRepository->method('findAll')->willReturn([]);
-        $this->responder = new GetListNewsResponder($this->createMock(Environment::class));
     }
 
     public function testConstruct()
     {
-        $getListNewsAction = new GetListNewsAction(
-            $this->newsRepository,
-            $this->responder
-        );
+        $getListNewsAction = new GetListNewsAction($this->newsRepository);
 
         static::assertInstanceOf(
             GetListNewsActionInterface::class,
@@ -48,17 +39,15 @@ class GetListNewsActionTest extends WebTestCase
         );
     }
 
-    public function testReservationView()
+    public function testListNewsPageView()
     {
-        $getListNewsAction = new GetListNewsAction(
-            $this->newsRepository,
-            $this->responder
-        );
+        $getListNewsAction = new GetListNewsAction($this->newsRepository);
 
+        $responder = new GetListNewsResponder($this->createMock(Environment::class));
 
         static::assertInstanceOf(
             Response::class,
-            $getListNewsAction()
+            $getListNewsAction($responder)
         );
     }
 }

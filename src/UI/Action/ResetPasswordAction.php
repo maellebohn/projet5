@@ -17,7 +17,10 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route(
  *     path="/resetpassword/{token}",
- *     name="reset_password"
+ *     name="reset_password",
+ *     requirements={
+ *         "token": "\S+"
+ *     }
  * )
  */
 final class ResetPasswordAction implements ResetPasswordActionInterface
@@ -54,6 +57,16 @@ final class ResetPasswordAction implements ResetPasswordActionInterface
         $this->usersRepository = $usersRepository;
     }
 
+    /**
+     * @param Request                         $request
+     * @param ResetPasswordResponderInterface $responder
+     *
+     * @return mixed|\Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function __invoke(
         Request $request,
         ResetPasswordResponderInterface $responder
@@ -67,6 +80,6 @@ final class ResetPasswordAction implements ResetPasswordActionInterface
             return $responder(true);
         }
 
-        return $responder(false, $resetPasswordType, $user);
+        return $responder(false, $resetPasswordType);
     }
 }

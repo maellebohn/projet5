@@ -1,46 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block wrapper %}
-    <div class="row" id="contact_row">
-        <div id="contact" class="col-xs-12 col-md-offset-3 col-md-6">
+    <div class="row title_row">
+        <div class="col-xs-12 col-md-offset-3 col-md-6 title">
             <h1>CONNEXION</h1>
         </div>
     </div>
 
-    <div>
-        {% if errors %}
-            <p>
-                Les identifiants soumis semblent invalides, veuillez vérifier votre saisie.
-            </p>
-        {% endif %}
-    </div>
-    <div>
-        <form action="{{ path('login') }}" method="post">
+    {% for message in app.flashes('success') %}
+        <div class="flash-success">
+            {{ message }}
+        </div>
+    {% endfor %}
 
-            <div class="form-group row">
-                <label for="username" class="col-sm-2 col-form-label">Votre nom</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="username" name="_username" value="{{ username }}" />
-                </div>
-            </div>
+    {% form_theme form 'theme/login_type.html.twig' %}
+    {{ form(form) }}
 
-            <div class="form-group row">
-                <label for="password" class="col-sm-2 col-form-label">Votre mot de passe</label>
-                <div class="col-sm-10">
-                    <input type="password" class="form-control" id="password" name="_password" />
-                </div>
-            </div>
-
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
-
-            <div class="form-group row">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-10">
-                    <button type="submit" class="btn btn-success">Se connecter</button>
-                </div>
-            </div>
-
-        </form>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10">
+            <p><a href="{{ path('ask_reset_password') }}">Mot de passe oublié ?</a></p>
+        </div>
     </div>
 
 {% endblock %}

@@ -21,7 +21,5 @@ interface NewsInterface
 
     public function getAuthor();
 
-    //public function create(NewNewsDTO $newBirdDTO): self;
-
     public function update(UpdateNewsDTO $updateNewsDTO);
 }

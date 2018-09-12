@@ -27,7 +27,7 @@ class AddBirdTypeHandlerTest extends TestCase
     /**
      *{@inheritdoc}
      */
-    public function setUp ()
+    protected function setUp ()
     {
         $this->birdsRepository = $this->createMock(BirdsRepositoryInterface::class);
         $this->validator = $this->createMock(ValidatorInterface::class);

@@ -7,6 +7,7 @@ namespace App\UI\Form\Handler\Interfaces;
 use App\Domain\Models\Interfaces\InfosInterface;
 use App\Repository\Interfaces\InfosRepositoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 interface UpdateInfoTypeHandlerInterface
@@ -16,10 +17,12 @@ interface UpdateInfoTypeHandlerInterface
      *
      * @param InfosRepositoryInterface $infosRepository
      * @param ValidatorInterface       $validator
+     * @param TokenStorageInterface    $tokenStorage
      */
     public function __construct (
         InfosRepositoryInterface $infosRepository,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
+        TokenStorageInterface $tokenStorage
     );
 
     /**

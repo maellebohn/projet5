@@ -7,6 +7,8 @@ namespace App\UI\Form\Type;
 use App\Domain\DTO\Interfaces\UpdateBirdDTOInterface;
 use App\Domain\DTO\UpdateBirdDTO;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,8 +21,15 @@ class UpdateBirdType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('birthdate', TextType::class)
-            ->add('price', TextType::class)
+            ->add('birthdate', BirthdayType::class, [
+                'input' => 'timestamp', 'format' => 'dd MM yyyy'
+            ])
+            ->add('price', IntegerType::class, [
+                'scale' => 0,
+                'attr' => [
+                    'placeholder' => 'ex : 200.00'
+                ]
+            ])
             ->add('description', TextareaType::class);
     }
 

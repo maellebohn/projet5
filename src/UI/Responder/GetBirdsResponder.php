@@ -55,7 +55,7 @@ final class GetBirdsResponder implements GetBirdsResponderInterface
         FormInterface $reservationType = null
     ) {
         $redirect
-            ? $response = new RedirectResponse($this->router->generate('reservation'))
+            ? $response = new RedirectResponse($this->router->generate('home'))
             : $response = new Response(
             $this->twig->render('listbirds.html.twig', [
                 'listbirds' => $data,

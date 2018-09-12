@@ -9,6 +9,7 @@ use App\Helper\Interfaces\FileUploaderHelperInterface;
 use App\Repository\Interfaces\NewsRepositoryInterface;
 use App\UI\Form\Handler\Interfaces\AddNewsTypeHandlerInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AddNewsTypeHandler implements AddNewsTypeHandlerInterface
@@ -29,38 +30,49 @@ class AddNewsTypeHandler implements AddNewsTypeHandlerInterface
     private $validator;
 
     /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
+
+    /**
      * AddNewsTypeHandler constructor.
      *
-     * @param NewsRepositoryInterface    $newsRepository
+     * @param NewsRepositoryInterface     $newsRepository
      * @param FileUploaderHelperInterface $fileUploaderHelper
      * @param ValidatorInterface          $validator
+     * @param TokenStorageInterface       $tokenStorage
      */
     public function __construct (
         NewsRepositoryInterface $newsRepository,
         FileUploaderHelperInterface $fileUploaderHelper,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
+        TokenStorageInterface $tokenStorage
     ) {
         $this->newsRepository = $newsRepository;
         $this->fileUploaderHelper = $fileUploaderHelper;
         $this->validator = $validator;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
      * @param FormInterface $form
+     *
      * @return bool
      */
     public function handle(FormInterface $form): bool
     {
         if($form->isSubmitted() && $form->isValid()) {
 
-            $image = $form->getData()->image;
-            $imageName = $this->fileUploaderHelper->upload($image);
+            if (!\is_null($form->getData()->image)) {
+                $image = $form->getData()->image;
+                $imageName = $this->fileUploaderHelper->upload($image);
+            }
 
             $news = new News(
+                $form->getData()->content,
                 $form->getData()->title,
-                $form->getData()->author,
-                $imageName,
-                $form->getData()->content
+                $this->tokenStorage->getToken()->getUser(),
+                $imageName ?? null
             );
 
             $this->validator->validate($news, [], [

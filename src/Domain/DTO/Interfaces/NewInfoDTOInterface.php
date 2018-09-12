@@ -4,24 +4,22 @@ declare(strict_types=1);
 
 namespace App\Domain\DTO\Interfaces;
 
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use App\Domain\Models\Interfaces\UsersInterface;
 
 interface NewInfoDTOInterface
 {
     /**
      * NewInfoDTO constructor.
      *
-     * @param string       $title
-     * @param string       $author
-     * @param UploadedFile $image
-     * @param string       $category
-     * @param string       $content
+     * @param string            $title
+     * @param string            $category
+     * @param string            $content
+     * @param \SplFileInfo|null $image
      */
     public function __construct(
         string $title,
-        string $author,
-        UploadedFile $image,
         string $category,
-        string $content
+        string $content,
+        \SplFileInfo $image = null
     );
 }

@@ -30,7 +30,7 @@ class AddBirdActionFunctionalTest extends WebTestCase
         $form = $crawler->selectButton('Créer')->form();
 
         $form['add_bird[name]'] = 'inoue';
-        $form['add_bird[birthdate]'] = '2018-02-05';
+        $form['add_bird[birthdate]'] = 1530741600;
         $form['add_bird[price]'] = 200;
         $form['add_bird[description]'] = 'femelle';
 

@@ -38,7 +38,7 @@ final class GetInfosByCategoryResponder implements GetInfosByCategoryResponderIn
     {
         return new Response(
             $this->twig->render('infosbycategory.html.twig', [
-                'infosbycategory' =>$data
+                'infosbycategory' => $data
             ])
         );
     }

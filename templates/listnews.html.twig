@@ -2,8 +2,8 @@
 
 {% block wrapper %}
 
-    <div class="row" id="listnews_row">
-        <div id="listnews" class="col-xs-12 col-md-offset-3 col-md-6">
+    <div class="row title_row">
+        <div class="col-xs-12 col-md-offset-3 col-md-6 title">
             <h1>DERNIERES NOUVELLES</h1>
             <p>Retrouvez ici toutes les dernières nouvelles de l'élevage</p>
         </div>
@@ -12,10 +12,10 @@
 
     <div class="row">
         {% for news in listnews %}
-        <div class="col-xs-12 col-md-4">
+        <div class="col-xs-12 col-md-4 conseils">
             <h3>{{ news.title }}</h3>
             <p>Publié le {{ news.dateCreation|date("d/m/Y") }}</p>
-            <p>{{ 'news.content'[50:] }}<br> <a href="#">Lire la suite</a></p>
+            <p>{{ 'news.content'[50:] }}<br> <a href="{{ path('get_news', {'id':news.id}) }}">Lire la suite</a></p>
         </div>
         {% endfor %}
     </div>

@@ -33,8 +33,5 @@ interface ContactResponderInterface
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke(
-        $redirect = false,
-        FormInterface $contactType = null
-    );
+    public function __invoke($redirect = false, FormInterface $contactType = null);
 }

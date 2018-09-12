@@ -34,7 +34,7 @@ class AddInfoTypeHandlerTest extends TestCase
     /**
      *{@inheritdoc}
      */
-    public function setUp ()
+    protected function setUp ()
     {
         $this->infosRepository = $this->createMock(InfosRepositoryInterface::class);
         $this->fileUploaderHelper = $this->createMock(FileUploaderHelperInterface::class);
@@ -80,6 +80,7 @@ class AddInfoTypeHandlerTest extends TestCase
         $image = $this->createMock(UploadedFile::class);
         $image->method('getClientOriginalName')->willReturn('/tmp/hdhzdzdndjdzndnzd');
 //mock user interface
+
         $newInfoDTOMock = new NewInfoDTO(
             'alimentation',
             'toto',

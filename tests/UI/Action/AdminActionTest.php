@@ -23,11 +23,6 @@ class AdminActionTest extends WebTestCase
     private $infosRepository;
 
     /**
-     * @var AdminResponderInterface
-     */
-    private $responder;
-
-    /**
      * @var BirdsRepositoryInterface
      */
     private $birdsRepository;
@@ -47,15 +42,12 @@ class AdminActionTest extends WebTestCase
         $this->newsRepository->method('findAll')->willReturn([]);
         $this->birdsRepository = $this->createMock(BirdsRepositoryInterface::class);
         $this->birdsRepository->method('findAll')->willReturn([]);
-        $this->responder = new AdminResponder($this->createMock(Environment::class));
-        ;
     }
 
     public function testConstruct()
     {
         $adminAction = new AdminAction(
             $this->infosRepository,
-            $this->responder,
             $this->birdsRepository,
             $this->newsRepository
         );
@@ -71,18 +63,19 @@ class AdminActionTest extends WebTestCase
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function testReservationView()
+    public function testAdminView()
     {
         $adminAction = new AdminAction(
             $this->infosRepository,
-            $this->responder,
             $this->birdsRepository,
             $this->newsRepository
         );
 
+        $responder = new AdminResponder($this->createMock(Environment::class));
+
         static::assertInstanceOf(
             Response::class,
-            $adminAction()
+            $adminAction($responder)
         );
     }
 }

@@ -11,6 +11,7 @@ use App\UI\Responder\AddNewsResponder;
 use Blackfire\Bridge\PhpUnit\TestCaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,7 +40,7 @@ class AddNewsActionTest extends WebTestCase
     /**
      *{@inheritdoc}
      */
-    public function setUp ()
+    protected function setUp ()
     {
         $this->formFactory = $this->createMock(FormFactoryInterface::class);
         $this->addNewsTypeHandler = $this->createMock(AddNewsTypeHandlerInterface::class);
@@ -49,6 +50,10 @@ class AddNewsActionTest extends WebTestCase
 
     public function testConstruct()
     {
+        $formInterfaceMock = $this->createMock(FormInterface::class);
+        $formInterfaceMock->method('handleRequest')->willReturnSelf();
+        $this->formFactory->method('create')->willReturn($formInterfaceMock);
+
         $addNewsAction = new AddNewsAction(
             $this->formFactory,
             $this->addNewsTypeHandler
@@ -65,43 +70,50 @@ class AddNewsActionTest extends WebTestCase
      */
     public function testWrongFormHandling()
     {
+        $formInterfaceMock = $this->createMock(FormInterface::class);
+        $formInterfaceMock->method('handleRequest')->willReturnSelf();
+        $this->formFactory->method('create')->willReturn($formInterfaceMock);
+
         $addNewsAction = new AddNewsAction(
             $this->formFactory,
             $this->addNewsTypeHandler
         );
 
         $this->addNewsTypeHandler->method('handle')->willReturn(false);
+
         $responder = new AddNewsResponder(
             $this->createMock(Environment::class),
             $this->router
         );
 
-        $request = Request::create(
-            '/addnews',
-            'POST'
-        );
+        $requestMock = $this->createMock(Request::class);
 
         $probe = static::$blackfire->createProbe();
 
-        $addNewsAction($request, $responder);
+        $addNewsAction($requestMock, $responder);
 
         static::$blackfire->endProbe($probe);
 
 
         static::assertInstanceOf(
             Response::class,
-            $addNewsAction($request, $responder)
+            $addNewsAction($requestMock, $responder)
         );
     }
 
     public function testGoodFormHandling()
     {
+        $formInterfaceMock = $this->createMock(FormInterface::class);
+        $formInterfaceMock->method('handleRequest')->willReturnSelf();
+        $this->formFactory->method('create')->willReturn($formInterfaceMock);
+
         $addNewsAction = new AddNewsAction(
             $this->formFactory,
             $this->addNewsTypeHandler
         );
 
         $this->addNewsTypeHandler->method('handle')->willReturn(true);
+
         $responder = new AddNewsResponder(
             $this->createMock(Environment::class),
             $this->router

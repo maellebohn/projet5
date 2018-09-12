@@ -8,6 +8,12 @@ use App\Helper\Interfaces\TokenGeneratorHelperInterface;
 
 class TokenGeneratorHelper implements TokenGeneratorHelperInterface
 {
+    /**
+     * @param string $username
+     * @param string $email
+     *
+     * @return string
+     */
     public function generateResetPasswordToken(string $username, string $email): string
     {
         return substr(

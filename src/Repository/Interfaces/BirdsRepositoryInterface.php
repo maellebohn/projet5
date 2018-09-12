@@ -17,4 +17,9 @@ interface BirdsRepositoryInterface
     public function deleteById(string $id);
 
     public function update();
+
+    public function findOneBy(
+        array $criteria,
+        array $orderBy = null
+    );
 }

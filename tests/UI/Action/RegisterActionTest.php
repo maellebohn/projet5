@@ -11,6 +11,7 @@ use App\UI\Responder\RegisterResponder;
 use Blackfire\Bridge\PhpUnit\TestCaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,17 +40,20 @@ class RegisterActionTest extends WebTestCase
     /**
      *{@inheritdoc}
      */
-    public function setUp ()
+    protected function setUp ()
     {
         $this->formFactory = $this->createMock(FormFactoryInterface::class);
         $this->registerTypeHandler = $this->createMock(RegisterTypeHandlerInterface::class);
         $this->router = $this->createMock(UrlGeneratorInterface::class);
         $this->router->method('generate')->willReturn('/register');
-
     }
 
     public function testConstruct()
     {
+        $formInterfaceMock = $this->createMock(FormInterface::class);
+        $formInterfaceMock->method('handleRequest')->willReturnSelf();
+        $this->formFactory->method('create')->willReturn($formInterfaceMock);
+
         $contactAction = new RegisterAction(
             $this->formFactory,
             $this->registerTypeHandler
@@ -66,56 +70,60 @@ class RegisterActionTest extends WebTestCase
      */
     public function testWrongFormHandling()
     {
+        $formInterfaceMock = $this->createMock(FormInterface::class);
+        $formInterfaceMock->method('handleRequest')->willReturnSelf();
+        $this->formFactory->method('create')->willReturn($formInterfaceMock);
+
         $registerAction = new RegisterAction(
             $this->formFactory,
             $this->registerTypeHandler
         );
 
         $this->registerTypeHandler->method('handle')->willReturn(false);
+
         $responder = new RegisterResponder(
             $this->createMock(Environment::class),
             $this->router
         );
 
-        $request = Request::create(
-            '/register',
-            'POST'
-        );
+        $requestMock = $this->createMock(Request::class);
 
         $probe = static::$blackfire->createProbe();
 
-        $registerAction($request, $responder);
+        $registerAction($requestMock, $responder);
 
         static::$blackfire->endProbe($probe);
 
 
         static::assertInstanceOf(
             Response::class,
-            $registerAction($request, $responder)
+            $registerAction($requestMock, $responder)
         );
     }
 
     public function testGoodFormHandling()
     {
+        $formInterfaceMock = $this->createMock(FormInterface::class);
+        $formInterfaceMock->method('handleRequest')->willReturnSelf();
+        $this->formFactory->method('create')->willReturn($formInterfaceMock);
+
         $registerAction = new RegisterAction(
             $this->formFactory,
             $this->registerTypeHandler
         );
 
         $this->registerTypeHandler->method('handle')->willReturn(true);
+
         $responder = new RegisterResponder(
             $this->createMock(Environment::class),
             $this->router
         );
 
-        $request = Request::create(
-            '/register',
-            'POST'
-        );
+        $requestMock = $this->createMock(Request::class);
 
         static::assertInstanceOf(
             RedirectResponse::class,
-            $registerAction($request, $responder)
+            $registerAction($requestMock, $responder)
         );
     }
 }

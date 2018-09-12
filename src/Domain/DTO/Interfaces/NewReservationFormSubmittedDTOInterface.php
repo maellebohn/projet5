@@ -12,10 +12,12 @@ interface NewReservationFormSubmittedDTOInterface
      * @param string $name
      * @param string $email
      * @param string $message
+     * @param string $id
      */
     public function __construct(
         string $name,
         string $email,
-        string $message
+        string $message,
+        string $id
     );
 }

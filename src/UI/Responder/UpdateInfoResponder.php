@@ -52,7 +52,7 @@ final class UpdateInfoResponder implements UpdateInfoResponderInterface
     public function __invoke($redirect = false, $info, FormInterface $updateInfoType = null)
     {
         $redirect
-        ? $response = new RedirectResponse($this->router->generate('contact'))
+        ? $response = new RedirectResponse($this->router->generate('admin'))
         : $response = new Response(
             $this->twig->render('updateinfo.html.twig', [
                 'info' => $info,

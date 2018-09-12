@@ -7,6 +7,7 @@ namespace App\UI\Form\Type;
 use App\Domain\DTO\Interfaces\NewReservationFormSubmittedDTOInterface;
 use App\Domain\DTO\NewReservationFormSubmittedDTO;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -21,8 +22,8 @@ class ReservationType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('email', EmailType::class)
-            ->add('message', TextareaType::class);
-
+            ->add('message', TextareaType::class)
+            ->add('id', HiddenType::class);
     }
 
     public function configureOptions (OptionsResolver $resolver)
@@ -33,7 +34,8 @@ class ReservationType extends AbstractType
                 return new NewReservationFormSubmittedDTO(
                     $form->get('name')->getData(),
                     $form->get('email')->getData(),
-                    $form->get('message')->getData()
+                    $form->get('message')->getData(),
+                    $form->get('id')->getData()
                 );
             },
             "validation_groups" => ['reservation']

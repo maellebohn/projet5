@@ -14,7 +14,7 @@ class UpdateBirdDTO implements UpdateBirdDTOInterface
     public $name;
 
     /**
-     * @var string
+     * @var int
      */
     public $birthdate;
 
@@ -32,19 +32,19 @@ class UpdateBirdDTO implements UpdateBirdDTOInterface
      * UpdateBirdDTO constructor.
      *
      * @param string $name
-     * @param string $birthdate
+     * @param int $birthdate
      * @param string $description
      * @param int    $price
      */
     public function __construct(
         string $name,
-        string $birthdate,
-        string $description,
-        int $price
+        int $birthdate,
+        int $price,
+        string $description
     ) {
         $this->name = $name;
         $this->birthdate = $birthdate;
-        $this->description = $description;
         $this->price = $price;
+        $this->description = $description;
     }
 }

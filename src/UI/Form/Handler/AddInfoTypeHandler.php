@@ -9,6 +9,7 @@ use App\Helper\Interfaces\FileUploaderHelperInterface;
 use App\Repository\Interfaces\InfosRepositoryInterface;
 use App\UI\Form\Handler\Interfaces\AddInfoTypeHandlerInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AddInfoTypeHandler implements AddInfoTypeHandlerInterface
@@ -29,39 +30,51 @@ class AddInfoTypeHandler implements AddInfoTypeHandlerInterface
     private $validator;
 
     /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
+
+    /**
      * AddInfoTypeHandler constructor.
      *
      * @param InfosRepositoryInterface    $infosRepository
      * @param FileUploaderHelperInterface $fileUploaderHelper
      * @param ValidatorInterface          $validator
+     * @param TokenStorageInterface       $tokenStorage
      */
     public function __construct (
         InfosRepositoryInterface $infosRepository,
         FileUploaderHelperInterface $fileUploaderHelper,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
+        TokenStorageInterface $tokenStorage
+
     ) {
         $this->infosRepository = $infosRepository;
         $this->fileUploaderHelper = $fileUploaderHelper;
         $this->validator = $validator;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
      * @param FormInterface $form
+     *
      * @return bool
      */
     public function handle(FormInterface $form): bool
     {
         if($form->isSubmitted() && $form->isValid()) {
 
-            $image = $form->getData()->image;
-            $imageName = $this->fileUploaderHelper->upload($image);
+            if (!\is_null($form->getData()->image)) {
+                $image = $form->getData()->image;
+                $imageName = $this->fileUploaderHelper->upload($image);
+            }
 
             $info = new Infos(
+                $form->getData()->content,
                 $form->getData()->title,
-                $form->getData()->author,
-                $imageName,
+                $this->tokenStorage->getToken()->getUser(),
                 $form->getData()->category,
-                $form->getData()->content
+                $imageName ?? null
             );
 
             $this->validator->validate($info, [], [

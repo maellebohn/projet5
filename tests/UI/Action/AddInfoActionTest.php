@@ -11,6 +11,7 @@ use App\UI\Responder\AddInfoResponder;
 use Blackfire\Bridge\PhpUnit\TestCaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,7 +40,7 @@ class AddInfoActionTest extends WebTestCase
     /**
      *{@inheritdoc}
      */
-    public function setUp ()
+    protected function setUp ()
     {
         $this->formFactory = $this->createMock(FormFactoryInterface::class);
         $this->addInfoTypeHandler = $this->createMock(AddInfoTypeHandlerInterface::class);
@@ -49,6 +50,10 @@ class AddInfoActionTest extends WebTestCase
 
     public function testConstruct()
     {
+        $formInterfaceMock = $this->createMock(FormInterface::class);
+        $formInterfaceMock->method('handleRequest')->willReturnSelf();
+        $this->formFactory->method('create')->willReturn($formInterfaceMock);
+
         $addInfoAction = new AddInfoAction(
             $this->formFactory,
             $this->addInfoTypeHandler
@@ -65,56 +70,60 @@ class AddInfoActionTest extends WebTestCase
      */
     public function testWrongFormHandling()
     {
+        $formInterfaceMock = $this->createMock(FormInterface::class);
+        $formInterfaceMock->method('handleRequest')->willReturnSelf();
+        $this->formFactory->method('create')->willReturn($formInterfaceMock);
+
         $addInfoAction = new AddInfoAction(
             $this->formFactory,
             $this->addInfoTypeHandler
         );
 
         $this->addInfoTypeHandler->method('handle')->willReturn(false);
+
         $responder = new AddInfoResponder(
             $this->createMock(Environment::class),
             $this->router
         );
 
-        $request = Request::create(
-            '/addinfo',
-            'POST'
-        );
+        $requestMock = $this->createMock(Request::class);
 
         $probe = static::$blackfire->createProbe();
 
-        $addInfoAction($request, $responder);
+        $addInfoAction($requestMock, $responder);
 
         static::$blackfire->endProbe($probe);
 
 
         static::assertInstanceOf(
             Response::class,
-            $addInfoAction($request, $responder)
+            $addInfoAction($requestMock, $responder)
         );
     }
 
     public function testGoodFormHandling()
     {
+        $formInterfaceMock = $this->createMock(FormInterface::class);
+        $formInterfaceMock->method('handleRequest')->willReturnSelf();
+        $this->formFactory->method('create')->willReturn($formInterfaceMock);
+
         $addInfoAction = new AddInfoAction(
             $this->formFactory,
             $this->addInfoTypeHandler
         );
 
         $this->addInfoTypeHandler->method('handle')->willReturn(true);
+
         $responder = new AddInfoResponder(
             $this->createMock(Environment::class),
             $this->router
         );
 
-        $request = Request::create(
-            '/addinfo',
-            'POST'
-        );
+        $requestMock = $this->createMock(Request::class);
 
         static::assertInstanceOf(
             RedirectResponse::class,
-            $addInfoAction($request, $responder)
+            $addInfoAction($requestMock, $responder)
         );
     }
 }

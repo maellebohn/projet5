@@ -56,7 +56,6 @@ class UpdateNewsAction implements UpdateNewsActionInterface
         $this->updateNewsTypeHandler = $updateNewsTypeHandler;
     }
 
-
     /**
      * @param Request                      $request
      * @param UpdateNewsResponderInterface $responder
@@ -70,7 +69,6 @@ class UpdateNewsAction implements UpdateNewsActionInterface
         $news = $this->newsRepository->findOneBy(['id' => $request->attributes->get('id')]);
         $dto = new UpdateNewsDTO(
             $news->getTitle(),
-            $news->getAuthor(),
             $news->getImage(),
             $news->getContent()
         );
@@ -79,7 +77,7 @@ class UpdateNewsAction implements UpdateNewsActionInterface
                                             ->handleRequest($request);
 
         if($this->updateNewsTypeHandler->handle($updateNewsType, $news)) {
-            return $responder(true);
+            return $responder(true, $news);
         }
 
         return $responder(false, $news, $updateNewsType);

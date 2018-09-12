@@ -20,7 +20,7 @@ class BirdsTest extends TestCase
 
         static::assertSame('inoue', $bird->getName());
 
-        static::assertSame('2018-07-05', $bird->getBirthdate());
+        static::assertSame(1530741600, $bird->getBirthdate()->getTimestamp());
 
         static::assertSame('femelle', $bird->getDescription());
 

@@ -8,6 +8,7 @@ use App\Domain\Models\Interfaces\InfosInterface;
 use App\Repository\Interfaces\InfosRepositoryInterface;
 use App\UI\Form\Handler\Interfaces\UpdateInfoTypeHandlerInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UpdateInfoTypeHandler implements UpdateInfoTypeHandlerInterface
@@ -23,17 +24,25 @@ class UpdateInfoTypeHandler implements UpdateInfoTypeHandlerInterface
     private $validator;
 
     /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
+
+    /**
      * UpdateInfoTypeHandler constructor.
      *
      * @param InfosRepositoryInterface $infosRepository
      * @param ValidatorInterface       $validator
+     * @param TokenStorageInterface    $tokenStorage
      */
     public function __construct (
         InfosRepositoryInterface $infosRepository,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
+        TokenStorageInterface $tokenStorage
     ) {
         $this->infosRepository = $infosRepository;
         $this->validator = $validator;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -45,13 +54,13 @@ class UpdateInfoTypeHandler implements UpdateInfoTypeHandlerInterface
     public function handle(FormInterface $form, InfosInterface $infos): bool
     {
         if($form->isSubmitted() && $form->isValid()) {
-            $updateInfo = $infos->update(
-                $form->getData()->title,
-                $form->getData()->author,
-                $form->getData()->image,
-                $form->getData()->category,
-                $form->getData()->content
-            );
+
+            if (!\is_null($form->getData()->image)) {
+                $image = $form->getData()->image;
+                $imageName = $this->fileUploaderHelper->upload($image);
+            }
+
+            $updateInfo = $infos->update($form->getData());
 
             $this->validator->validate($updateInfo, [], [
                 'updateinfo'

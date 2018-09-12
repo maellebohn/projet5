@@ -7,6 +7,7 @@ namespace App\Domain\Models;
 use App\Domain\DTO\NewNewsDTO;
 use App\Domain\DTO\UpdateNewsDTO;
 use App\Domain\Models\Interfaces\NewsInterface;
+use App\Domain\Models\Interfaces\UsersInterface;
 use DateTime;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -34,72 +35,104 @@ class News implements NewsInterface
     private $dateCreation;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $image;
+    private $image = null;
 
     /**
-     * @var string
+     * @var UsersInterface
      */
     private $author;
 
+    /**
+     * @return UuidInterface
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * @return string
+     */
     public function getContent()
     {
         return $this->content;
     }
 
+    /**
+     * @return string
+     */
     public function getTitle()
     {
         return $this->title;
     }
 
+    /**
+     * @return bool|DateTime
+     */
     public function getDateCreation()
     {
         return \DateTime::createFromFormat('U', $this->dateCreation);
     }
 
+    /**
+     * @return null|string
+     */
     public function getImage()
     {
         return $this->image;
     }
 
+    /**
+     * @return string
+     */
     public function getAuthor()
     {
         return $this->author;
     }
 
+    /**
+     * News constructor.
+     *
+     * @param string         $content
+     * @param string         $title
+     * @param UsersInterface $author
+     * @param string|null    $image
+     */
     public function __construct(
         string $content,
         string $title,
-        string $image,
-        string $author
+        UsersInterface $author,
+        string $image = null
     ) {
         $this->id = Uuid::uuid4();
         $this->content = $content;
         $this->title = $title;
         $this->dateCreation = time();
-        $this->image = $image;
         $this->author = $author;
+        $this->image = $image;
     }
 
+    /**
+     * @param NewNewsDTO $newNewsDTO
+     *
+     * @return News
+     */
     public function create(NewNewsDTO $newNewsDTO): self
     {
         $this->content = $newNewsDTO->content;
         $this->title = $newNewsDTO->title;
         $this->image = $newNewsDTO->image;
-        $this->author = $newNewsDTO->author;
     }
 
+    /**
+     * @param UpdateNewsDTO $updateNewsDTO
+     */
     public function update(UpdateNewsDTO $updateNewsDTO)
     {
         $this->content = $updateNewsDTO->content;
         $this->title = $updateNewsDTO->title;
         $this->image = $updateNewsDTO->image;
-        $this->author = $updateNewsDTO->author;
     }
 }

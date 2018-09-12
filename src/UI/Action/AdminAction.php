@@ -35,41 +35,33 @@ final class AdminAction implements AdminActionInterface
     private $newsRepository;
 
     /**
-     * @var AdminResponderInterface
-     */
-    private $responder;
-
-    /**
      * AdminAction constructor.
      *
      * @param InfosRepositoryInterface  $infosRepository
-     * @param AdminResponderInterface   $responder
      * @param BirdsRepositoryInterface  $birdsRepository
      * @param NewsRepositoryInterface   $newsRepository
      */
     public function __construct (
         InfosRepositoryInterface $infosRepository,
-        AdminResponderInterface $responder,
         BirdsRepositoryInterface $birdsRepository,
         NewsRepositoryInterface $newsRepository
     ) {
         $this->infosRepository = $infosRepository;
-        $this->responder = $responder;
         $this->birdsRepository = $birdsRepository;
         $this->newsRepository = $newsRepository;
     }
 
     /**
-     * @return mixed
+     * @param AdminResponderInterface $responder
+     *
+     * @return mixed|\Symfony\Component\HttpFoundation\Response
      *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke()
+    public function __invoke(AdminResponderInterface $responder)
     {
-        $responder = $this->responder;
-
         return $responder(
             $this->infosRepository->findAll(),
             $this->newsRepository->findAll(),

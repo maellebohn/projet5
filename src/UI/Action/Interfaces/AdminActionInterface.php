@@ -15,23 +15,23 @@ interface AdminActionInterface
      * AdminAction constructor.
      *
      * @param InfosRepositoryInterface  $infosRepository
-     * @param AdminResponderInterface   $responder
      * @param BirdsRepositoryInterface  $birdsRepository
      * @param NewsRepositoryInterface   $newsRepository
      */
     public function __construct (
         InfosRepositoryInterface $infosRepository,
-        AdminResponderInterface $responder,
         BirdsRepositoryInterface $birdsRepository,
         NewsRepositoryInterface $newsRepository
     );
 
     /**
-     * @return mixed
+     * @param AdminResponderInterface $responder
+     *
+     * @return mixed|\Symfony\Component\HttpFoundation\Response
      *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke();
+    public function __invoke(AdminResponderInterface $responder);
 }

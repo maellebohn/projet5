@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block wrapper %}
+    <div class="row title_row">
+        <div class="col-xs-12 col-md-offset-3 col-md-6 title">
+            <h1>DERNIERES NOUVELLES</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-md-offset-3 col-md-6 title">
+            {% if news.image is not null %}
+                <img class="illustration" src="{{ asset('images/' ~ news.image) }}" />
+            {% endif %}
+            <p class="date">Publié le {{ news.dateCreation|date("d/m/Y") }}</p>
+            <h2>{{ news.title }}</h2>
+            <p class="content">{{ news.content }}</p>
+        </div>
+    </div>
+
+{% endblock %}

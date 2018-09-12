@@ -11,6 +11,7 @@ use App\UI\Responder\AddBirdResponder;
 use Blackfire\Bridge\PhpUnit\TestCaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,7 +40,7 @@ class AddBirdActionTest extends WebTestCase
     /**
      *{@inheritdoc}
      */
-    public function setUp ()
+    protected function setUp ()
     {
         $this->formFactory = $this->createMock(FormFactoryInterface::class);
         $this->addBirdTypeHandler = $this->createMock(AddBirdTypeHandlerInterface::class);
@@ -49,6 +50,10 @@ class AddBirdActionTest extends WebTestCase
 
     public function testConstruct()
     {
+        $formInterfaceMock = $this->createMock(FormInterface::class);
+        $formInterfaceMock->method('handleRequest')->willReturnSelf();
+        $this->formFactory->method('create')->willReturn($formInterfaceMock);
+
         $addBirdAction = new AddBirdAction(
             $this->formFactory,
             $this->addBirdTypeHandler
@@ -65,6 +70,10 @@ class AddBirdActionTest extends WebTestCase
      */
     public function testWrongFormHandling()
     {
+        $formInterfaceMock = $this->createMock(FormInterface::class);
+        $formInterfaceMock->method('handleRequest')->willReturnSelf();
+        $this->formFactory->method('create')->willReturn($formInterfaceMock);
+
         $addBirdAction = new AddBirdAction(
             $this->formFactory,
             $this->addBirdTypeHandler
@@ -76,26 +85,27 @@ class AddBirdActionTest extends WebTestCase
             $this->router
         );
 
-        $request = Request::create(
-            '/addbird',
-            'POST'
-        );
+        $requestMock = $this->createMock(Request::class);
 
         $probe = static::$blackfire->createProbe();
 
-        $addBirdAction($request, $responder);
+        $addBirdAction($requestMock, $responder);
 
         static::$blackfire->endProbe($probe);
 
 
         static::assertInstanceOf(
             Response::class,
-            $addBirdAction($request, $responder)
+            $addBirdAction($requestMock, $responder)
         );
     }
 
     public function testGoodFormHandling()
     {
+        $formInterfaceMock = $this->createMock(FormInterface::class);
+        $formInterfaceMock->method('handleRequest')->willReturnSelf();
+        $this->formFactory->method('create')->willReturn($formInterfaceMock);
+
         $addBirdAction = new AddBirdAction(
             $this->formFactory,
             $this->addBirdTypeHandler
@@ -107,14 +117,11 @@ class AddBirdActionTest extends WebTestCase
             $this->router
         );
 
-        $request = Request::create(
-            '/addbird',
-            'POST'
-        );
+        $requestMock = $this->createMock(Request::class);
 
         static::assertInstanceOf(
             RedirectResponse::class,
-            $addBirdAction($request, $responder)
+            $addBirdAction($requestMock, $responder)
         );
     }
 }

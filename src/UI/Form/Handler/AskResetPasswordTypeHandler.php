@@ -35,6 +35,14 @@ class AskResetPasswordTypeHandler implements AskResetPasswordTypeHandlerInterfac
      */
     private $tokenGeneratorHelper;
 
+    /**
+     * AskResetPasswordTypeHandler constructor.
+     *
+     * @param UsersRepositoryInterface      $usersRepository
+     * @param EventDispatcherInterface      $eventDispatcher
+     * @param SessionInterface              $session
+     * @param TokenGeneratorHelperInterface $tokenGeneratorHelper
+     */
     public function __construct (
         UsersRepositoryInterface $usersRepository,
         EventDispatcherInterface $eventDispatcher,

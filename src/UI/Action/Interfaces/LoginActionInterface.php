@@ -5,19 +5,20 @@ declare(strict_types=1);
 namespace App\UI\Action\Interfaces;
 
 use App\UI\Responder\Interfaces\LoginResponderInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 interface LoginActionInterface
 {
     /**
      * LoginAction constructor.
      *
-     * @param AuthenticationUtils $authenticationUtils
+     * @param FormFactoryInterface $formFactory
      */
-    public function __construct(AuthenticationUtils $authenticationUtils);
+    public function __construct(FormFactoryInterface $formFactory);
 
     /**
+     * @param Request                 $request
      * @param LoginResponderInterface $responder
      *
      * @return mixed|\Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -26,5 +27,8 @@ interface LoginActionInterface
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke(LoginResponderInterface $responder);
+    public function __invoke(
+        Request $request,
+        LoginResponderInterface $responder
+    );
 }

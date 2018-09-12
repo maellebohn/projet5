@@ -21,7 +21,9 @@ interface BirdsInterface
 
     public function getReservation();
 
-    //public function create(NewBirdDTO $newBirdDTO): self;
-
     public function update(UpdateBirdDTO $updateBirdDTO);
+
+    public function reservation();
+
+    public function deleteReservation();
 }

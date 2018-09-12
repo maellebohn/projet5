@@ -10,16 +10,6 @@ App\Domain\DTO\UpdateInfoDTO:
                 max: 100
                 maxMessage: "Cette valeur est trop longue !"
                 groups: ['updateinfo']
-        author:
-            - NotBlank:
-                message: "Ce champs est requis, veuillez saisir une valeur."
-                groups: ['updateinfo']
-            - Length:
-                min: 3
-                minMessage: "Cette valeur est trop courte !"
-                max: 50
-                maxMessage: "Cette valeur est trop longue !"
-                groups: ['updateinfo']
         image:
             - Image:
                 mimeTypes: ['image/jpeg', 'image/png']

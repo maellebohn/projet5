@@ -2,59 +2,69 @@
 
 {% block wrapper %}
 
-    <div class="row" id="reservation_row">
-        <div id="reservation" class="col-xs-12 col-md-offset-3 col-md-6">
+    <div class="row title_row">
+        <div class="col-xs-12 col-md-offset-3 col-md-6 title">
             <h1>RESERVER UN OISEAU</h1>
             <p>Vous trouverez ci-dessous les oiseaux disponibles et pouvez les pré-réservez !</p>
         </div>
     </div>
 
-    {% for message in app.flashes('success') %}
-        <div class="flash-success">
-            {{ message }}
-        </div>
-    {% endfor %}
-
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Date de naissance</th>
-                <th>Description</th>
-                <th>Prix</th>
-                <th>Reservation</th>
-            </tr>
+                <tr>
+                    <th>Nom</th>
+                    <th>Date de naissance</th>
+                    <th>Description</th>
+                    <th>Prix</th>
+                    <th>Reservation</th>
+                </tr>
             </thead>
 
             <tbody>
             {% for birds in listbirds %}
-            <tr>
-                <td>{{ birds.name }}</td>
-                {#<td>{{ birds.birthdate|date("d/m/Y") }}</td>#}
-                <td>{{ birds.description }}</td>
-                <td>{{ birds.price|number_format(2, ',', ' ') }} euros</td>
-                <td id="reservation_button"><button class="btn btn-success" data-toggle="modal" data-target="#form_reservation">Réserver</button>
-                </td>
-            </tr>
+                <tr>
+                    <td>{{ birds.name }}</td>
+                    <td>{{ birds.birthdate|date("d/m/Y") }}</td>
+                    <td>{{ birds.description }}</td>
+                    <td>{{ birds.price|number_format(2, ',', ' ') }} euros</td>
+                    {% if birds.reservation == false %}
+                    <td id="reservation_button"><button class="btn btn-success" data-toggle="modal" data-target="#form_reservation">Réserver</button>
+                    </td>
+                    {% else %}
+                    <td>Déjà Réservé !</td>
+                    {% endif %}
+                </tr>
+
+                <div class="modal fade" id="form_reservation" tabindex="-1" role="dialog" aria-labelledby="form-reservation" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="form_reservation_title">Formulaire de réservation</h4>
+                            </div>
+                            <div class="modal-body">
+                                {{ form_start(form) }}
+                                {{ form_row(form.name, { 'label': 'Votre nom' }) }}
+                                {{ form_row(form.email, { 'label': 'Votre adresse e-mail' }) }}
+                                {{ form_row(form.message, { 'label': 'Votre message' }) }}
+                                {{ form_row(form.id, { 'attr': { 'value':  birds.id } }) }}
+                                <div class="form-group row">
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-10">
+                                        <button type="submit" class="btn btn-success">Envoyer</button>
+                                    </div>
+                                </div>
+                                {{ form_end(form) }}
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div>
+
             {% endfor %}
 
-            <div class="modal fade" id="form_reservation" tabindex="-1" role="dialog" aria-labelledby="form-reservation" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="form_reservation_title">Formulaire de réservation</h4>
-                        </div>
-                        <div class="modal-body">
-                            {% form_theme form 'theme/reservation_type.html.twig' %}
-                            {{ form(form) }}
-                        </div>
-                        <div class="modal-footer">
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div>
             </tbody>
         </table>
     </div>

@@ -1,0 +1,12 @@
+{% block form %}
+    {{ form_start(form) }}
+    {{ form_row(form.username, { 'label': 'Votre nom d\'utilisateur' }) }}
+    {{ form_row(form.password, { 'label': 'Votre mot de passe' }) }}
+        <div class="form-group row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-success" id="submit">Se connecter</button>
+            </div>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}

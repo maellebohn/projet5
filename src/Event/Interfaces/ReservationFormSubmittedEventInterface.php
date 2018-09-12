@@ -8,7 +8,15 @@ interface ReservationFormSubmittedEventInterface
 {
     const NAME = 'reservationform.submitted';
 
+    /**
+     * ReservationFormSubmittedEvent constructor.
+     *
+     * @param NewReservationFormSubmittedDTO $newReservationFormSubmittedDTO
+     */
     public function __construct (NewReservationFormSubmittedDTO $newReservationFormSubmittedDTO);
 
+    /**
+     * @return NewReservationFormSubmittedDTO
+     */
     public function getNewReservationFormSubmittedDTO(): NewReservationFormSubmittedDTO;
 }

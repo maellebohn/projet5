@@ -8,7 +8,15 @@ interface AskResetPasswordFormSubmittedEventInterface
 {
     const NAME = 'resetform.submitted';
 
+    /**
+     * AskResetPasswordFormSubmittedEvent constructor.
+     *
+     * @param UsersInterface $user
+     */
     public function __construct(UsersInterface $user);
 
-    public function getUser();
+    /**
+     * @return UsersInterface
+     */
+    public function getUser(): UsersInterface;
 }

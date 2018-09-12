@@ -14,9 +14,9 @@ class InfosTest extends TestCase
         $info = new Infos(
             'graines, fruits et légumes',
             'alimentation',
-            'oiseau',
             'admin',
-            'education'
+            'education',
+            'oiseau'
         );
 
         static::assertSame('graines, fruits et légumes', $info->getContent());

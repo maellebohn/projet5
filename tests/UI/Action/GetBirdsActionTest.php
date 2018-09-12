@@ -9,9 +9,9 @@ use App\UI\Action\GetBirdsAction;
 use App\UI\Action\Interfaces\GetBirdsActionInterface;
 use App\UI\Form\Handler\Interfaces\ReservationTypeHandlerInterface;
 use App\UI\Responder\GetBirdsResponder;
-use App\UI\Responder\Interfaces\GetBirdsResponderInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -23,11 +23,6 @@ class GetBirdsActionTest extends WebTestCase
      * @var BirdsRepositoryInterface
      */
     private $birdsRepository;
-
-    /**
-     * @var GetBirdsResponderInterface
-     */
-    private $responder;
 
     /**
      * @var FormFactoryInterface
@@ -47,22 +42,24 @@ class GetBirdsActionTest extends WebTestCase
     /**
      *{@inheritdoc}
      */
-    public function setUp ()
+    protected function setUp ()
     {
         $this->formFactory = $this->createMock(FormFactoryInterface::class);
         $this->birdsRepository = $this->createMock(BirdsRepositoryInterface::class);
         $this->birdsRepository->method('findAll')->willReturn([]);
+        $this->reservationTypeHandler = $this->createMock(ReservationTypeHandlerInterface::class);
         $this->router = $this->createMock(UrlGeneratorInterface::class);
         $this->router->method('generate')->willReturn('/reservation');
-        $this->responder = new GetBirdsResponder($this->createMock(Environment::class), $this->router);
-        $this->reservationTypeHandler = $this->createMock(ReservationTypeHandlerInterface::class);
     }
 
     public function testConstruct()
     {
+        $formInterfaceMock = $this->createMock(FormInterface::class);
+        $formInterfaceMock->method('handleRequest')->willReturnSelf();
+        $this->formFactory->method('create')->willReturn($formInterfaceMock);
+
         $getBirdsAction = new GetBirdsAction(
             $this->birdsRepository,
-            $this->responder,
             $this->formFactory,
             $this->reservationTypeHandler
         );
@@ -80,23 +77,25 @@ class GetBirdsActionTest extends WebTestCase
      */
     public function testWrongFormHandling()
     {
+        $formInterfaceMock = $this->createMock(FormInterface::class);
+        $formInterfaceMock->method('handleRequest')->willReturnSelf();
+        $this->formFactory->method('create')->willReturn($formInterfaceMock);
+
         $getBirdsAction = new GetBirdsAction(
             $this->birdsRepository,
-            $this->responder,
             $this->formFactory,
             $this->reservationTypeHandler
         );
 
         $this->reservationTypeHandler->method('handle')->willReturn(false);
 
-        $request = Request::create(
-            '/reservation',
-            'POST'
-        );
+        $responder = new GetBirdsResponder($this->createMock(Environment::class), $this->router);
+
+        $requestMock = $this->createMock(Request::class);
 
         static::assertInstanceOf(
             Response::class,
-            $getBirdsAction($request)
+            $getBirdsAction($requestMock, $responder)
         );
     }
 
@@ -107,23 +106,28 @@ class GetBirdsActionTest extends WebTestCase
      */
     public function testGoodFormHandling()
     {
+        $formInterfaceMock = $this->createMock(FormInterface::class);
+        $formInterfaceMock->method('handleRequest')->willReturnSelf();
+        $this->formFactory->method('create')->willReturn($formInterfaceMock);
+
         $getBirdsAction = new GetBirdsAction(
             $this->birdsRepository,
-            $this->responder,
             $this->formFactory,
             $this->reservationTypeHandler
         );
 
         $this->reservationTypeHandler->method('handle')->willReturn(true);
 
-        $request = Request::create(
-            '/reservation',
-            'POST'
+        $responder = new GetBirdsResponder(
+            $this->createMock(Environment::class),
+            $this->router
         );
+
+        $requestMock = $this->createMock(Request::class);
 
         static::assertInstanceOf(
             Response::class,
-            $getBirdsAction($request)
+            $getBirdsAction($requestMock, $responder)
         );
     }
 }

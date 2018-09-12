@@ -31,7 +31,7 @@ class AddInfoActionFunctionalTest extends WebTestCase
         $form = $crawler->selectButton('Créer')->form();
 
         $form['add_info[title]'] = 'alimentation';
-        $form['add_info[author]'] = 'toto';//
+        $form['add_info[author]'] = 'toto';
         $form['add_info[image]'] = new File('public/images/accueil1.jpg', 'photo.jpg', 'image/jpeg') ;
         $form['add_info[category]'] = 'education' ;
         $form['add_info[content]'] = 'bien nourrir ses perroquets' ;

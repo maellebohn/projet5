@@ -16,25 +16,27 @@ interface GetBirdsActionInterface
      * GetBirdsAction constructor.
      *
      * @param BirdsRepositoryInterface        $birdsRepository
-     * @param GetBirdsResponderInterface      $responder
      * @param FormFactoryInterface            $formFactory
      * @param ReservationTypeHandlerInterface $reservationTypeHandler
      */
     public function __construct (
         BirdsRepositoryInterface $birdsRepository,
-        GetBirdsResponderInterface $responder,
         FormFactoryInterface $formFactory,
         ReservationTypeHandlerInterface $reservationTypeHandler
     );
 
     /**
-     * @param Request $request
+     * @param Request                    $request
+     * @param GetBirdsResponderInterface $responder
      *
-     * @return mixed|\Symfony\Component\HttpFoundation\Response
+     * @return mixed|\Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke(Request $request);
+    public function __invoke(
+        Request $request,
+        GetBirdsResponderInterface $responder
+    );
 }

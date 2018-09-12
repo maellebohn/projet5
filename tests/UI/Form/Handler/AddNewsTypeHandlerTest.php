@@ -34,7 +34,7 @@ class AddNewsTypeHandlerTest extends TestCase
     /**
      *{@inheritdoc}
      */
-    public function setUp ()
+    protected function setUp ()
     {
         $this->newsRepository = $this->createMock(NewsRepositoryInterface::class);
         $this->fileUploaderHelper = $this->createMock(FileUploaderHelperInterface::class);

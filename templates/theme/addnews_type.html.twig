@@ -1,7 +1,6 @@
 {% block form %}
     {{ form_start(form) }}
         {{ form_row(form.title, { 'label': 'Titre' }) }}
-        {{ form_row(form.author, { 'label': 'Auteur' }) }}
         {{ form_row(form.image, { 'label': 'Image' }) }}
         {{ form_row(form.content, { 'label': 'Texte' })|raw }}
         <div class="form-group row">

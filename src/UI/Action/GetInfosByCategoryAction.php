@@ -24,26 +24,18 @@ final class GetInfosByCategoryAction implements GetInfosByCategoryActionInterfac
     private $infosRepository;
 
     /**
-     * @var GetInfosByCategoryResponderInterface
-     */
-    private $responder;
-
-    /**
      * GetInfosByCategoryAction constructor.
      *
-     * @param InfosRepositoryInterface             $infosRepository
-     * @param GetInfosByCategoryResponderInterface $responder
+     * @param InfosRepositoryInterface $infosRepository
      */
-    public function __construct (
-        InfosRepositoryInterface $infosRepository,
-        GetInfosByCategoryResponderInterface $responder
-    ) {
+    public function __construct (InfosRepositoryInterface $infosRepository)
+    {
         $this->infosRepository = $infosRepository;
-        $this->responder = $responder;
     }
 
     /**
-     * @param Request $request
+     * @param Request                              $request
+     * @param GetInfosByCategoryResponderInterface $responder
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
@@ -51,10 +43,10 @@ final class GetInfosByCategoryAction implements GetInfosByCategoryActionInterfac
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke(Request $request)
-    {
-        $responder = $this->responder;
-
+    public function __invoke(
+        Request $request,
+        GetInfosByCategoryResponderInterface $responder
+    ) {
         return $responder($this->infosRepository->findBy(
             array('category'=>$request->attributes->get('category')),
             array('dateCreation' => 'desc')

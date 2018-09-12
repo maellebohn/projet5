@@ -24,19 +24,27 @@ class NewReservationFormSubmittedDTO implements NewReservationFormSubmittedDTOIn
     public $message;
 
     /**
+     * @var string
+     */
+    public $id;
+
+    /**
      * NewReservationFormSubmittedDTO constructor.
      *
      * @param string $name
      * @param string $email
      * @param string $message
+     * @param string $id
      */
     public function __construct(
         string $name,
         string $email,
-        string $message
+        string $message,
+        string $id
     ) {
         $this->name = $name;
         $this-> email = $email;
         $this->message =  $message;
+        $this->id = $id;
     }
 }

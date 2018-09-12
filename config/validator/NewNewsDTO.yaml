@@ -10,16 +10,6 @@ App\Domain\DTO\NewNewsDTO:
                 max: 100
                 maxMessage: "Cette valeur est trop longue !"
                 groups: ['addnews']
-        author:
-            - NotBlank:
-                message: "Ce champs est requis, veuillez saisir une valeur."
-                groups: ['addnews']
-            - Length:
-                min: 3
-                minMessage: "Cette valeur est trop courte !"
-                max: 50
-                maxMessage: "Cette valeur est trop longue !"
-                groups: ['addnews']
         image:
             - Image:
                 mimeTypes: ['image/jpeg', 'image/png']

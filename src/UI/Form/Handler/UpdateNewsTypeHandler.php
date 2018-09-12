@@ -8,6 +8,7 @@ use App\Domain\Models\Interfaces\NewsInterface;
 use App\Repository\Interfaces\NewsRepositoryInterface;
 use App\UI\Form\Handler\Interfaces\UpdateNewsTypeHandlerInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UpdateNewsTypeHandler implements UpdateNewsTypeHandlerInterface
@@ -23,17 +24,25 @@ class UpdateNewsTypeHandler implements UpdateNewsTypeHandlerInterface
     private $validator;
 
     /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
+
+    /**
      * UpdateNewsTypeHandler constructor.
      *
      * @param NewsRepositoryInterface $newsRepository
      * @param ValidatorInterface      $validator
+     * @param TokenStorageInterface   $tokenStorage
      */
     public function __construct (
         NewsRepositoryInterface $newsRepository,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
+        TokenStorageInterface $tokenStorage
     ) {
         $this->newsRepository = $newsRepository;
         $this->validator = $validator;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -45,12 +54,14 @@ class UpdateNewsTypeHandler implements UpdateNewsTypeHandlerInterface
     public function handle(FormInterface $form, NewsInterface $news): bool
     {
         if($form->isSubmitted() && $form->isValid()) {
-            $updateNews = $news->update(
-                $form->getData()->title,
-                $form->getData()->author,
-                $form->getData()->image,
-                $form->getData()->content
-            );
+
+            if (!\is_null($form->getData()->image)) {
+                $image = $form->getData()->image;
+                $imageName = $this->fileUploaderHelper->upload($image);
+            }
+
+            $updateNews = $news->update($form->getData());
+            //userinterface a implementer comment et image comment je la recupere ?
 
             $this->validator->validate($updateNews, [], [
                 'updateinfo'

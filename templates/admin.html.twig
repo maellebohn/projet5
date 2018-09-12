@@ -2,11 +2,17 @@
 
 {% block wrapper %}
 
-    <div class="row" id="admin_row">
-        <div id="admin" class="col-xs-12 col-md-offset-3 col-md-6">
+    <div class="row title_row">
+        <div class="col-xs-12 col-md-offset-3 col-md-6 title">
             <h1>ADMINISTRATION</h1>
         </div>
     </div>
+
+    {% for message in app.flashes('success') %}
+        <div class="flash-success">
+            {{ message }}
+        </div>
+    {% endfor %}
 
     <ul class="nav nav-tabs">
         <li class="active"><a href="#tab1" data-toggle="tab" id="infos">Conseils</a></li>
@@ -118,10 +124,14 @@
                 {% for birds in listbirds %}
                     <tr>
                         <td>{{ birds.name }}</td>
-                        {#<td>{{ birds.birthdate|date("d/m/Y") }}</td>#}
+                        <td>{{ birds.birthdate|date("d/m/Y") }}</td>
                         <td>{{ birds.description }}</td>
                         <td>{{ birds.price|number_format(2, ',', ' ') }}</td>
-                        <td><a href="#">Oiseau non réservé</a></td>
+                        {% if birds.reservation == false %}
+                        <td>Oiseau non réservé</td>
+                        {% else %}
+                            <td><a href="{{ path('delete_reservation', {'id':birds.id}) }}">Annuler résa</a></td>
+                        {% endif %}
                         <td><a href="{{ path('update_bird', {'id':birds.id}) }}"><span class="fas fa-edit"></span></a><a href="#" data-toggle="modal" data-target="#delete_bird"><span class="fas fa-times"></span></a></td>
                     </tr>
 

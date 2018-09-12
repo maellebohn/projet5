@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Helper;
 
 use App\Helper\Interfaces\FileUploaderHelperInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUploaderHelper implements FileUploaderHelperInterface
 {
@@ -23,6 +22,7 @@ class FileUploaderHelper implements FileUploaderHelperInterface
     {
         $this->imageFolder = $imageFolder;
     }
+
     /**
      * @return string
      */
@@ -31,10 +31,14 @@ class FileUploaderHelper implements FileUploaderHelperInterface
         return $this->imageFolder;
     }
 
-    public function upload(UploadedFile $image)
+    /**
+     * @param \SplFileInfo $image
+     *
+     * @return string
+     */
+    public function upload(\SplFileInfo $image)
    {
        $imageName = md5(uniqid()).'.'.$image->guessExtension();
-
        $image->move($this->getImageFolder(), $imageName);
 
        return $imageName;

@@ -45,12 +45,7 @@ class UpdateBirdTypeHandler implements UpdateBirdTypeHandlerInterface
     public function handle(FormInterface $form, BirdsInterface $bird): bool
     {
         if($form->isSubmitted() && $form->isValid()) {
-            $updateBird = $bird->update(
-                $form->getData()->title,
-                $form->getData()->author,
-                $form->getData()->image,
-                $form->getData()->content
-            );
+            $updateBird = $bird->update($form->getData());
 
             $this->validator->validate($updateBird, [], [
                 'updatebird'

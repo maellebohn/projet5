@@ -23,8 +23,9 @@ interface AddBirdTypeHandlerInterface
     );
 
     /**
-    *@param FormInterface $form
-    *@return bool
-    */
+     * @param FormInterface $form
+     *
+     * @return bool
+     */
     public function handle(FormInterface $form): bool;
 }

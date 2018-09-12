@@ -4,22 +4,20 @@ declare(strict_types=1);
 
 namespace App\Domain\DTO\Interfaces;
 
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use App\Domain\Models\Interfaces\UsersInterface;
 
 interface UpdateNewsDTOInterface
 {
     /**
      * UpdateNewsDTO constructor.
      *
-     * @param string       $title
-     * @param string       $author
-     * @param UploadedFile $image
-     * @param string       $content
+     * @param string      $title
+     * @param string|null $image
+     * @param string      $content
      */
     public function __construct(
         string $title,
-        string $author,
-        UploadedFile $image,
+        string $image = null,
         string $content
     );
 }

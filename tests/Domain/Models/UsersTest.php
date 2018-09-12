@@ -21,7 +21,9 @@ class UsersTest extends TestCase
     }
 
     public function testConstructor()
-    {//$encoder = closure::from callable
+    {
+        $encoder = \Closure::fromCallable([$this->passwordEncoder, 'encodePassword']);
+
         $user = new Users(
             'maelle',
             'bohn',

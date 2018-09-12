@@ -10,9 +10,10 @@
         <field name="lastname" length="50" />
         <field name="username" length="50" />
         <field name="email" length="50" />
-        <field name="password" length="50" />
+        <field name="password" length="60" />
         <field name="roles" type="array" />
-        <field name="dateCreation" column="date_creation" type="datetime" />
+        <field name="dateCreation" column="date_creation" type="datetime" nullable="true" />
         <field name="active" column="active" type="boolean" />
+        <field name="resetPasswordToken" length="10" nullable="true" />
     </entity>
 </doctrine-mapping>
