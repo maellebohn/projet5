@@ -9,8 +9,7 @@
         <field name="content" type="text" />
         <field name="title" length="200" />
         <field name="category" length="50" />
-        <field name="dateCreation" column="date_creation" type="datetime" />
-        <field name="dateModification" column="date_modification" type="datetime" nullable="true" />
+        <field name="dateCreation" column="date_creation" type="integer" />
         <field name="image" length="50" nullable="true" />
         <many-to-one field="author" target-entity="Users">
             <join-column name="author_FK" referenced-column-name="id" />

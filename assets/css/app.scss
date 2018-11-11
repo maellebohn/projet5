@@ -110,6 +110,7 @@ th, td {
 .title {
   background-color: #698B69;
   text-align:center;
+  padding:0 15px 10px;
 }
 
 h3{
@@ -121,6 +122,10 @@ footer {
   bottom:0;
   height:90px;
   background-color:#9BCD9B;
+}
+
+footer p{
+  color:#ffff;
 }
 
 a.btn.btn-social-icon {
@@ -194,13 +199,17 @@ a.connexion:hover {
 .nav-side-menu li a {
   text-decoration: none;
   color: #e1ffff;
+  display: block;
 }
 
 .nav-side-menu li:hover {
   border-right: 5px solid #006400;
 }
+.nav-side-menu li:hover a{
+  color:#006400;
+}
 
-.active {
+li.active a{
   color: #006400 !important;
 }
 
@@ -270,16 +279,36 @@ div.flash-success {
   margin-bottom: 20px;
 }
 
-//home page
-@media (max-width: 767px) {
-  #image2, #image1 {
-    display:none;
+#cookie {
+  background-color: #9BCD9B;
+  text-align: center;
+  height: 50px;
+  padding:10px;
+  color:#e1ffff;
+}
+
+@media (max-width:768px) {
+  #cookie{
+    height:65px;
   }
 }
 
-#oiseau1, #oiseau2, .illustration {
-  width:100%;
-  height:auto;
+@media (min-width:1024px) {
+  #cookie{
+    margin-left:70px;
+  }
+}
+
+#ok_cookie {
+  margin-left: 10px;
+}
+
+.presentation{
+  padding:0 15px;
+}
+
+.text-presentation{
+  padding:0 15px 15px 15px;
 }
 
 //admin page
@@ -293,6 +322,18 @@ div.flash-success {
 
 #addinfo_button, #addnews_button, #addbird_button {
   margin-left:5%;
+}
+
+.fa-edit{
+  margin-right:8px;
+}
+
+.table > tbody > tr > td:last-child{
+  text-align:center;
+}
+
+.table-responsive{
+  width:95%;
 }
 
 //conseils page
@@ -353,6 +394,7 @@ legend {
   font-weight: bold;
 }
 
-select#add_bird_birthdate_day.form-control, select#add_bird_birthdate_month.form-control, select#add_bird_birthdate_year.form-control, input#add_bird_price.form-control {
+select#add_bird_birthdate_day.form-control, select#add_bird_birthdate_month.form-control, select#add_bird_birthdate_year.form-control, input#add_bird_price.form-control,
+select#update_bird_birthdate_day.form-control, select#update_bird_birthdate_month.form-control, select#update_bird_birthdate_year.form-control, input#update_bird_price.form-control{
   width: 20% !important;
 }

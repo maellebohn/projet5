@@ -13,7 +13,7 @@ class ResetPasswordTypeTest extends TypeTestCase
         $form = $this->factory->create(ResetPasswordType::class);
 
         $form->submit([
-            'password' => 'coco',
+            'password' => ['first' => 'coco', 'second' => 'coco']
         ]);
 
         static::assertTrue(

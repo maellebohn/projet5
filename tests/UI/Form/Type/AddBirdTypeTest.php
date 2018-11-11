@@ -14,7 +14,7 @@ class AddBirdTypeTest extends TypeTestCase
 
         $form->submit([
             'name' => 'inoue',
-            'birthdate' => 1530741600,
+            'birthdate' => ['year' => '2018', 'month' => '3', 'day' => '28' ],
             'price' => 200,
             'description' => 'femelle'
         ]);

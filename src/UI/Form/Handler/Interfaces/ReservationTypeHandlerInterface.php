@@ -17,17 +17,16 @@ interface ReservationTypeHandlerInterface
      *
      * @param EventDispatcherInterface $eventDispatcher
      * @param SessionInterface         $session
-     * @param BirdsRepositoryInterface $bird
+     * @param BirdsRepositoryInterface $birdsRepository
      */
     public function __construct (
         EventDispatcherInterface $eventDispatcher,
         SessionInterface $session,
-        BirdsRepositoryInterface $bird
+        BirdsRepositoryInterface $birdsRepository
     );
 
     /**
      * @param FormInterface  $form
-     * @param BirdsInterface $bird
      *
      * @return bool
      */

@@ -72,10 +72,10 @@ class UpdateInfoTypeHandlerTest extends TestCase
         $infoInterfaceMock = $this->createMock(InfosInterface::class);
 
         $updateInfoDTOMock = new UpdateInfoDTO(
-            'inoue',
-            1530741600,
-            200,
-            'femelle'
+            'alimentation',
+            null,
+            'alimentation',
+            'bien nourrir ses perroquets'
         );
 
         $updateInfoTypeHandler = new UpdateInfoTypeHandler(

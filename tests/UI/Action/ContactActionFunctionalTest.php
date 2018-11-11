@@ -25,6 +25,8 @@ class ContactActionFunctionalTest extends WebTestCase
     {
         $client = static::createClient();
 
+        $client->followRedirects();
+
         $crawler = $client->request('GET','/contact');
 
         $form = $crawler->selectButton('Envoyer')->form();
@@ -33,7 +35,7 @@ class ContactActionFunctionalTest extends WebTestCase
         $form['contact[email]'] = 'toto@gmail.com';
         $form['contact[message]'] = 'Hello !' ;
 
-        $crawler = $client->submit($form);
+        $client->submit($form);
 
         static::assertSame(
             Response::HTTP_OK,

@@ -51,7 +51,8 @@ class GetInfosByCategoryActionTest extends WebTestCase
 
         $responder = new GetInfosByCategoryResponder($this->createMock(Environment::class));
 
-        $requestMock = $this->createMock(Request::class);
+        $request = Request::create('/conseils/alimentation', 'GET');
+        $requestMock = $request->duplicate();
 
         static::assertInstanceOf(
             Response::class,

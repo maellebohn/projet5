@@ -5,16 +5,29 @@ declare(strict_types=1);
 namespace App\Tests\Domain\Models;
 
 use App\Domain\Models\News;
+use App\Domain\Models\Interfaces\UsersInterface;
 use PHPUnit\Framework\TestCase;
 
 class NewsTest extends TestCase
 {
+    /**
+     * @var UsersInterface
+     */
+    private $user;
+
+    protected function setUp ()
+    {
+        $this->user = $this->createMock(UsersInterface::class);
+    }
+
     public function testConstructor()
     {
+        $this->user->method('getUsername')->willReturn('toto');
+
         $news = new News(
             'les oeufs ont éclos',
             'nouveaux-nés',
-            'admin',
+            $this->user,
             'oiseau'
         );
 
@@ -22,7 +35,7 @@ class NewsTest extends TestCase
 
         static::assertSame('nouveaux-nés', $news->getTitle());
 
-        static::assertSame('admin', $news->getAuthor());
+        static::assertInstanceOf(UsersInterface::class, $news->getAuthor());
 
         static::assertSame('oiseau', $news->getImage());
     }

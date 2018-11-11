@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Tests\UI\Form\Handler;
 
 use App\Domain\DTO\NewReservationFormSubmittedDTO;
+use App\Domain\Models\Interfaces\BirdsInterface;
+use App\Repository\Interfaces\BirdsRepositoryInterface;
 use App\UI\Form\Handler\ReservationTypeHandler;
 use App\UI\Form\Handler\Interfaces\ReservationTypeHandlerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -27,6 +29,16 @@ class ReservationTypeHandlerTest extends KernelTestCase
     private $session;
 
     /**
+     * @var BirdsRepositoryInterface
+     */
+    private $birdsRepository;
+
+    /**
+     * @var BirdsInterface
+     */
+    private $bird;
+
+    /**
      *{@inheritdoc}
      */
     protected function setUp ()
@@ -35,13 +47,17 @@ class ReservationTypeHandlerTest extends KernelTestCase
 
         $this->eventDispatcher = static::$kernel->getContainer()->get('event_dispatcher');
         $this->session = new Session(new MockArraySessionStorage());
+        $this->birdsRepository = $this->createMock(BirdsRepositoryInterface::class);
+        $this->bird = $this->createMock(BirdsInterface::class);
+        $this->birdsRepository->method('findOneBy')->willReturn($this->bird);
     }
 
     public function testConstruct ()
     {
         $reservationTypeHandler = new ReservationTypeHandler(
             $this->eventDispatcher,
-            $this->session
+            $this->session,
+            $this->birdsRepository
         );
 
         static::assertInstanceOf(
@@ -56,7 +72,8 @@ class ReservationTypeHandlerTest extends KernelTestCase
 
         $reservationTypeHandler = new ReservationTypeHandler(
             $this->eventDispatcher,
-            $this->session
+            $this->session,
+            $this->birdsRepository
         );
 
         $formInterfaceMock->method('isValid')->willReturn(false);
@@ -74,12 +91,14 @@ class ReservationTypeHandlerTest extends KernelTestCase
         $newReservationFormSubmittedDTOMock = new NewReservationFormSubmittedDTO(
             'toto',
             'toto@gmail.com',
-            'hello'
+            'hello',
+            '1e1796b3-8e1a-452e-85d5-2b0248ed3cde'
         );
 
         $reservationTypeHandler = new ReservationTypeHandler(
             $this->eventDispatcher,
-            $this->session
+            $this->session,
+            $this->birdsRepository
         );
 
         $formInterfaceMock->method('isValid')->willReturn(true);

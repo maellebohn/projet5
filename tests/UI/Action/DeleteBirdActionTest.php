@@ -57,7 +57,8 @@ class DeleteBirdActionTest extends WebTestCase
             $this->router
         );
 
-        $requestMock = $this->createMock(Request::class);
+        $request = Request::create('/deletebird/1e1796b3-8e1a-452e-85d5-2b0248ed3cde', 'GET');
+        $requestMock = $request->duplicate([],[],['id' => '1e1796b3-8e1a-452e-85d5-2b0248ed3cde']);
 
         static::assertInstanceOf(
             Response::class,

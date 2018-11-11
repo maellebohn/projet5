@@ -22,7 +22,7 @@
 
     <div class="tab-content">
 
-        <div class="tap-pane active" id="tab1">
+        <div class="tap-pane active table-responsive" id="tab1">
             <table class="table table-bordered">
                 <thead>
                 <tr>
@@ -38,7 +38,7 @@
                 {% for infos in listinfos %}
                 <tr>
                     <td>{{ infos.title }}</td>
-                    <td>{{ infos.content }}</td>
+                    <td>{{ infos.content|striptags }}</td>
                     <td>{{ infos.dateCreation|date("d/m/Y") }}</td>
                     <td><a href="{{ path('update_info', {'id':infos.id}) }}"><span class="fas fa-edit"></span></a><a href="#" data-toggle="modal" data-target="#delete_info"><span class="fas fa-times"></span></a></td>
                 </tr>
@@ -65,7 +65,7 @@
             </table>
         </div>
 
-        <div class="tap-pane" id="tab2">
+        <div class="tap-pane table-responsive" id="tab2">
             <table class="table table-bordered">
                 <thead>
                 <tr>
@@ -80,11 +80,10 @@
                 {% for news in listnews %}
                     <tr>
                         <td>{{ news.title }}</td>
-                        <td>{{ news.content }}</td>
-                        {#<td>{{ news.dateCreation|date("d/m/Y") }}</td>#}
+                        <td>{{ news.content|striptags }}</td>
+                        <td>{{ news.dateCreation|date("d/m/Y") }}</td>
                         <td><a href="{{ path('update_news', {'id':news.id}) }}"><span class="fas fa-edit"></span></a><a href="#" data-toggle="modal" data-target="#delete_news"><span class="fas fa-times"></span></a></td>
                     </tr>
-
                     <div class="modal fade" id="delete_news" tabindex="-1" role="dialog" aria-labelledby="delete-news" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -107,7 +106,7 @@
             </table>
         </div>
 
-        <div class="tap-pane" id="tab3">
+        <div class="tap-pane table-responsive" id="tab3">
             <table class="table table-bordered">
                 <thead>
                 <tr>

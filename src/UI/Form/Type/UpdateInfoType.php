@@ -8,6 +8,7 @@ use App\Domain\DTO\Interfaces\UpdateInfoDTOInterface;
 use App\Domain\DTO\UpdateInfoDTO;
 use App\UI\Form\DataTransformer\ImageTransformer;
 use App\UI\Form\Subscriber\ImageFieldSubscriber;
+use App\UI\Form\Subscriber\TinymceFieldSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -19,11 +20,29 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UpdateInfoType extends AbstractType
 {
+    /**
+     * @var ImageTransformer
+     */
     private $transformer;
 
-    public function __construct(ImageTransformer $transformer)
-    {
+    /**
+     * @var ImageFieldSubscriber
+     */
+    private $imageFieldSubscriber;
+
+    /**
+     * @var TinymceFieldSubscriber
+     */
+    private $tinymceFieldSubscriber;
+
+    public function __construct(
+        ImageTransformer $transformer,
+        ImageFieldSubscriber $imageFieldSubscriber,
+        TinymceFieldSubscriber $tinymceFieldSubscriber
+    ) {
         $this->transformer = $transformer;
+        $this->imageFieldSubscriber = $imageFieldSubscriber;
+        $this->tinymceFieldSubscriber = $tinymceFieldSubscriber;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -44,7 +63,9 @@ class UpdateInfoType extends AbstractType
         $builder->get('image')
             ->addModelTransformer($this->transformer);
 
-        $builder->addEventSubscriber(new ImageFieldSubscriber());
+        $builder->addEventSubscriber($this->imageFieldSubscriber);
+
+        $builder->addEventSubscriber($this->tinymceFieldSubscriber);
     }
 
     public function configureOptions (OptionsResolver $resolver)

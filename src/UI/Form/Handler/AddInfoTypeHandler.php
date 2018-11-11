@@ -59,6 +59,7 @@ class AddInfoTypeHandler implements AddInfoTypeHandlerInterface
      * @param FormInterface $form
      *
      * @return bool
+     * @throws \Exception
      */
     public function handle(FormInterface $form): bool
     {

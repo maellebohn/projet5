@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Form\Subscriber;
 
+use App\Helper\Interfaces\FileUploaderHelperInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -16,36 +17,32 @@ class ImageFieldSubscriber implements EventSubscriberInterface
     private $file;
 
     /**
-     * ImageFieldSubscriber constructor.
-     *
-     * @param \SplFileInfo|null $file
+     * @var FileUploaderHelperInterface
      */
-    public function __construct (\SplFileInfo $file = null)
+    private $fileUploaderHelper;
+
+    public function __construct (FileUploaderHelperInterface $fileUploaderHelper)
     {
-        $this->file = $file;
+        $this->fileUploaderHelper = $fileUploaderHelper;
     }
 
     public static function getSubscribedEvents()
     {
         return array(
-            FormEvents::PRE_SET_DATA => 'onPreSetData',
+            FormEvents::POST_SET_DATA => 'onPostSetData',
             FormEvents::SUBMIT => 'onSubmit',
         );
     }
 
-    public function onPreSetData(FormEvent $event)
+    public function onPostSetData(FormEvent $event)
     {
         $this->file = $event->getForm()->get('image')->getData();
     }
 
     public function onSubmit(FormEvent $event)
     {
-        $submittedImage = $event->getForm()->get('image')->getData();
-
-        if ($this->file !== $submittedImage) {
-
-            return $submittedImage;
+        if (\is_null($event->getForm()->get('image')->getData())) {
+            $event->getForm()->getData()->image = $this->file;
         }
-        return $this->file;
     }
 }

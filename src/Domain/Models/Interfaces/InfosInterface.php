@@ -17,8 +17,6 @@ interface InfosInterface
 
     public function getDateCreation();
 
-    public function getDateModification();
-
     public function getImage();
 
     public function getAuthor();

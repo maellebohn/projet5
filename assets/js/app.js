@@ -14,7 +14,7 @@ $(document).ready(function() {
 
     $("#menu ul li a").click(function(){
         $("#menu ul li a").removeClass("active");
-        $(this).addClass("active")
+        $(this).addClass("active");
     });
 
     $("#news").click(function(){
@@ -43,11 +43,24 @@ $(document).ready(function() {
         $("#addinfo_button").hide();
         $("#addnews_button").hide();
     });
-   //
-   // $("form").submit(function(event){
-   //      var content = tinyMCE.activeEditor.getContent();
-    // or     var content = tinyMCE.get("add_info_content").getContent();
-    //     $("#add_info_content2").html(content);
-   // });
+
+    var affichage = Cookies.get('close-bloc');
+    if (affichage == null) {
+        var affichage = 'normal';
+    }
+    if (affichage === 'normal') {
+        $(document).ready(function() {
+            $("#cookie").show();
+        });
+    }
+    if (affichage ==='hide') {
+        $(document).ready(function() {
+            $("#cookie").fadeOut("fast");
+        });
+    }
+    $("#ok_cookie").click(function() {
+        Cookies.set('close-bloc', 'hide', { expires: 7 });
+        $("#cookie").fadeOut("fast");
+    });
 
 });

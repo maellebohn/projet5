@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace App\Tests\UI\Form\Handler;
 
 use App\Domain\DTO\NewNewsDTO;
+use App\Domain\Models\Interfaces\UsersInterface;
 use App\Helper\Interfaces\FileUploaderHelperInterface;
 use App\Repository\Interfaces\NewsRepositoryInterface;
 use App\UI\Form\Handler\AddNewsTypeHandler;
 use App\UI\Form\Handler\Interfaces\AddNewsTypeHandlerInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AddNewsTypeHandlerTest extends TestCase
@@ -32,6 +34,21 @@ class AddNewsTypeHandlerTest extends TestCase
     private $validator;
 
     /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
+
+    /**
+     * @var UsersInterface
+     */
+    private $user;
+
+    /**
+     * @var TokenInterface
+     */
+    private $tokenInterface;
+
+    /**
      *{@inheritdoc}
      */
     protected function setUp ()
@@ -40,6 +57,11 @@ class AddNewsTypeHandlerTest extends TestCase
         $this->fileUploaderHelper = $this->createMock(FileUploaderHelperInterface::class);
         $this->validator = $this->createMock(ValidatorInterface::class);
         $this->validator->method('validate')->willReturn([]);
+        $this->tokenStorage = $this->createMock(TokenStorageInterface::class);
+        $this->tokenInterface = $this->createMock(TokenInterface::class);
+        $this->tokenStorage->method('getToken')->willReturn($this->tokenInterface);
+        $this->user = $this->createMock(UsersInterface::class);
+        $this->tokenInterface->method('getUser')->willReturn($this->user);
     }
 
     public function testConstruct ()
@@ -47,8 +69,10 @@ class AddNewsTypeHandlerTest extends TestCase
         $addNewsTypeHandler = new AddNewsTypeHandler(
             $this->newsRepository,
             $this->fileUploaderHelper,
-            $this->validator
-        );
+            $this->validator,
+            $this->tokenStorage
+
+    );
 
         static::assertInstanceOf(
             AddNewsTypeHandlerInterface::class,
@@ -63,7 +87,8 @@ class AddNewsTypeHandlerTest extends TestCase
         $addNewsTypeHandler = new AddNewsTypeHandler(
             $this->newsRepository,
             $this->fileUploaderHelper,
-            $this->validator
+            $this->validator,
+            $this->tokenStorage
         );
 
         $formInterfaceMock->method('isValid')->willReturn(false);
@@ -77,20 +102,18 @@ class AddNewsTypeHandlerTest extends TestCase
     public function testRightHandlingProcess ()
     {
         $formInterfaceMock = $this->createMock(FormInterface::class);
-        $image = $this->createMock(UploadedFile::class);
-        $image->method('getClientOriginalName')->willReturn('/tmp/hdhzdzdndjdzndnzd');
 
         $newNewsDTOMock = new NewNewsDTO(
             'alimentation',
-            'toto',
-            $image,
+            null,
             'bien nourrir ses perroquets'
         );
 
         $addNewsTypeHandler = new AddNewsTypeHandler(
             $this->newsRepository,
             $this->fileUploaderHelper,
-            $this->validator
+            $this->validator,
+            $this->tokenStorage
         );
 
         $formInterfaceMock->method('isValid')->willReturn(true);

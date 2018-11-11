@@ -40,7 +40,7 @@ class AskResetPasswordActionTest extends WebTestCase
     /**
      *{@inheritdoc}
      */
-    public function setUp ()
+    protected function setUp ()
     {
         $this->formFactory = $this->createMock(FormFactoryInterface::class);
         $this->askResetPasswordTypeHandler = $this->createMock(AskResetPasswordTypeHandlerInterface::class);
@@ -50,10 +50,6 @@ class AskResetPasswordActionTest extends WebTestCase
 
     public function testConstruct()
     {
-        $formInterfaceMock = $this->createMock(FormInterface::class);
-        $formInterfaceMock->method('handleRequest')->willReturnSelf();
-        $this->formFactory->method('create')->willReturn($formInterfaceMock);
-
         $askResetPasswordAction = new AskResetPasswordAction(
             $this->formFactory,
             $this->askResetPasswordTypeHandler

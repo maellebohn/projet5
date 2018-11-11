@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\UI\Action;
 
+use App\Domain\Models\Interfaces\NewsInterface;
 use App\Repository\Interfaces\NewsRepositoryInterface;
 use App\UI\Action\UpdateNewsAction;
 use App\UI\Action\Interfaces\UpdateNewsActionInterface;
@@ -44,6 +45,11 @@ class UpdateNewsActionTest extends WebTestCase
     private $newsRepository;
 
     /**
+     * @var NewsInterface
+     */
+    private $news;
+
+    /**
      *{@inheritdoc}
      */
     protected function setUp ()
@@ -53,14 +59,15 @@ class UpdateNewsActionTest extends WebTestCase
         $this->router = $this->createMock(UrlGeneratorInterface::class);
         $this->router->method('generate')->willReturn('/admin');
         $this->newsRepository = $this->createMock(NewsRepositoryInterface::class);
+        $this->news = $this->createMock(NewsInterface::class);
+        $this->newsRepository->method('findOneBy')->willReturn($this->news);
+        $this->news->method('getTitle')->willReturn('alimentation');
+        $this->news->method('getImage')->willReturn(null);
+        $this->news->method('getContent')->willReturn('bien nourrir ses perroquets');
     }
 
     public function testConstruct()
     {
-        $formInterfaceMock = $this->createMock(FormInterface::class);
-        $formInterfaceMock->method('handleRequest')->willReturnSelf();
-        $this->formFactory->method('create')->willReturn($formInterfaceMock);
-
         $updateNewsAction = new UpdateNewsAction(
             $this->newsRepository,
             $this->formFactory,
@@ -95,21 +102,19 @@ class UpdateNewsActionTest extends WebTestCase
             $this->router
         );
 
-        $request = Request::create(
-            '/updatenews/{id}',
-            'POST'
-        );
+        $request = Request::create('/updatenews/1e1796b3-8e1a-452e-85d5-2b0248ed3cde', 'GET');
+        $requestMock = $request->duplicate([],[],['id' => '1e1796b3-8e1a-452e-85d5-2b0248ed3cde']);
 
         $probe = static::$blackfire->createProbe();
 
-        $updateNewsAction($request, $responder);
+        $updateNewsAction($requestMock, $responder);
 
         static::$blackfire->endProbe($probe);
 
 
         static::assertInstanceOf(
             Response::class,
-            $updateNewsAction($request, $responder)
+            $updateNewsAction($requestMock, $responder)
         );
     }
 
@@ -132,14 +137,12 @@ class UpdateNewsActionTest extends WebTestCase
             $this->router
         );
 
-        $request = Request::create(
-            '//updatenews/{id}',
-            'POST'
-        );
+        $request = Request::create('/updatenews/1e1796b3-8e1a-452e-85d5-2b0248ed3cde', 'GET');
+        $requestMock = $request->duplicate([],[],['id' => '1e1796b3-8e1a-452e-85d5-2b0248ed3cde']);
 
         static::assertInstanceOf(
             RedirectResponse::class,
-            $updateNewsAction($request, $responder)
+            $updateNewsAction($requestMock, $responder)
         );
     }
 }

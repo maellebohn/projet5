@@ -68,7 +68,7 @@ class ResetPasswordTypeHandler implements ResetPasswordTypeHandlerInterface
     {
         if($form->isSubmitted() && $form->isValid()) {
 
-            $user->ResetPasswordDate();
+            $user->resetPasswordDate();
             $interval = $user->getAskResetPasswordDate()->diff($user->getResetPasswordDate());
 
             if (($interval->hours) >= 24) {

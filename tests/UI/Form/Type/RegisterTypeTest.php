@@ -17,7 +17,7 @@ class RegisterTypeTest extends TypeTestCase
             'lastname' => 'Dupont',
             'username' => 'Tintin',
             'email' => 'toto@gmail.com',
-            'password' => 'coco'
+            'password' => ['first' => 'coco', 'second' => 'coco']
         ]);
 
         static::assertTrue(

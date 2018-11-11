@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\UI\Form\Handler;
 
-use App\Domain\Models\Interfaces\BirdsInterface;
 use App\Event\ReservationFormSubmittedEvent;
 use App\Event\Interfaces\ReservationFormSubmittedEventInterface;
 use App\Repository\Interfaces\BirdsRepositoryInterface;
@@ -35,16 +34,16 @@ class ReservationTypeHandler implements ReservationTypeHandlerInterface
      *
      * @param EventDispatcherInterface $eventDispatcher
      * @param SessionInterface         $session
-     * @param BirdsRepositoryInterface $bird
+     * @param BirdsRepositoryInterface $birdsRepository
      */
     public function __construct (
         EventDispatcherInterface $eventDispatcher,
         SessionInterface $session,
-        BirdsRepositoryInterface $bird
+        BirdsRepositoryInterface $birdsRepository
     ) {
         $this->eventDispatcher = $eventDispatcher;
         $this->session = $session;
-        $this->birdsRepository = $bird;
+        $this->birdsRepository = $birdsRepository;
     }
 
     /**

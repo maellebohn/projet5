@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AddBirdActionFunctionalTest extends WebTestCase
 {
-    public function testAddInfoPageStatusCode()
+    public function testAddBirdPageStatusCode()
     {
         $client = static::createClient();
 
@@ -25,16 +25,20 @@ class AddBirdActionFunctionalTest extends WebTestCase
     {
         $client = static::createClient();
 
+        $client->followRedirects();
+
         $crawler = $client->request('GET','/addbird');
 
         $form = $crawler->selectButton('Créer')->form();
 
         $form['add_bird[name]'] = 'inoue';
-        $form['add_bird[birthdate]'] = 1530741600;
+        $form['add_bird[birthdate][day]'] = 15;
+        $form['add_bird[birthdate][month]'] = 3;
+        $form['add_bird[birthdate][year]'] = 2018;
         $form['add_bird[price]'] = 200;
         $form['add_bird[description]'] = 'femelle';
 
-        $crawler = $client->submit($form);
+        $client->submit($form);
 
         static::assertSame(
             Response::HTTP_OK,

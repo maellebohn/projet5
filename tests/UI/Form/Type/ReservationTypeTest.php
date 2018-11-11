@@ -15,7 +15,8 @@ class ReservationTypeTest extends TypeTestCase
         $form->submit([
             'name' => 'toto',
             'email' => 'toto@gmail.com',
-            'message' => 'hello'
+            'message' => 'hello',
+            'id' => '1e1796b3-8e1a-452e-85d5-2b0248ed3cde'
         ]);
 
         static::assertTrue(

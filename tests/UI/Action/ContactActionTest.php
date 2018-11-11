@@ -40,20 +40,16 @@ class ContactActionTest extends WebTestCase
     /**
      *{@inheritdoc}
      */
-    public function setUp ()
+    protected function setUp ()
     {
         $this->formFactory = $this->createMock(FormFactoryInterface::class);
         $this->contactTypeHandler = $this->createMock(ContactTypeHandlerInterface::class);
         $this->router = $this->createMock(UrlGeneratorInterface::class);
-        $this->router->method('generate')->willReturn('/contact');
+        $this->router->method('generate')->willReturn('/home');
     }
 
     public function testConstruct()
     {
-        $formInterfaceMock = $this->createMock(FormInterface::class);
-        $formInterfaceMock->method('handleRequest')->willReturnSelf();
-        $this->formFactory->method('create')->willReturn($formInterfaceMock);
-
         $contactAction = new ContactAction(
             $this->formFactory,
             $this->contactTypeHandler

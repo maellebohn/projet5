@@ -73,7 +73,7 @@ class News implements NewsInterface
      */
     public function getDateCreation()
     {
-        return \DateTime::createFromFormat('U', $this->dateCreation);
+        return \DateTime::createFromFormat('U', (string) $this->dateCreation);
     }
 
     /**
@@ -92,14 +92,6 @@ class News implements NewsInterface
         return $this->author;
     }
 
-    /**
-     * News constructor.
-     *
-     * @param string         $content
-     * @param string         $title
-     * @param UsersInterface $author
-     * @param string|null    $image
-     */
     public function __construct(
         string $content,
         string $title,

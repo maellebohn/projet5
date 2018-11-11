@@ -17,12 +17,10 @@ interface UpdateNewsTypeHandlerInterface
      *
      * @param NewsRepositoryInterface $newsRepository
      * @param ValidatorInterface      $validator
-     * @param TokenStorageInterface   $tokenStorage
      */
     public function __construct (
         NewsRepositoryInterface $newsRepository,
-        ValidatorInterface $validator,
-        TokenStorageInterface $tokenStorage
+        ValidatorInterface $validator
     );
 
     /**

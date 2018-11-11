@@ -72,10 +72,9 @@ class UpdateNewsTypeHandlerTest extends TestCase
         $newsInterfaceMock = $this->createMock(NewsInterface::class);
 
         $updateNewsDTOMock = new UpdateNewsDTO(
-            'inoue',
-            1530741600,
-            200,
-            'femelle'
+            'alimentation',
+            null,
+            'bien nourrir ses perroquets'
         );
 
         $updateNewsTypeHandler = new UpdateNewsTypeHandler(

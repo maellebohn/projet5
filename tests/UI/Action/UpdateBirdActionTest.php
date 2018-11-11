@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\UI\Action;
 
+use App\Domain\Models\Interfaces\BirdsInterface;
 use App\Repository\Interfaces\BirdsRepositoryInterface;
 use App\UI\Action\UpdateBirdAction;
 use App\UI\Action\Interfaces\UpdateBirdActionInterface;
@@ -44,6 +45,16 @@ class UpdateBirdActionTest extends WebTestCase
     private $birdsRepository;
 
     /**
+     * @var BirdsInterface
+     */
+    private $bird;
+
+    /**
+     * @var \DateTimeInterface
+     */
+    private $date;
+
+    /**
      *{@inheritdoc}
      */
     protected function setUp ()
@@ -53,14 +64,16 @@ class UpdateBirdActionTest extends WebTestCase
         $this->router = $this->createMock(UrlGeneratorInterface::class);
         $this->router->method('generate')->willReturn('/admin');
         $this->birdsRepository = $this->createMock(BirdsRepositoryInterface::class);
+        $this->bird = $this->createMock(BirdsInterface::class);
+        $this->birdsRepository->method('findOneBy')->willReturn($this->bird);
+        $this->bird->method('getName')->willReturn('inoue');
+        $this->bird->method('getBirthdate')->willReturn(new \DateTime('2018-03-05'));
+        $this->bird->method('getPrice')->willReturn(200);
+        $this->bird->method('getDescription')->willReturn('femelle');
     }
 
     public function testConstruct()
     {
-        $formInterfaceMock = $this->createMock(FormInterface::class);
-        $formInterfaceMock->method('handleRequest')->willReturnSelf();
-        $this->formFactory->method('create')->willReturn($formInterfaceMock);
-
         $updateBirdAction = new UpdateBirdAction(
             $this->birdsRepository,
             $this->formFactory,
@@ -95,21 +108,19 @@ class UpdateBirdActionTest extends WebTestCase
             $this->router
         );
 
-        $request = Request::create(
-            '/updatebird/{id}',
-            'POST'
-        );
+        $request = Request::create('/updatebird/1e1796b3-8e1a-452e-85d5-2b0248ed3cde', 'GET');
+        $requestMock = $request->duplicate([],[],['id' => '1e1796b3-8e1a-452e-85d5-2b0248ed3cde']);
 
         $probe = static::$blackfire->createProbe();
 
-        $updateBirdAction($request, $responder);
+        $updateBirdAction($requestMock, $responder);
 
         static::$blackfire->endProbe($probe);
 
 
         static::assertInstanceOf(
             Response::class,
-            $updateBirdAction($request, $responder)
+            $updateBirdAction($requestMock, $responder)
         );
     }
 
@@ -132,14 +143,12 @@ class UpdateBirdActionTest extends WebTestCase
             $this->router
         );
 
-        $request = Request::create(
-            '//updatebird/{id}',
-            'POST'
-        );
+        $request = Request::create('/updatebird/1e1796b3-8e1a-452e-85d5-2b0248ed3cde', 'GET');
+        $requestMock = $request->duplicate([],[],['id' => '1e1796b3-8e1a-452e-85d5-2b0248ed3cde']);
 
         static::assertInstanceOf(
             RedirectResponse::class,
-            $updateBirdAction($request, $responder)
+            $updateBirdAction($requestMock, $responder)
         );
     }
 }

@@ -19,6 +19,12 @@
 
             <header>{% block header %}
 
+                <div id="cookie">
+                    <p>Ce site utilise des cookies pour améliorer votre navigation.
+                        <button id="ok_cookie" class="btn btn-success">D'accord !</button>
+                    </p>
+                </div>
+
                 <div class="nav-side-menu">
                     <div class="brand">
                         <img id="logo" src="{{ asset('images/logo.png') }}" alt="logo de l'elevage" />
@@ -31,28 +37,17 @@
                         <div class="menu-list" id="menu">
 
                             <ul id="menu-content" class="menu-content collapse out">
-                                <li>
-                                    <a class="active" href="{{ path('home') }}">NOTRE ELEVAGE</a>
+                                <li class="active">
+                                    <a  href="{{ path('home') }}">NOTRE ELEVAGE</a>
                                 </li>
 
-                                <li  data-toggle="collapse" data-target="#conseils" class="collapsed">
+                                <li>
                                     <a href="{{ path('conseils') }}">NOS CONSEILS</a>
                                 </li>
-                                <ul class="sub-menu collapse" id="conseils">
-                                    <li><a href="#">ALIMENTATION</a></li>
-                                    <li><a href="#">EDUCATION</a></li>
-                                    <li><a href="#">INSTALLATION</a></li>
-                                    <li><a href="#">PATHOLOGIE</a></li>
-                                </ul>
 
-                                <li data-toggle="collapse" data-target="#news" class="collapsed">
+                                <li>
                                     <a href="{{ path('news') }}">DERNIERES NOUVELLES</a>
                                 </li>
-                                <ul class="sub-menu collapse" id="news">
-                                    <li><a href="#">News 1</a></li>
-                                    <li><a href="#">News 2</a></li>
-                                    <li><a href="#">News 3</a></li>
-                                </ul>
 
                                 <li>
                                     <a href="{{ path('reservation') }}">OISEAUX DISPONIBLES</a>
@@ -80,10 +75,12 @@
                 <a class="btn btn-social-icon btn-twitter" href="https://twitter.com/">
                 <span class="fab fa-twitter"></span>
                 </a>
-                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <p><a class="connexion" href="{{ path('logout') }}">Se déconnecter</a></p>
+                <p><a href="{{ path('mentions_legales') }}">Mentions légales</a> -
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('admin') }}">Tableau de bord </a> -
+                    <a class="connexion" href="{{ path('logout') }}">Se déconnecter</a>
                 {% else %}
-                <p><a class="connexion" href="{{ path('login') }}">Se connecter</a></p>
+                    <a class="connexion" href="{{ path('login') }}">Se connecter</a></p>
                 {% endif %}
             </div>
         {% endblock %}
@@ -91,17 +88,7 @@
 
         {% block javascripts %}
             <script src="{{ asset('build/js/app.js') }}"></script>
-            <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
-            <script>
-                tinymce.init({
-                    selector: '#add_info_content',
-                    setup: function (editor) {
-                        editor.on('change', function () {
-                            editor.save();
-                        });
-                    }
-                });
-            </script>
+            <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
         {% endblock %}
     </body>
 

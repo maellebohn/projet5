@@ -10,11 +10,11 @@
     <div class="row">
         <div class="col-xs-12 col-md-offset-3 col-md-6 title">
             {% if infos.image is not null %}
-                <img class="illustration" src="{{ asset('images/' ~ infos.image) }}" />
+                <img class="illustration img-responsive" src="{{ asset('images/' ~ infos.image) }}" />
             {% endif %}
             <p class="date">Publié le {{ infos.dateCreation|date("d/m/Y") }}</p>
             <h2>{{ infos.title }}</h2>
-            <p class="content">{{ infos.content }}</p>
+            <p class="content">{{ infos.content|raw}}</p>
         </div>
     </div>
 

@@ -12,7 +12,7 @@ class BirdsFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $bird = new Birds('coco','2018-02-20', 'mâle', 200);
+        $bird = new Birds('coco',1530741600, 'mâle', 200);
 
         $manager->persist($bird);
         $manager->flush();

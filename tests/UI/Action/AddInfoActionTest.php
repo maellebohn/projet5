@@ -50,10 +50,6 @@ class AddInfoActionTest extends WebTestCase
 
     public function testConstruct()
     {
-        $formInterfaceMock = $this->createMock(FormInterface::class);
-        $formInterfaceMock->method('handleRequest')->willReturnSelf();
-        $this->formFactory->method('create')->willReturn($formInterfaceMock);
-
         $addInfoAction = new AddInfoAction(
             $this->formFactory,
             $this->addInfoTypeHandler

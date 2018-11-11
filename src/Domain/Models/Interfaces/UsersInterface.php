@@ -31,4 +31,14 @@ interface UsersInterface
     public function getResetPasswordToken();
 
     public function updatePassword(string $newPassword);
+
+    public function getAskResetPasswordDate();
+
+    public function resetPasswordDate();
+
+    public function getResetPasswordDate();
+
+    public function askForPasswordReset($resetPasswordToken);
+
+    public function updateAskResetPasswordDate();
 }

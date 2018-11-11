@@ -31,10 +31,11 @@ class AdminActionTest extends WebTestCase
      * @var NewsRepositoryInterface
      */
     private $newsRepository;
+
     /**
      *{@inheritdoc}
      */
-    public function setUp ()
+    protected function setUp ()
     {
         $this->infosRepository = $this->createMock(InfosRepositoryInterface::class);
         $this->infosRepository->method('findAll')->willReturn([]);

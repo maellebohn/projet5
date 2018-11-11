@@ -41,6 +41,6 @@ class UsersTest extends TestCase
 
         static::assertSame('coco@gmail.com', $user->getEmail());
 
-        static::assertSame('coco', $user->getPassword());
+        static::assertNotEmpty($user->getPassword());
     }
 }

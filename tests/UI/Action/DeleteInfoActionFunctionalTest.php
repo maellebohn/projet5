@@ -13,7 +13,7 @@ class DeleteInfoActionFunctionalTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET','/deleteinfo/id');
+        $client->request('GET','/deleteinfo/1e1796b3-8e1a-452e-85d5-2b0248ed3cde');
 
         static::assertSame(
             Response::HTTP_OK,

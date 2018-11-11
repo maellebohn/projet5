@@ -31,12 +31,12 @@
                         <div class="menu-list" id="menu">
 
                             <ul id="menu-content" class="menu-content collapse out">
-                                <li>
+                                <li >
                                     <a class="active" href="{{ path('admin') }}">TABLEAU DE BORD</a>
                                 </li>
 
                                 <li data-toggle="collapse" data-target="#create" class="collapsed">
-                                    <a href="#">CREER</a>
+                                    <a href="#">CREER </a>
                                 </li>
                                 <ul class="sub-menu collapse" id="create">
                                     <li><a href="{{ path('add_info') }}">AJOUTER UN CONSEIL</a></li>
@@ -80,10 +80,11 @@
 
         {% block javascripts %}
             <script src="{{ asset('build/js/app.js') }}"></script>
+            <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
             <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
             <script>
                 tinymce.init({
-                    selector: '#add_info_content, #add_news_content',
+                    selector: '#add_info_content, #add_news_content, #update_info_content, #update_news_content',
                     setup: function (editor) {
                         editor.on('change', function () {
                             editor.save();

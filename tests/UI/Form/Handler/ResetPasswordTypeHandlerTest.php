@@ -9,7 +9,8 @@ use App\Domain\Models\Interfaces\UsersInterface;
 use App\Repository\Interfaces\UsersRepositoryInterface;
 use App\UI\Form\Handler\ResetPasswordTypeHandler;
 use App\UI\Form\Handler\Interfaces\ResetPasswordTypeHandlerInterface;
-use PHPUnit\Framework\TestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -17,7 +18,7 @@ use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 use Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
-class ResetPasswordTypeHandlerTest extends TestCase
+class ResetPasswordTypeHandlerTest extends KernelTestCase
 {
     /**
      * @var SessionInterface
@@ -35,14 +36,37 @@ class ResetPasswordTypeHandlerTest extends TestCase
     private $encoderFactory;
 
     /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
+
+    /**
+     * @var UsersInterface
+     */
+    private $user;
+
+    /**
+     * @var \DateTimeInterface
+     */
+    private $date;
+
+    /**
      *{@inheritdoc}
      */
     protected function setUp ()
     {
+        static::bootKernel();
+
         $this->session = new Session(new MockArraySessionStorage());
         $this->usersRepository = $this->createMock(UsersRepositoryInterface::class);
         $this->encoderFactory = $this->createMock(EncoderFactoryInterface::class);
         $this->encoderFactory->method('getEncoder')->willReturn(new BCryptPasswordEncoder(13));
+        $this->eventDispatcher = static::$kernel->getContainer()->get('event_dispatcher');
+        $this->user = $this->createMock(UsersInterface::class);
+        $this->user->method('getAskResetPasswordDate');
+        $this->user->method('getResetPasswordDate');
+        $this->date = $this->createMock(\DateTimeInterface::class);
+        $this->date->method('diff');
     }
 
     public function testConstruct ()
@@ -50,7 +74,8 @@ class ResetPasswordTypeHandlerTest extends TestCase
         $resetPasswordTypeHandler = new ResetPasswordTypeHandler(
             $this->usersRepository,
             $this->session,
-            $this->encoderFactory
+            $this->encoderFactory,
+            $this->eventDispatcher
         );
 
         static::assertInstanceOf(
@@ -67,7 +92,8 @@ class ResetPasswordTypeHandlerTest extends TestCase
         $resetPasswordTypeHandler = new ResetPasswordTypeHandler(
             $this->usersRepository,
             $this->session,
-            $this->encoderFactory
+            $this->encoderFactory,
+            $this->eventDispatcher
         );
 
         $formInterfaceMock->method('isValid')->willReturn(false);
@@ -90,7 +116,8 @@ class ResetPasswordTypeHandlerTest extends TestCase
         $resetPasswordTypeHandler = new ResetPasswordTypeHandler(
             $this->usersRepository,
             $this->session,
-            $this->encoderFactory
+            $this->encoderFactory,
+            $this->eventDispatcher
         );
 
         $formInterfaceMock->method('isValid')->willReturn(true);

@@ -29,12 +29,14 @@
         {% endif %}
     </div>
 
-    {% for infos in infosbycategory %}
-        <div class="col-xs-12 col-md-4 conseils">
-            <h3>{{ infos.title }}</h3>
-            {#<p>Publié le {{ infos.dateCreation|date("d/m/Y") }}</p>#}
-            <p>{{ infos.content[:50] }} <br> <a href="{{ path('get_info', {'id':infos.id}) }}">Lire la suite</a></p>
-        </div>
-    {% endfor %}
+    <div class="row">
+        {% for infos in infosbycategory %}
+            <div class="col-xs-12 col-md-4 conseils">
+                <h3>{{ infos.title }}</h3>
+                <p>Publié le {{ infos.dateCreation|date("d/m/Y") }}</p>
+                <p>{{ infos.content[:50]|striptags }} <br> <a href="{{ path('get_info', {'id':infos.id}) }}">Lire la suite</a></p>
+            </div>
+        {% endfor %}
+    </div>
 
 {% endblock %}

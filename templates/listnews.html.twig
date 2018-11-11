@@ -15,7 +15,7 @@
         <div class="col-xs-12 col-md-4 conseils">
             <h3>{{ news.title }}</h3>
             <p>Publié le {{ news.dateCreation|date("d/m/Y") }}</p>
-            <p>{{ 'news.content'[50:] }}<br> <a href="{{ path('get_news', {'id':news.id}) }}">Lire la suite</a></p>
+            <p>{{ news.content[:50]|striptags }} <br> <a href="{{ path('get_news', {'id':news.id}) }}">Lire la suite</a></p>
         </div>
         {% endfor %}
     </div>

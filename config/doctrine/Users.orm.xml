@@ -12,8 +12,10 @@
         <field name="email" length="50" />
         <field name="password" length="60" />
         <field name="roles" type="array" />
-        <field name="dateCreation" column="date_creation" type="datetime" nullable="true" />
+        <field name="dateCreation" column="date_creation" type="integer" />
         <field name="active" column="active" type="boolean" />
         <field name="resetPasswordToken" length="10" nullable="true" />
+        <field name="askResetPasswordDate" column="ask_reset_password_date" type="integer" nullable="true" />
+        <field name="resetPasswordDate" column="reset_password_date" type="integer" nullable="true" />
     </entity>
 </doctrine-mapping>

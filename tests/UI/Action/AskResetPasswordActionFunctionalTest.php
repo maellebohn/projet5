@@ -25,14 +25,16 @@ class AskResetPasswordActionFunctionalTest extends WebTestCase
     {
         $client = static::createClient();
 
+        $client->followRedirects();
+
         $crawler = $client->request('GET','/resetpassword/ask');
 
         $form = $crawler->selectButton('Envoyer')->form();
 
-        $form['ask_reset_password[name]'] = 'Toto';
+        $form['ask_reset_password[username]'] = 'Toto';
         $form['ask_reset_password[email]'] = 'toto@gmail.com';
 
-        $crawler = $client->submit($form);
+        $client->submit($form);
 
         static::assertSame(
             Response::HTTP_OK,

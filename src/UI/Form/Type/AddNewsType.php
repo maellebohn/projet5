@@ -6,6 +6,7 @@ namespace App\UI\Form\Type;
 
 use App\Domain\DTO\Interfaces\NewNewsDTOInterface;
 use App\Domain\DTO\NewNewsDTO;
+use App\UI\Form\Subscriber\TinymceFieldSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -16,6 +17,21 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AddNewsType extends AbstractType
 {
+    /**
+     * @var TinymceFieldSubscriber
+     */
+    private $tinymceFieldSubscriber;
+
+    /**
+     * AddInfoType constructor.
+     *
+     * @param TinymceFieldSubscriber $tinymceFieldSubscriber
+     */
+    public function __construct (TinymceFieldSubscriber $tinymceFieldSubscriber)
+    {
+        $this->tinymceFieldSubscriber = $tinymceFieldSubscriber;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

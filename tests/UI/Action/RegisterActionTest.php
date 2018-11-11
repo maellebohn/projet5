@@ -50,18 +50,14 @@ class RegisterActionTest extends WebTestCase
 
     public function testConstruct()
     {
-        $formInterfaceMock = $this->createMock(FormInterface::class);
-        $formInterfaceMock->method('handleRequest')->willReturnSelf();
-        $this->formFactory->method('create')->willReturn($formInterfaceMock);
-
-        $contactAction = new RegisterAction(
+        $registerAction = new RegisterAction(
             $this->formFactory,
             $this->registerTypeHandler
         );
 
         static::assertInstanceOf(
             RegisterActionInterface::class,
-            $contactAction
+            $registerAction
         );
     }
 

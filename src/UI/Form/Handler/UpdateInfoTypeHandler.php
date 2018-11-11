@@ -24,25 +24,17 @@ class UpdateInfoTypeHandler implements UpdateInfoTypeHandlerInterface
     private $validator;
 
     /**
-     * @var TokenStorageInterface
-     */
-    private $tokenStorage;
-
-    /**
      * UpdateInfoTypeHandler constructor.
      *
      * @param InfosRepositoryInterface $infosRepository
      * @param ValidatorInterface       $validator
-     * @param TokenStorageInterface    $tokenStorage
      */
     public function __construct (
         InfosRepositoryInterface $infosRepository,
-        ValidatorInterface $validator,
-        TokenStorageInterface $tokenStorage
+        ValidatorInterface $validator
     ) {
         $this->infosRepository = $infosRepository;
         $this->validator = $validator;
-        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -54,11 +46,6 @@ class UpdateInfoTypeHandler implements UpdateInfoTypeHandlerInterface
     public function handle(FormInterface $form, InfosInterface $infos): bool
     {
         if($form->isSubmitted() && $form->isValid()) {
-
-            if (!\is_null($form->getData()->image)) {
-                $image = $form->getData()->image;
-                $imageName = $this->fileUploaderHelper->upload($image);
-            }
 
             $updateInfo = $infos->update($form->getData());
 

@@ -29,17 +29,12 @@ class Infos implements InfosInterface
     private $title;
 
     /**
-     * @var string|null
+     * @var string
      */
     private $dateCreation;
 
     /**
-     * @var string
-     */
-    private $dateModification;
-
-    /**
-     * @var string
+     * @var string|null
      */
     private $image = null;
 
@@ -79,16 +74,7 @@ class Infos implements InfosInterface
 
     public function getDateCreation()
     {
-//        return \DateTime::createFromFormat('U', (string) $this->dateCreation);
-        return $this->dateCreation;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getDateModification()
-    {
-        return $this->dateModification;
+        return \DateTime::createFromFormat('U', (string) $this->dateCreation);
     }
 
     /**
@@ -123,6 +109,8 @@ class Infos implements InfosInterface
      * @param UsersInterface $author
      * @param string         $category
      * @param string|null    $image
+     *
+     * @throws \Exception
      */
     public function __construct(
         string $content,
@@ -134,8 +122,7 @@ class Infos implements InfosInterface
         $this->id = Uuid::uuid4();
         $this->content = $content;
         $this->title = $title;
-        $this->dateCreation = new \DateTime();
-        $this->dateModification = null;
+        $this->dateCreation = time();
         $this->author = $author;
         $this->category = $category;
         $this->image = $image;

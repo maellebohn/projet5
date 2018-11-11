@@ -10,12 +10,12 @@ App\Domain\DTO\UpdateNewsDTO:
                 max: 100
                 maxMessage: "Cette valeur est trop longue !"
                 groups: ['updatenews']
-        image:
-            - Image:
-                mimeTypes: ['image/jpeg', 'image/png']
-                mimeTypesMessage: "Ce format d'image est interdit, veuillez recommencer votre saisie."
-                maxSize: "2M"
-                groups: ['updatenews']
+#        image:
+#            - Image:
+#                mimeTypes: ['image/jpeg', 'image/png']
+#                mimeTypesMessage: "Ce format d'image est interdit, veuillez recommencer votre saisie."
+#                maxSize: "2M"
+#                groups: ['updatenews']
         content:
             - NotBlank:
                 message: "Ce champs est requis, veuillez saisir une valeur."

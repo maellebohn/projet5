@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\UI\Action;
 
+use App\Domain\Models\Interfaces\InfosInterface;
 use App\Repository\Interfaces\InfosRepositoryInterface;
 use App\UI\Action\UpdateInfoAction;
 use App\UI\Action\Interfaces\UpdateInfoActionInterface;
@@ -44,6 +45,11 @@ class UpdateInfoActionTest extends WebTestCase
     private $infosRepository;
 
     /**
+     * @var InfosInterface
+     */
+    private $info;
+
+    /**
      *{@inheritdoc}
      */
     protected function setUp ()
@@ -53,14 +59,16 @@ class UpdateInfoActionTest extends WebTestCase
         $this->router = $this->createMock(UrlGeneratorInterface::class);
         $this->router->method('generate')->willReturn('/admin');
         $this->infosRepository = $this->createMock(InfosRepositoryInterface::class);
+        $this->info = $this->createMock(InfosInterface::class);
+        $this->infosRepository->method('findOneBy')->willReturn($this->info);
+        $this->info->method('getTitle')->willReturn('alimentation');
+        $this->info->method('getImage')->willReturn(null);
+        $this->info->method('getCategory')->willReturn('education');
+        $this->info->method('getContent')->willReturn('bien nourrir ses perroquets');
     }
 
     public function testConstruct()
     {
-        $formInterfaceMock = $this->createMock(FormInterface::class);
-        $formInterfaceMock->method('handleRequest')->willReturnSelf();
-        $this->formFactory->method('create')->willReturn($formInterfaceMock);
-
         $updateInfoAction = new UpdateInfoAction(
             $this->infosRepository,
             $this->formFactory,
@@ -94,21 +102,19 @@ class UpdateInfoActionTest extends WebTestCase
             $this->router
         );
 
-        $request = Request::create(
-            '/updateinfo/{id}',
-            'POST'
-        );
+        $request = Request::create('/updateinfo/1e1796b3-8e1a-452e-85d5-2b0248ed3cde', 'GET');
+        $requestMock = $request->duplicate([],[],['id' => '1e1796b3-8e1a-452e-85d5-2b0248ed3cde']);
 
         $probe = static::$blackfire->createProbe();
 
-        $updateInfoAction($request, $responder);
+        $updateInfoAction($requestMock, $responder);
 
         static::$blackfire->endProbe($probe);
 
 
         static::assertInstanceOf(
             Response::class,
-            $updateInfoAction($request, $responder)
+            $updateInfoAction($requestMock, $responder)
         );
     }
 
@@ -130,14 +136,12 @@ class UpdateInfoActionTest extends WebTestCase
             $this->router
         );
 
-        $request = Request::create(
-            '//updateinfo/{id}',
-            'POST'
-        );
+        $request = Request::create('/updateinfo/1e1796b3-8e1a-452e-85d5-2b0248ed3cde', 'GET');
+        $requestMock = $request->duplicate([],[],['id' => '1e1796b3-8e1a-452e-85d5-2b0248ed3cde']);
 
         static::assertInstanceOf(
             RedirectResponse::class,
-            $updateInfoAction($request, $responder)
+            $updateInfoAction($requestMock, $responder)
         );
     }
 }

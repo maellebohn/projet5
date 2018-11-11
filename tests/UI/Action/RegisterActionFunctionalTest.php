@@ -25,18 +25,20 @@ class RegisterActionFunctionalTest extends WebTestCase
     {
         $client = static::createClient();
 
+        $client->followRedirects();
+
         $crawler = $client->request('GET','/register');
 
-        $form = $crawler->selectButton('Envoyer')->form();
+        $form = $crawler->selectButton('Créer')->form();
 
         $form['register[firstname]'] = 'Toto';
         $form['register[lastname]'] = 'Dupont';
         $form['register[username]'] = 'Tintin';
         $form['register[email]'] = 'toto@gmail.com';
-        $form['register[password]'] = 'coco21';
-        //x2?
+        $form['register[password][first]'] = 'coco21';
+        $form['register[password][second]'] = 'coco21';
 
-        $crawler = $client->submit($form);
+        $client->submit($form);
 
         static::assertSame(
             Response::HTTP_OK,

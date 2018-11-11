@@ -54,10 +54,6 @@ class GetBirdsActionTest extends WebTestCase
 
     public function testConstruct()
     {
-        $formInterfaceMock = $this->createMock(FormInterface::class);
-        $formInterfaceMock->method('handleRequest')->willReturnSelf();
-        $this->formFactory->method('create')->willReturn($formInterfaceMock);
-
         $getBirdsAction = new GetBirdsAction(
             $this->birdsRepository,
             $this->formFactory,

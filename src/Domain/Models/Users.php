@@ -204,7 +204,7 @@ class Users implements UsersInterface, UserInterface
         $this->username = $username;
         $this->email = $email;
         $this->password = $passwordEncoder($password, null);
-        //$this->dateCreation = time();
+        $this->dateCreation = time();
         $this->roles = ['ROLE_ADMIN'];
         $this->active = true;
         $this->resetPasswordToken = null;
@@ -243,7 +243,7 @@ class Users implements UsersInterface, UserInterface
         $this->resetPasswordDate = null;
     }
 
-    public function ResetPasswordDate()
+    public function resetPasswordDate()
     {
         $this->resetPasswordDate = time();
     }

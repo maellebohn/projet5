@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class ImageTransformer implements DataTransformerInterface
 {
+    private $defaultImage;
+
     /**
      * @var FileUploaderHelperInterface
      */
@@ -24,15 +26,18 @@ class ImageTransformer implements DataTransformerInterface
     public function transform ($value)
     {
         if(!\is_null($value)) {
-            $image = new File($this->fileUploaderHelper->getImageFolder().'/'.$value);
-
-            return $image;
+            $this->defaultImage = $value;
+            return new File($this->fileUploaderHelper->getImageFolder().'/'.$value);
         }
     }
 
     public function reverseTransform ($value)
     {
-        $image = $value->getClientOriginalName();
+        if (\is_null($value) || $this->defaultImage === $value) {
+            return;
+        }
+
+        $image = $this->fileUploaderHelper->upload($value);
 
         return $image;
     }

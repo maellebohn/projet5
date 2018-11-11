@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\UI\Form\Handler;
 
 use App\Domain\DTO\UserResetPasswordDTO;
+use App\Domain\Models\Interfaces\UsersInterface;
 use App\Helper\Interfaces\TokenGeneratorHelperInterface;
 use App\Repository\Interfaces\UsersRepositoryInterface;
 use App\UI\Form\Handler\AskResetPasswordTypeHandler;
@@ -39,6 +40,11 @@ class AskResetPasswordTypeHandlerTest extends KernelTestCase
     private $tokenGeneratorHelper;
 
     /**
+     * @var UsersInterface
+     */
+    private $user;
+
+    /**
      *{@inheritdoc}
      */
     protected function setUp ()
@@ -49,6 +55,9 @@ class AskResetPasswordTypeHandlerTest extends KernelTestCase
         $this->session = new Session(new MockArraySessionStorage());
         $this->usersRepository = $this->createMock(UsersRepositoryInterface::class);
         $this->tokenGeneratorHelper = $this->createMock(TokenGeneratorHelperInterface::class);
+        $this->user = $this->createMock(UsersInterface::class);
+        $this->usersRepository->method('getUserByUsernameAndEmail')->willReturn($this->user);
+        $this->user->method('askForPasswordReset')->willReturn('ghjkizzkfejzejfizf');
     }
 
     public function testConstruct ()

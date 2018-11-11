@@ -8,6 +8,7 @@ use App\Domain\DTO\Interfaces\UpdateNewsDTOInterface;
 use App\Domain\DTO\UpdateNewsDTO;
 use App\UI\Form\DataTransformer\ImageTransformer;
 use App\UI\Form\Subscriber\ImageFieldSubscriber;
+use App\UI\Form\Subscriber\TinymceFieldSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -18,11 +19,36 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UpdateNewsType extends AbstractType
 {
+    /**
+     * @var ImageTransformer
+     */
     private $transformer;
 
-    public function __construct(ImageTransformer $transformer)
-    {
+    /**
+     * @var ImageFieldSubscriber
+     */
+    private $imageFieldSubscriber;
+
+    /**
+     * @var TinymceFieldSubscriber
+     */
+    private $tinymceFieldSubscriber;
+
+    /**
+     * UpdateNewsType constructor.
+     *
+     * @param ImageTransformer       $transformer
+     * @param ImageFieldSubscriber   $imageFieldSubscriber
+     * @param TinymceFieldSubscriber $tinymceFieldSubscriber
+     */
+    public function __construct(
+        ImageTransformer $transformer,
+        ImageFieldSubscriber $imageFieldSubscriber,
+        TinymceFieldSubscriber $tinymceFieldSubscriber
+    ) {
         $this->transformer = $transformer;
+        $this->imageFieldSubscriber = $imageFieldSubscriber;
+        $this->tinymceFieldSubscriber = $tinymceFieldSubscriber;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -35,7 +61,7 @@ class UpdateNewsType extends AbstractType
         $builder->get('image')
             ->addModelTransformer($this->transformer);
 
-        $builder->addEventSubscriber(new ImageFieldSubscriber());
+        $builder->addEventSubscriber($this->imageFieldSubscriber);
     }
 
     public function configureOptions (OptionsResolver $resolver)
