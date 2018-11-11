@@ -16,8 +16,9 @@ use Symfony\Component\Routing\Annotation\Route;
  *     path="/deletereservation/{id}",
  *     name="delete_reservation"
  * )
+ *
+ *  @Security("is_granted('ROLE_ADMIN')")
  */
-// @Security("is_granted('ROLE_ADMIN')")
 class DeleteReservationAction implements DeleteReservationActionInterface
 {
     /**

@@ -17,8 +17,8 @@ use Symfony\Component\Routing\Annotation\Route;
  *     path="/deletebird/{id}",
  *     name="delete_bird"
  * )
+ * @Security("is_granted('ROLE_ADMIN')")
  */
-// @Security("is_granted('ROLE_ADMIN')")
 class DeleteBirdAction implements DeleteBirdActionInterface
 {
     /**

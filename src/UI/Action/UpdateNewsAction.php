@@ -20,8 +20,8 @@ use Symfony\Component\Routing\Annotation\Route;
  *     path="/updatenews/{id}",
  *     name="update_news"
  * )
+ * @Security("is_granted('ROLE_ADMIN')")
  */
-// @Security("is_granted('ROLE_ADMIN')")
 class UpdateNewsAction implements UpdateNewsActionInterface
 {
     /**

@@ -16,8 +16,9 @@ use Symfony\Component\Routing\Annotation\Route;
  *     path="/deletenews/{id}",
  *     name="delete_news"
  * )
+ *
+ *  @Security("is_granted('ROLE_ADMIN')")
  */
-// @Security("is_granted('ROLE_ADMIN')")
 class DeleteNewsAction implements DeleteNewsActionInterface
 {
     /**

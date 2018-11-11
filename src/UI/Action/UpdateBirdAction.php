@@ -20,8 +20,8 @@ use Symfony\Component\Routing\Annotation\Route;
  *     path="/updatebird/{id}",
  *     name="update_bird"
  * )
+ * @Security("is_granted('ROLE_ADMIN')")
  */
-// @Security("is_granted('ROLE_ADMIN')")
 class UpdateBirdAction implements UpdateBirdActionInterface
 {
     /**
