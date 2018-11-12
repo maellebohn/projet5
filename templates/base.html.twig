@@ -37,23 +37,23 @@
                         <div class="menu-list" id="menu">
 
                             <ul id="menu-content" class="menu-content collapse out">
-                                <li class="active">
+                                <li {% if app.request.attributes.get('_route') == 'home' %} class="active" {% endif %}>
                                     <a  href="{{ path('home') }}">NOTRE ELEVAGE</a>
                                 </li>
 
-                                <li>
+                                <li {% if app.request.attributes.get('_route') == 'conseils' %} class="active" {% endif %}>
                                     <a href="{{ path('conseils') }}">NOS CONSEILS</a>
                                 </li>
 
-                                <li>
+                                <li {% if app.request.attributes.get('_route') == 'news' %} class="active" {% endif %}>
                                     <a href="{{ path('news') }}">DERNIERES NOUVELLES</a>
                                 </li>
 
-                                <li>
+                                <li {% if app.request.attributes.get('_route') == 'reservation' %} class="active" {% endif %}>
                                     <a href="{{ path('reservation') }}">OISEAUX DISPONIBLES</a>
                                 </li>
 
-                                <li>
+                                <li {% if app.request.attributes.get('_route') == 'contact' %} class="active" {% endif %}>
                                     <a href="{{ path('contact') }}">NOUS CONTACTER</a>
                                 </li>
                             </ul>

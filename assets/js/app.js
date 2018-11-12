@@ -12,11 +12,6 @@ require('bootstrap-sass');
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
 
-    $("#menu ul li a").click(function(){
-        $("#menu ul li a").removeClass("active");
-        $(this).addClass("active");
-    });
-
     $("#news").click(function(){
         $("#tab2").show();
         $("#addnews_button").show();

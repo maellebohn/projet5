@@ -31,8 +31,8 @@
                         <div class="menu-list" id="menu">
 
                             <ul id="menu-content" class="menu-content collapse out">
-                                <li >
-                                    <a class="active" href="{{ path('admin') }}">TABLEAU DE BORD</a>
+                                <li {% if app.request.attributes.get('_route') == 'admin' %} class="active" {% endif %}>
+                                    <a href="{{ path('admin') }}">TABLEAU DE BORD</a>
                                 </li>
 
                                 <li data-toggle="collapse" data-target="#create" class="collapsed">
